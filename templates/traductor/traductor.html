@@ -1,0 +1,52 @@
+{% extends 'base_html/base.html' %}
+
+
+{% block titulo %}
+Registro empresa
+{% endblock %}
+
+
+
+{%block contenido %}
+
+
+
+<form action="{{url_for('texto')}}" enctype="" method="POST">
+    <div class="">
+        <div class="wrapper">
+            <h2>Español</h2>
+            <input class="form-control" type="text" placeholder="Escribir texto a traducir..." name="texto_entrada"
+                id="texto_entrada" value="{{texto_entrada}}">
+
+            <br>
+            <center><button class="btn btn-primary" type="submit">000</button></center>
+
+
+            <h2>Inga</h2>
+            <input class="form-control" type="text" id="texto_salida" name="texto_salida"
+                value="{{texto_salida}}" placeholder="TRADUCION" disabled>
+
+            
+            <input type="submit" id="voice" formaction="{{url_for('audio', texto_salida=texto_salida, texto_entrada=texto_entrada)}}" value="voice" onclick="habilitar1()">
+        </div>
+    </div>
+</form>
+
+<script>
+ 
+    function habilitar() {
+        text= document.getElementById("texto_entrada").value;
+        val=0;
+        if(text==""){
+            val++;
+        }
+        if(val==0){
+            document.getElementById("voice").disabled=false;
+        }else{
+            document.getElementById("voice").disabled=true;
+        }
+    }
+
+</script>
+
+{% endblock %}
