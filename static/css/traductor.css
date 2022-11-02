@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(#4671EA, #AC34E7);
+}
+
+.wrapper {
+    width: 470px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 25px 25px 25px;
+}
+
+
+
