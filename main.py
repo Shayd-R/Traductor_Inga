@@ -1,6 +1,6 @@
 
 from flask import Flask, jsonify,render_template,request,redirect,url_for,session,flash,json,make_response
-from models import voz_traductor
+from models import voz_traductor, traduccion_texto
 
 app = Flask(__name__)
 app.secret_key = "##91!IasdyAjadfbdfan"
@@ -13,12 +13,21 @@ def inicio():
 @app.route("/texto", methods=["GET", "POST"])
 def texto():
     if request.method=='POST':
-        text= request.form['texto_entrada']
-        if text=="hola":
-            a="hello"
-        else:
-            a=text
-        return render_template("/traductor/traductor.html", texto_salida=a, texto_entrada=text)
+        texto_obtenido= request.form['texto_entrada']+" "
+        texto=texto_obtenido.split()
+        traducido=[]
+        for palabra in texto:
+            if palabra=="hola":
+                a="hello"
+            else:
+                a=palabra
+            traducido.append(a)  
+            print(traducido)
+        print(traducido)
+        texto_salida=traduccion_texto.concatenar_palabras(traducido, " ")
+
+
+        return render_template("/traductor/traductor.html", texto_salida=texto_salida, texto_entrada=texto_obtenido)
     
     return render_template("/traductor/traductor.html")
 
