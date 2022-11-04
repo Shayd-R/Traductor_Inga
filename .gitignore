@@ -1,3 +1,4 @@
 env
 __pycache__
 .env
+pruebas_codigo.py
