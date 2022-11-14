@@ -8,12 +8,12 @@ app.secret_key = "##91!IasdyAjadfbdfan"
 @app.route("/", methods=["GET", "POST"])
 def inicio():
 
-    return render_template("/traductor/traductor.html")
+    return render_template("/traductor/asd.html")
 
 @app.route("/texto", methods=["GET", "POST"])
 def texto():
     if request.method=='POST':
-        texto_entrada= request.form['texto_entrada']+" "
+        texto_entrada= request.form['texto_entrada']
         texto=texto_entrada.split()
         traducido=[]
         for palabra in texto:
@@ -30,7 +30,7 @@ def texto():
 
 @app.route("/audio", methods=["GET", "POST"])
 def audio():    
-    texto_entrada= request.form['texto_entrada']+" "
+    texto_entrada= request.form['texto_entrada']
     texto=texto_entrada.split()
     traducido=[]
     for palabra in texto:
