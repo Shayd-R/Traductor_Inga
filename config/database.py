@@ -2,11 +2,11 @@ import mysql.connector
 from config import settings
 
 db = mysql.connector.connect(
-    host=settings.MYSQL_HOSTNAME,
-    user=settings.MYSQL_USERNAME,
-    password=settings.MYSQL_PASSWORD,
-    port=settings.MYSQL_PORT,
-    database=settings.MYSQL_DATABASE,
+    host='localhost',
+    user='root',
+    password='',
+    port=3306,
+    database='traductor',
     buffered=True
 )
 db.autocommit = True
