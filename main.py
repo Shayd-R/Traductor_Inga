@@ -8,17 +8,19 @@ app.secret_key = "##91!IasdyAjadfbdfan"
 
 @app.route("/", methods=["GET", "POST"])
 def inicio():
+    return render_template("/inicio/inicio.html")
 
+@app.route("/traductor", methods=["GET", "POST"])
+def traductor():
     return render_template("/traductor/traductor.html")
 
-@app.route("/texto", methods=["GET", "POST"])
-def texto():
+@app.route("/traduccion", methods=["GET", "POST"])
+def traduccion():
     if request.method=='POST':
         texto_entrada= request.form['texto_entrada']
         texto=texto_entrada.split()
         traducido=[]
         for palabra in texto:
-            print(palabra)
             cursor = db.cursor(dictionary=True)
             cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='"+palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
             a=cursor.fetchone()
@@ -33,7 +35,7 @@ def texto():
     return render_template("/traductor/traductor.html")
 
 
-@app.route("/audio", methods=["GET", "POST"])
+@app.route("/voz", methods=["GET", "POST"])
 def audio():    
     texto_entrada= request.form['texto_entrada']
     texto=texto_entrada.split()

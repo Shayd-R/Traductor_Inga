@@ -1,0 +1,144 @@
+body{
+    background-color: #eeeeee;
+    position: relative;
+}
+
+.Header{
+    width: 100%;
+    height: 95vh;
+    background-image: linear-gradient(#888585, #ffffff41 100%), url(../img/inicio.jpg);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-dark{
+    background-color: #393e46 !important;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+}
+
+.bg-dark1{
+    background-color:#393e46;
+    position:fixed;
+    z-index: 100;
+    width: 100%;
+    border-bottom: 2px solid #fdbb2d;
+
+}
+
+@media (min-width: 768px){
+    .bg-dark{
+        background-color: transparent !important; 
+    }
+}
+
+.navbar a{
+    color: #fff !important;
+    font-family:'MuseoModerno';
+    text-align: center;
+    font-size: 23px;
+    padding: 4px 15px;
+}
+
+.navbar a:hover{
+    background: linear-gradient(180deg, #cccece 0%, #424241 100%);
+    border-radius: 5%;
+}
+ 
+.Text-hero{
+    height: 550px;  /*altura */
+    color: #fff;
+    font-family: '';
+    padding-top: 190px;
+}
+
+.Text-hero h5{
+    font-size: 70px;  /*tamaño de fuente */
+    letter-spacing: .2em;  /* espacio de letras */
+/*  font-weight: bold;   peso de la fuente negrita*/
+    display: flex;   /* pantalla flexible*/
+}
+
+.Text-hero a{
+    font-family: 'Montserrat';
+    color: #fff;
+    font-size: 23px;
+    padding: 5px 10px;   /*relleno  alto y ancho  tambien espaceador */   
+    text-decoration: none;  /* quita la rayita  de la referencia */
+    border-radius: 5px;  /* silueta del boton*/
+    background: linear-gradient(10deg, #ffffff 0%, #808080 100%);/*color*/
+}
+
+.svg-hero{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+}
+
+
+/* segunda seccion*/
+
+.Perfil{
+    background-color: #e8e4e1;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.Perfil h1{
+    font-family: 'MuseoModerno';
+    font-size: 50px;
+    padding-bottom: 13px;
+}
+
+.Perfil h4{
+    font-family:'';
+    font-size: 35px;
+    padding-bottom: 13px;
+    letter-spacing: 7px;
+}
+
+.Perfil p{
+    font-family: '';
+    font-size: 22px;
+    font-weight: 500; /*peso de la fuente*/
+}
+
+.Galeria h4{
+    font-family: 'MuseoModerno';
+    font-size: 22px;
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.Galeria .col-lg-4{
+    margin: 0 !important;
+    padding: 3px;
+    transition: 0.2s linear;
+}
+
+.Galeria .col-lg-4:hover{
+    transform: scale(1.05);
+    transition: 0.2s linear;
+    z-index: 1;
+}
+
+.Galeria .row img{
+    width: 100%;
+    height: 250px;
+}
+
+.itp{
+    color: rgb(16, 75, 84) !important;
+
+}
+
+
+
