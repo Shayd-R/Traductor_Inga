@@ -1,0 +1,119 @@
+:root {
+    --color-dark: #15181f;
+    --color-dark-x: #2d343f;
+    --color-dark-xx: #1f232b;
+    --color-light: #ffffff;
+    --color-grey: #f5f6fB;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: linear-gradient(to right, #434343, #000000);
+    background-color: var(--color-grey);
+    color: var(--color-light);
+    letter-spacing: .05rem;
+}
+
+.bg-light {
+    background-color: var(--color-light) !important;
+}
+
+.bg-dark {
+    background-color: var(--color-dark) !important;
+}
+
+.dark-x{
+    background-color: var(--color-dark-x) !important;
+}
+
+.dark-xx{
+    background-color: var(--color-dark-xx) !important;
+}
+
+.p-6 {
+    padding: 2rem 6rem;
+}
+
+.contact-box {
+    padding: 4rem;
+}
+
+.btn {
+    font-weight: 400;
+    padding: 1rem 2rem;
+    border-radius: 5rem;
+    min-width: 13rem;
+}
+
+.btn-outline-dark {
+    border: 2px solid var(--color-dark-xx);
+}
+
+.form-control {
+    background-color: var(--color-dark-xx);
+    border: 2px solid var(--color-dark-xx);
+    border-radius: .2rem;
+    padding: 1.5rem 1rem;
+}
+
+.register-bg {
+    background-image: url(/static/img/login_registro_restablecer_2.jpg);
+
+    background-repeat: no-repeat;
+    min-height: 82vh;
+}
+
+.bc {
+    background-color: var(--color-dark-x);
+}
+
+.testimonial {
+    bottom: 70px;
+}
+
+.contenedor {
+    position: relative;
+}
+  
+.inicio {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -450px; 
+}
+
+.titulo{
+    font-size: 14rem;
+}
+
+.flash {
+    margin: 0 auto;
+}
+
+@media (max-width: 575.98px) {
+    .p-6 {
+        padding: 2rem;
+    }
+
+    .contact-box {
+        padding: 0;
+    }
+
+    .width-100 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1000px){
+    .register-bg{
+        min-height: 50vh;
+    }
+
+}
+.form_input{
+    width: 50% !important; border: 0;
+}
