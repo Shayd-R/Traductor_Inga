@@ -28,7 +28,7 @@ def muro():
     if autenticacionController.vericarAutenticacion():
         id_sesion=session['name']
         rol=session['rol']
-        return render_template("muro/muro.html", id_sesion=id_sesion, rol=rol)
+        return render_template("menu/menu.html", id_sesion=id_sesion, rol=rol)
     else:
         return redirect(url_for('inicio'))
 

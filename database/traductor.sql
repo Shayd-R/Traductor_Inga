@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise v13.1.1 (32 bit)
-MySQL - 10.4.21-MariaDB : Database - traductor
+SQLyog Ultimate v13.1.1 (64 bit)
+MySQL - 8.0.30 : Database - traductor
 *********************************************************************
 */
 
@@ -12,34 +12,34 @@ MySQL - 10.4.21-MariaDB : Database - traductor
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`traductor` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`traductor` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `traductor`;
 
-/*Table structure for table `\'espaã±ol-inga$\'` */
+/*Table structure for table `categorias` */
 
-DROP TABLE IF EXISTS `\'espaã±ol-inga$\'`;
+DROP TABLE IF EXISTS `categorias`;
 
-CREATE TABLE `\'espaã±ol-inga$\'` (
-  `id` double DEFAULT NULL,
-  `palabra_espanol` varchar(255) DEFAULT NULL,
-  `traduccion` varchar(255) DEFAULT NULL,
-  `palabra a palabra` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `categorias` (
+  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `nombre_categoria` varchar(2555) DEFAULT NULL,
+  `imagen_categoria` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
-/*Data for the table `\'espaã±ol-inga$\'` */
+/*Data for the table `categorias` */
 
 /*Table structure for table `palabras_espanol` */
 
 DROP TABLE IF EXISTS `palabras_espanol`;
 
 CREATE TABLE `palabras_espanol` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `palabra_espanol` varchar(500) DEFAULT NULL,
   `traduccion` varchar(500) DEFAULT NULL,
   `palabra a palabra` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2632 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2632 DEFAULT CHARSET=utf8mb3;
 
 /*Data for the table `palabras_espanol` */
 
@@ -2681,12 +2681,12 @@ insert  into `palabras_espanol`(`id`,`palabra_espanol`,`traduccion`,`palabra a p
 DROP TABLE IF EXISTS `palabras_inga`;
 
 CREATE TABLE `palabras_inga` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `palabra_inga` varchar(500) NOT NULL,
   `traduccion` varchar(500) DEFAULT NULL,
   `palabra a palabra` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8mb3;
 
 /*Data for the table `palabras_inga` */
 
@@ -6032,10 +6032,10 @@ insert  into `palabras_inga`(`id`,`palabra_inga`,`traduccion`,`palabra a palabra
 DROP TABLE IF EXISTS `pronombres`;
 
 CREATE TABLE `pronombres` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `P_pronombre` varchar(500) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 /*Data for the table `pronombres` */
 
@@ -6046,15 +6046,36 @@ insert  into `pronombres`(`id`,`P_pronombre`) values
 (4,'nosotros'),
 (5,'ellos, ellas');
 
+/*Table structure for table `usuarios` */
+
+DROP TABLE IF EXISTS `usuarios`;
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `estado` varchar(255) DEFAULT NULL,
+  `rol` varchar(255) DEFAULT 'contribuyente',
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf16;
+
+/*Data for the table `usuarios` */
+
+insert  into `usuarios`(`id_usuario`,`nombre`,`email`,`password`,`token`,`estado`,`rol`) values 
+(8,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$Bko57XF7WzeRfCnY$ec757d4b069c524b83b415ca4a3a044613590dcd537873c5d75abd796425be05',NULL,'activo','adimin'),
+(9,'shayd','shaydruano3@gmail.com','pbkdf2:sha256:260000$YxcuTtSqgWE3knD4$3bd792b7409bb0fd94c86d871a93fcede2b2f66046ac1037b09ad5b6831ed268',NULL,'activo','contribuyente');
+
 /*Table structure for table `verbos` */
 
 DROP TABLE IF EXISTS `verbos`;
 
 CREATE TABLE `verbos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `palabra` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 /*Data for the table `verbos` */
 

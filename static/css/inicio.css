@@ -6,7 +6,7 @@ body{
 .Header{
     width: 100%;
     height: 95vh;
-    background-image: linear-gradient(180deg, #969797, #009cfd41 100%), url(../img/imagen1.jpg);
+    background-image: linear-gradient(#888585, #ffffff41 100%), url(../img/inicio/inicio_1.jpg);
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
@@ -46,18 +46,18 @@ body{
 }
 
 .navbar a:hover{
-    background: linear-gradient(180deg, #22c2c3 0%, #fdbb2d 100%);
+    background: linear-gradient(180deg, #cccece 0%, #424241 100%);
     border-radius: 5%;
 }
  
 .Text-hero{
     height: 550px;  /*altura */
-    color: rgb(255, 255, 255);
+    color: #fff;
     font-family: '';
     padding-top: 190px;
 }
 
-.Text-hero h3,h5{
+.Text-hero h5{
     font-size: 70px;  /*tamaño de fuente */
     letter-spacing: .2em;  /* espacio de letras */
 /*  font-weight: bold;   peso de la fuente negrita*/
@@ -71,11 +71,7 @@ body{
     padding: 5px 10px;   /*relleno  alto y ancho  tambien espaceador */   
     text-decoration: none;  /* quita la rayita  de la referencia */
     border-radius: 5px;  /* silueta del boton*/
-    background: linear-gradient(160deg, #22c3c3bb 0%, #fdbb2db0 100%); /*color*/
-}
-
-.Text-hero a:hover{
-    background: linear-gradient(160deg, #22c2c3 0%, #fdbb2d 100%);
+    background: linear-gradient(10deg, #ffffff 0%, #808080 100%);/*color*/
 }
 
 .svg-hero{
@@ -86,10 +82,68 @@ body{
 
 }
 
-/* itp imagen */
+
+/* segunda seccion*/
+
+.Perfil{
+    background-color: #e8e4e1;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.Perfil h1{
+    font-family: 'MuseoModerno';
+    font-size: 50px;
+    padding-bottom: 13px;
+}
+
+.Perfil h4{
+    font-family:'';
+    font-size: 35px;
+    padding-bottom: 13px;
+    letter-spacing: 7px;
+}
+
+.Perfil p{
+    font-family: '';
+    font-size: 22px;
+    font-weight: 500; /*peso de la fuente*/
+}
+
+.Galeria h4{
+    font-family: 'MuseoModerno';
+    font-size: 22px;
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.Galeria .col-lg-4{
+    margin: 0 !important;
+    padding: 3px;
+    transition: 0.2s linear;
+}
+
+.Galeria .col-lg-4:hover{
+    transform: scale(1.05);
+    transition: 0.2s linear;
+    z-index: 1;
+}
+
+.Galeria .row img{
+    width: 100%;
+    height: 250px;
+}
+
+.itp{
+    color: rgb(16, 75, 84) !important;
+
+}
+
 .brand img{
     width: 80px;
     height: 50px;
+    background-size: cover;
 }
 
 
