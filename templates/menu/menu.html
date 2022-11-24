@@ -22,15 +22,15 @@ Menu
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <label for="" class="brand">
-        <img class="icono_itp" src="/static/img/menu/icono_itp.jpg" >
+        <img class="icono_itp" src="/static/img/menu/icono_itp.jpg">
       </label>
       <div class="navbar-nav d-flex justify-content-center w-100">
         <h4>MENU CATEGORIAS</h4>
       </div>
       <div class="navbar-nav nav-flex-icons">
         <div class="dropdown">
-          <button  class="btn btn-bd-secondary dropdown-toggle" type="button" id="menu"
-            data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static">
+          <button class="btn btn-bd-secondary dropdown-toggle" type="button" id="menu" data-bs-toggle="dropdown"
+            aria-expanded="false" data-bs-display="static">
             {{nombre}} &nbsp; {{rol}}
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
@@ -53,73 +53,95 @@ Menu
 
 
 <section>
-  <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active container" id="pills-profile" role="tabpanel"
-      aria-labelledby="pills-profile-tab">
-      <h2 class="h4 m-4 text-primary">´</h2>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    data-bs-whatever="@getbootstrap">Crear categoria</button>
 
-      <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-        <div class="card" >
-          <img src="/static/img/menu/comida.jpg" class="card-img-top img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+  <div class="row row-cols-1 row-cols-md-4 text-dark">
+    {% for categoria in categorias %}
+    <div class="col p-2">
+      <div class="card">
+        <div class="btn-group dropleft my-1 mr-2" style="display: flex; justify-content: end;">
+          <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
+            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="">Ver</a></li>
+            <li><a class="dropdown-item" href="">Editar</a></li>
+            <li><a class="dropdown-item" href="">Eliminar</a></li>
+          </ul>
         </div>
-        <div class="col d-flex justify-content-center mb-4">
-
-          <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
-            <h5 class="card-title pt-2 text-center text-primary"></h5>
-            <img src="/static/img/menu/comida.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Comida</a>
-            </div>
-          </div>
-        </div>
-        <div class="col d-flex justify-content-center mb-4">
-          <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
-            <h5 class="card-title pt-2 text-center text-primary"></h5>
-            <img src="/static/img/menu/escuela.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Escuela</a>
-            </div>
-          </div>
-        </div>
-        <div class="col d-flex justify-content-center mb-4">
-
-          <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
-            <h5 class="card-title pt-2 text-center text-primary"></h5>
-            <img src="/static/img/menu/fiesta.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Fiesta</a>
-            </div>
-          </div>
-        </div>
-        <div class="col d-flex justify-content-center mb-4">
-          <div class="card shadow mb-1 bg-dark rounded" style="width: 20rem;">
-            <h5 class="card-title pt-2 text-center text-primary"></h5>
-            <img src="/static/img/menu/trabajo.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Trabajo</a>
-            </div>
-          </div>
+        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Nombre: {{categoria[1]}}</h5>
+         
         </div>
       </div>
-
-
-
-
     </div>
-
-
+    {% endfor %}
   </div>
 
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear categoria</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+        <form action="{{url_for('crear_categoria')}}" enctype="multipart/form-data" method="post">
+          <div class="modal-body">
+            <div class="flash">
+              <p class="card-text text-center">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                {% if messages %}
+              <ul class="alert alert-danger text-center">
+                {% for message in messages %}
+                <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% endwith %}
+              {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
+              {% if messages %}
+              <ul class="alert alert-success text-center">
+                {% for message in messages %}
+                <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% endwith %}
+              </p>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Nombre:</label>
+              <input type="text" class="form-control" name="nombre" id="recipient-name">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">imagen:</label>
+              <input class="form-control" type="file" name="imagen">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
   </div>
+
+
+
+
+
+
+
+
+
 </section>
 
 <div class="svg-hero" style="height: 150px; overflow: hidden;">

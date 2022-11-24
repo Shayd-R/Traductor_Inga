@@ -25,8 +25,6 @@ def resgistrarUsuario(nombre, email, password, token):
     )       
     cursor.close()
    
-
-"""este codigo puede servir para despues en agregar imagenes"""
 def nombreImagen(imagen):
     today = date.today()
     now = datetime.now()
@@ -70,7 +68,6 @@ def cambioPassword(email, passwordencriptada):
         email,
     ))
     cursor.close()
-
 
 
 

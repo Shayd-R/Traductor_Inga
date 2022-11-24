@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify,render_template,request,redirect,url_for,session,flash,json,make_response
 from hashlib import sha256
-from models import voz_traductor, traduccion_texto
+from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria
 from controllers import loginController,registroController,confirmarToken,restablecerPassword,cambiarPassword, autenticacionController
 from config.database import db
 
@@ -34,7 +34,10 @@ def muro():
     if autenticacionController.vericarAutenticacion():
         nombre=session['name']
         rol=session['rol']
-        return render_template("menu/menu.html", nombre=nombre, rol=rol)
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM categorias")
+        categorias = cursor.fetchall()
+        return render_template("menu/menu.html", nombre=nombre, rol=rol, categorias=categorias)
     else:
         return redirect(url_for('inicio'))
 
@@ -50,18 +53,35 @@ def registrar_usuario():
             return render_template("/registro/registro.html",nombre=nombre,email=email)
     return render_template("/registro/registro.html")
 
+@app.route("/crearCategoria", methods=["GET", "POST"])
+def crear_categoria():
+    if request.method == 'GET':
+        return render_template('/menu/menu.html')
+    
+    if request.method == 'POST':
+        nombre = request.form.get('nombre')
+        imagen = request.files.get('imagen')
+        resultado=existeCategoria.existe(nombre)
+        if resultado:
+            flash("Ya existe esta categoria", "error")
+            return redirect(url_for('muro'))
+        img = userModel.nombreImagen(imagen)
+        crearCategoria.crear(nombre=nombre, imagen=img)
+        print(nombre)
+        imagen.save('./static/img/categorias/'+str(img))
+        flash("Se ha creado la categoria: "+nombre, 'bueno')
+    return redirect(url_for('muro'))
+
+
 @app.route("/restorePassword", methods=["GET", "POST"])
 def restorePassword():
-    print('1')
     if autenticacionController.vericarAutenticacion():
-        print(2)
         if request.method== 'POST':
             email=request.form['email']
             if restablecerPassword.restablecer(email):
                 return redirect(url_for('inicio'))
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
     else:
-        print('3')
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
     
     
