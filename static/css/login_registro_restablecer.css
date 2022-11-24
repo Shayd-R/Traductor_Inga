@@ -61,7 +61,7 @@ body {
 }
 
 .register-bg {
-    background-image: url(/static/img/login_registro_restablecer_2.jpg);
+    background-image: url(/static/img/login/login_registro_restablecer_2.jpg);
 
     background-repeat: no-repeat;
     min-height: 82vh;

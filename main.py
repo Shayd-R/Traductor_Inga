@@ -23,12 +23,18 @@ def inicio_session():
             return render_template("/inicio_session/inicio_session.html")
     return render_template("/inicio_session/inicio_session.html")
 
+@app.get("/exit")
+def exit():
+    if autenticacionController.vericarAutenticacion():
+        session.clear()
+    return redirect(url_for('inicio_session'))
+
 @app.route("/muro", methods=["GET", "POST"])
 def muro():
     if autenticacionController.vericarAutenticacion():
-        id_sesion=session['name']
+        nombre=session['name']
         rol=session['rol']
-        return render_template("menu/menu.html", id_sesion=id_sesion, rol=rol)
+        return render_template("menu/menu.html", nombre=nombre, rol=rol)
     else:
         return redirect(url_for('inicio'))
 

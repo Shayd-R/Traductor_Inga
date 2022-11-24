@@ -1,22 +1,22 @@
 body{
     background-color: #eeeeee;
-    position: relative;
-}
-
-.Header{
+    position:relative;
     width: 100%;
-    height: 95vh;
+    height: 100vh;
     background-image: linear-gradient(#888585, #ffffff41 100%), url(../img/inicio/inicio_1.jpg);
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
     background-attachment: fixed;
-    position: relative;
     overflow: hidden;
 }
 
-.bg-dark{
-    background-color: #393e46 !important;
+.icono-itp {
+    border-radius: 10%;
+}
+
+.bg-navar{
+    background: #fff !important;
     position: fixed;
     z-index: 100;
     width: 100%;
@@ -37,18 +37,7 @@ body{
     }
 }
 
-.navbar a{
-    color: #fff !important;
-    font-family:'MuseoModerno';
-    text-align: center;
-    font-size: 23px;
-    padding: 4px 15px;
-}
 
-.navbar a:hover{
-    background: linear-gradient(180deg, #cccece 0%, #424241 100%);
-    border-radius: 5%;
-}
  
 .Text-hero{
     height: 550px;  /*altura */
@@ -148,3 +137,9 @@ body{
 
 
 
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+  }
