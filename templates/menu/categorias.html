@@ -13,7 +13,6 @@ Menu
 {%block contenido %}
 
 
-
 <nav class="navbar navbar-expand-lg bg-navar">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -25,26 +24,19 @@ Menu
         <img class="icono_itp" src="/static/img/menu/icono_itp.jpg">
       </label>
       <div class="navbar-nav d-flex justify-content-center w-100">
-        <h4>MENU CATEGORIAS</h4>
+        <h4>{{nombre_categoria}}</h4>
       </div>
       <div class="navbar-nav nav-flex-icons">
         <div class="dropdown">
           <button class="btn btn-bd-secondary dropdown-toggle" type="button" id="menu" data-bs-toggle="dropdown"
             aria-expanded="false" data-bs-display="static">
-            {{nombre}} &nbsp; {{rol}}
+            {{name}} &nbsp; {{rol}}
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
             <li><a class="dropdown-item" href="#">Perfil</a></li>
-            {% if session['rol'] == 'admin' %}
-            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
-                class="dropdown-item" href="#">Agregar categoria</a></li>
-            {% endif %}
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
-
-
           </ul>
         </div>
-
       </div>
     </div>
   </div>
@@ -52,29 +44,25 @@ Menu
 
 
 
-
-
-
-
 <section>
-  <br>
   <div class="row row-cols-1 row-cols-md-4 text-dark">
-    {% for categoria in categorias %}
+    {% for frase in frases_categoria %}
     <div class="col p-2">
       <div class="card">
-        {% if session['rol'] == 'admin' %}
-        <div class="btn-group dropleft my-1 mr-2" style="display: flex; ">
+        <div class="btn-group dropleft my-1 mr-2" style="display: flex;">
           <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
             type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
+
             <li><a class="dropdown-item" href="">Editar</a></li>
             <li><a class="dropdown-item" href="">Eliminar</a></li>
+
           </ul>
         </div>
-        {% endif %}
-        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" alt="">
+        <img src="/static/img/frases_categoria/{{frase[3]}}" class="card-img-top" alt="">
         <div class="card-body">
-          <center><a type="button" class="btn btn-success" href="{{ url_for('frases', id=categoria[0], nombre=categoria[1])}}">{{categoria[1]}}</a></center>
+          <h1>{{frase[1]}}</h1>
+          <h3>{{frase[2]}}</h3>
         </div>
       </div>
     </div>
@@ -82,69 +70,9 @@ Menu
   </div>
 
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Crear categoria</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-
-        <form action="{{url_for('crear_categoria')}}" enctype="multipart/form-data" method="post">
-          <div class="modal-body">
-            <div class="flash">
-              <p class="card-text text-center">
-                {% with messages = get_flashed_messages(category_filter=["error"]) %}
-                {% if messages %}
-              <ul class="alert alert-danger text-center">
-                {% for message in messages %}
-                <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-              {% endwith %}
-              {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
-              {% if messages %}
-              <ul class="alert alert-success text-center">
-                {% for message in messages %}
-                <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-              {% endwith %}
-              </p>
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Nombre:</label>
-              <input type="text" class="form-control" name="nombre" id="recipient-name">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">imagen:</label>
-              <input class="form-control" type="file" name="imagen">
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
-            <button type="submit" class="btn btn-primary">Agregar</button>
-          </div>
-        </form>
-
-
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
 
 </section>
+
 
 <div class="svg-hero" style="height: 150px; overflow: hidden;">
   <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">

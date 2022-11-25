@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify,render_template,request,redirect,url_for,session,flash,json,make_response
 from hashlib import sha256
-from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria
+from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, listarFrases
 from controllers import loginController,registroController,confirmarToken,restablecerPassword,cambiarPassword, autenticacionController
 from config.database import db
 
@@ -41,6 +41,19 @@ def muro():
     else:
         return redirect(url_for('inicio'))
 
+@app.route("/frasesCategoria/<string:id>/<string:nombre>", methods=["GET", "POST"])
+def frases(id, nombre):
+    cursor = db.cursor()
+    if autenticacionController.vericarAutenticacion():
+        name=session['name']
+        rol=session['rol']
+        cursor.execute("SELECT * FROM frases_categorias WHERE id_categoria= "+id+"")      
+        frases_categorias = cursor.fetchall()
+        return render_template("menu/categorias.html", nombre_categoria=nombre, name=name, rol=rol, frases_categoria=frases_categorias)
+        
+    else:
+        return redirect(url_for('inicio'))    
+    
 @app.route("/registrarUsuario", methods=["GET", "POST"])
 def registrar_usuario():
     if request.method=='POST':
@@ -83,7 +96,6 @@ def restorePassword():
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
     else:
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
-    
     
     
 @app.get("/cambiarPass/<id>/<token>")

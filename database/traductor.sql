@@ -25,9 +25,38 @@ CREATE TABLE `categorias` (
   `nombre_categoria` varchar(2555) DEFAULT NULL,
   `imagen_categoria` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf16;
 
 /*Data for the table `categorias` */
+
+insert  into `categorias`(`id_categoria`,`nombre_categoria`,`imagen_categoria`) values 
+(1,'asd','2022-11-242321155912424. APORTE DE USUARIOS.png'),
+(2,'shayd','2022-11-242324167162484. APORTE DE USUARIOS.png'),
+(3,'shayd','2022-11-24232562369394. APORTE DE USUARIOS.png'),
+(4,'Bombom','2022-11-242343247184304. APORTE DE USUARIOS.png'),
+(5,'shayd1q1','2022-11-242345506635154. APORTE DE USUARIOS.png'),
+(6,'café','2022-11-24234811333504. APORTE DE USUARIOS.png'),
+(7,'hola','2022-11-25535556718040.png');
+
+/*Table structure for table `frases_categorias` */
+
+DROP TABLE IF EXISTS `frases_categorias`;
+
+CREATE TABLE `frases_categorias` (
+  `id_frases_categoria` int NOT NULL AUTO_INCREMENT,
+  `frase_español` varchar(255) DEFAULT NULL,
+  `traduccion` varchar(255) DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `id_categoria` int DEFAULT NULL,
+  PRIMARY KEY (`id_frases_categoria`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `frases_categorias_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf16;
+
+/*Data for the table `frases_categorias` */
+
+insert  into `frases_categorias`(`id_frases_categoria`,`frase_español`,`traduccion`,`imagen`,`id_categoria`) values 
+(1,'hola','hello',NULL,1);
 
 /*Table structure for table `palabras_espanol` */
 
@@ -6059,13 +6088,13 @@ CREATE TABLE `usuarios` (
   `estado` varchar(255) DEFAULT NULL,
   `rol` varchar(255) DEFAULT 'contribuyente',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf16;
 
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`id_usuario`,`nombre`,`email`,`password`,`token`,`estado`,`rol`) values 
-(8,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$Bko57XF7WzeRfCnY$ec757d4b069c524b83b415ca4a3a044613590dcd537873c5d75abd796425be05',NULL,'activo','adimin'),
-(9,'shayd','shaydruano3@gmail.com','pbkdf2:sha256:260000$YxcuTtSqgWE3knD4$3bd792b7409bb0fd94c86d871a93fcede2b2f66046ac1037b09ad5b6831ed268',NULL,'activo','contribuyente');
+(8,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$Bko57XF7WzeRfCnY$ec757d4b069c524b83b415ca4a3a044613590dcd537873c5d75abd796425be05',NULL,'activo','admin'),
+(10,'shayd','shaydruano3@gmail.com','pbkdf2:sha256:260000$VHAriBhapETCvmO6$823f8e8674e94d30fcb7394da8b19e43e8a3662cb24d5d653986778206ce3491',NULL,'activo','contribuyente');
 
 /*Table structure for table `verbos` */
 

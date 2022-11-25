@@ -9,10 +9,10 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 290;
     background: #000000;
-    background: -webkit-linear-gradient(to right, #434343, #000000);
-    background: linear-gradient(to right, #434343, #000000);
+    background: -webkit-linear-gradient(to right, #434343, #636363);
+    background: linear-gradient(to right, #919191, #5e5c5c);
     background-color: var(--color-grey);
     color: var(--color-light);
     letter-spacing: .05rem;
@@ -62,9 +62,9 @@ body {
 
 .register-bg {
     background-image: url(/static/img/login/login_registro_restablecer_2.jpg);
-
     background-repeat: no-repeat;
-    min-height: 82vh;
+    background-size: cover;
+    min-height: 85vh;
 }
 
 .bc {

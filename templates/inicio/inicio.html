@@ -14,45 +14,57 @@ Bienvenidos
 
 {%block contenido %}
 
-<header class="Header">
-  <div class=" bg-dark bg-dark1" id="mecSoc">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav d-flex justify-content-center w-100">
-              <a class="nav-link" href="#">Acerca de traductor Inga Español</a>
-              <a class="nav-link" href="#">privacidad y condiciones</a>
-              <a class="nav-link" href="#">Ayuda</a>
-              <a class="nav-link" href="{{url_for('inicio_session')}}">Loggin</a>
-            </div>
+
+<div class=" bg-white " id="mecSoc">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav d-flex justify-content-center w-100">
+            <a class="nav-link" href="#">Acerca de traductor Inga Español</a>
+            <a class="nav-link" href="#">privacidad y condiciones</a>
+            <a class="nav-link" href="#">Ayuda</a>
+            <a class="nav-link" href="{{url_for('inicio_session')}}">Loggin</a>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<section>
+
+  <div class="container">
+    <div class="Text-hero">
+      <center>
+        <h5>Bienvenidos, chaskii</h5>
+        <h3>Usuarios</h3>
+
+        <br>
+        <a type="button" class="btn btn-outline-light" href="{{url_for('traductor')}}">Ingresa al traductor</a>
+      </center>
     </div>
   </div>
 
-  <div class="Text-hero">
-    <div class="container">
-      <h5>Bienvenidos, chaskii</h5>
-      <h3>Usuarios</h3>
-      <a href="{{url_for('traductor')}}">Ingresa al traductor</a>
-    </div>
-  </div>
-
-  <div class="svg-hero" style="height: 150px; overflow: hidden;">
-    <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-      <path d="M-27.99,85.35 C171.78,206.74 293.11,-71.54 500.00,49.99 L500.00,150.00 L0.00,150.00 Z"
-        style="stroke: none; fill: rgb(255, 255, 255);"></path>
-    </svg>
-  </div>
+</section>
 
 
-</header>
+
+
+
+<div class="svg-hero" style="height: 150px; overflow: hidden;">
+  <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+    <path d="M-27.99,85.35 C171.78,206.74 293.11,-71.54 500.00,49.99 L500.00,150.00 L0.00,150.00 Z"
+      style="stroke: none; fill: rgb(255, 255, 255);"></path>
+  </svg>
+</div>
+
+
+
 
 
 
