@@ -1,0 +1,15 @@
+{% extends 'base_html/base.html' %}
+
+{% block titulo %}
+Verificacion
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css')}}">
+{% endblock %}
+
+{%block contenido %}
+{% for categoria in categorias %}
+<h1>{{categoria[1]}}</h1>
+{% endfor %}
+{% endblock %}

@@ -73,6 +73,9 @@ def crear_categoria():
     
     if request.method == 'POST':
         nombre = request.form.get('nombre')
+        if nombre == "":
+            flash("El campo nombre esta vacio", "error")
+            return redirect(url_for('muro'))
         imagen = request.files.get('imagen')
         resultado=existeCategoria.existe(nombre)
         if resultado:
@@ -142,7 +145,7 @@ def traduccion():
             if a==None:
                 a=palabra
             else:
-                a=a['traduccion']   
+                a=a['palabra a palabra']   
             traducido.append(a)
             db.commit()
         texto_salida=traduccion_texto.concatenar_palabras(traducido, "  ")
@@ -162,11 +165,22 @@ def audio():
         if a==None:
             a=palabra
         else:
-            a=a['traduccion']   
+            a=a['palabra a palabra']   
         traducido.append(a)
         db.commit()
         texto_salida=traduccion_texto.concatenar_palabras(traducido, "  ")
     voz_traductor.voz_texto(texto_salida)
     return render_template("/traductor/traductor.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
+
+@app.route("/verificacionContribuyente", methods=["GET", "POST"])
+def verificacionContribuyente():
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM categorias")      
+    frases_categorias = cursor.fetchall()
+    return render_template('/menu/verificacionContribucciones.html', categorias=frases_categorias)
+  
+       
+      
     
+
 app.run(debug=True)

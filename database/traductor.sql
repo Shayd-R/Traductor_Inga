@@ -25,7 +25,7 @@ CREATE TABLE `categorias` (
   `nombre_categoria` varchar(2555) DEFAULT NULL,
   `imagen_categoria` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf16;
 
 /*Data for the table `categorias` */
 
@@ -36,7 +36,8 @@ insert  into `categorias`(`id_categoria`,`nombre_categoria`,`imagen_categoria`) 
 (4,'Bombom','2022-11-242343247184304. APORTE DE USUARIOS.png'),
 (5,'shayd1q1','2022-11-242345506635154. APORTE DE USUARIOS.png'),
 (6,'café','2022-11-24234811333504. APORTE DE USUARIOS.png'),
-(7,'hola','2022-11-25535556718040.png');
+(7,'hola','2022-11-25535556718040.png'),
+(8,'','2022-11-28173337240073');
 
 /*Table structure for table `frases_categorias` */
 
