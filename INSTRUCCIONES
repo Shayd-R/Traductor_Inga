@@ -24,3 +24,6 @@ SMTP_PASSWORD=1006663258
 5. por ultimo se ejecuta el script de la base de datos que esta ahi en la carpeta "database"
 6. con el entorno activado de ya se procede a arrancar el programa con 
 python main.py run
+
+
+hola
