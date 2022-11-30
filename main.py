@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify,render_template,request,redirect,url_for,session,flash,json,make_response
 from hashlib import sha256
-from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, listarFrases
+from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, existeFrase, listarFrases
 from controllers import loginController,registroController,confirmarToken,restablecerPassword,cambiarPassword, autenticacionController
 from config.database import db
 
@@ -47,7 +47,7 @@ def frases(id, nombre):
     if autenticacionController.vericarAutenticacion():
         name=session['name']
         rol=session['rol']
-        cursor.execute("SELECT * FROM frases_categorias WHERE id_categoria= "+id+"")      
+        cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")      
         frases_categorias = cursor.fetchall()
         return render_template("menu/categorias.html", nombre_categoria=nombre, name=name, rol=rol, frases_categoria=frases_categorias)
         
@@ -175,11 +175,12 @@ def audio():
 @app.route("/verificacionContribuyente", methods=["GET", "POST"])
 def verificacionContribuyente():
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM categorias")      
+    cursor.execute("SELECT * FROM contribucciones")      
     frases_categorias = cursor.fetchall()
     return render_template('/menu/verificacionContribucciones.html', categorias=frases_categorias)
-  
-       
+
+
+
       
     
 

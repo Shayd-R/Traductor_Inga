@@ -1,14 +1,18 @@
 body{
     background-color: #eeeeee;
-    position:relative;
-    width: 100%;
-    height: 100vh;
+  
+    position: relative;
     background-image: linear-gradient(#888585, #ffffff41 100%), url(../img/inicio/inicio_1.jpg);
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
     background-attachment: fixed;
-    overflow: hidden;
+}
+
+.container {
+
+  
+
 }
 
 .icono-itp {
@@ -142,13 +146,6 @@ body{
 
 
 
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 20px;
-    background-color: #fff;
-}
 
 .card {
     padding-top: 10px;
@@ -160,4 +157,15 @@ footer {
     border-color: #393e46;
     border-radius: 5px;
     background-size:contain;
+}
+
+
+footer {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    color: rgb(0, 0, 0);
 }
