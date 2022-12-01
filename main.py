@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify,render_template,request,redirect,url_for,session,flash,json,make_response
 from hashlib import sha256
-from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, existeFrase, listarFrases
+from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase, existeFrase, listarFrases
 from controllers import loginController,registroController,confirmarToken,restablecerPassword,cambiarPassword, autenticacionController
 from config.database import db
 
@@ -47,13 +47,14 @@ def frases(id, nombre):
     if autenticacionController.vericarAutenticacion():
         name=session['name']
         rol=session['rol']
-        cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")      
+        cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+"  ")      
         frases_categorias = cursor.fetchall()
-        return render_template("menu/categorias.html", nombre_categoria=nombre, name=name, rol=rol, frases_categoria=frases_categorias)
-        
+        print("hola-1")
+        return render_template("menu/categorias.html", nombre_categoria=nombre,id=id, name=name, rol=rol, frases_categoria=frases_categorias)
     else:
         return redirect(url_for('inicio'))    
-    
+
+  
 @app.route("/registrarUsuario", methods=["GET", "POST"])
 def registrar_usuario():
     if request.method=='POST':
@@ -172,13 +173,35 @@ def audio():
     voz_traductor.voz_texto(texto_salida)
     return render_template("/traductor/traductor.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
 
-@app.route("/verificacionContribuyente", methods=["GET", "POST"])
-def verificacionContribuyente():
+@app.route("/verificacionContribuyente/<string:id>/<string:nombre>", methods=["GET", "POST"])
+def verificacionContribuyente(id, nombre):
     cursor = db.cursor()
     cursor.execute("SELECT * FROM contribucciones")      
     frases_categorias = cursor.fetchall()
-    return render_template('/menu/verificacionContribucciones.html', categorias=frases_categorias)
+    return render_template('/menu/categorias.html', frases_cateforia=frases_categorias)
 
+@app.route("/crearFrase/<string:id>/<string:nombre>", methods=["GET", "POST"])
+def crear_frase(id, nombre):
+    if request.method == 'GET':
+        return render_template('/menu/categorias.html')
+    
+    if request.method == 'POST':
+        frase = request.form.get('frase')
+        if frase == "":
+            flash("El campo frase esta vacio", "error")
+            return redirect(url_for('frases', id=id,nombre=nombre))
+        traduccion = request.form.get('traduccion')
+        imagen = request.files.get('imagen')
+        resultado=existeCategoria.existe(frase)
+        if resultado:
+            flash("Ya existe esta frase", "error")
+            return redirect(url_for('frases', id=id,nombre=nombre))
+        img = userModel.nombreImagen(imagen)
+        crearFrase.crear(id_categoria=id, frase=frase, traduccion=traduccion, imagen=img)
+  
+        imagen.save('./static/img/frases_categoria/'+str(img))
+        flash("Se ha creado la frase: "+frase, 'bueno')
+    return redirect(url_for('frases', id=id,nombre=nombre))
 
 
       

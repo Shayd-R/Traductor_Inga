@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block titulo %}
-Menu
+Menu_verificacion
 {% endblock %}
 
 
@@ -60,7 +60,7 @@ Menu
 <section>
   <br>
   <div class="row row-cols-1 row-cols-md-4 text-dark">
-    {% for categoria in categorias %}
+    {% for categoria in frases_categoria %}
     <div class="col p-2">
       <div class="card">
         {% if session['rol'] == 'admin' %}
@@ -93,7 +93,7 @@ Menu
         </div>
 
 
-        <form action="{{url_for('crear_categoria')}}" enctype="multipart/form-data" method="post">
+        <form action="{{url_for('crear_frase')}}" enctype="multipart/form-data" method="post">
           <div class="modal-body">
             <div class="flash">
               <p class="card-text text-center">
@@ -164,9 +164,6 @@ Menu
 
 
 
-<footer>
-  <h6 >Copyright 2022 ITP todos los derechos reservados.</h6>
-</footer>
 
 {% endblock %}
 {% block js %}

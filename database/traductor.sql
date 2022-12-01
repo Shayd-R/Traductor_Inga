@@ -35,8 +35,7 @@ insert  into `categorias`(`id_categoria`,`nombre_categoria`,`imagen_categoria`) 
 (3,'Comida','2022-11-24232562369394. APORTE DE USUARIOS.png'),
 (4,'Presentacion','2022-11-242343247184304. APORTE DE USUARIOS.png'),
 (5,'Viajes','2022-11-242345506635154. APORTE DE USUARIOS.png'),
-(6,'Saludos','2022-11-24234811333504. APORTE DE USUARIOS.png'),
-(12,'shayd','2022-11-29719881849Captura de pantalla_20221127_234015.png');
+(6,'Saludos','2022-11-24234811333504. APORTE DE USUARIOS.png');
 
 /*Table structure for table `contribucciones` */
 
@@ -55,12 +54,12 @@ CREATE TABLE `contribucciones` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `contribucciones_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `contribucciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16;
 
 /*Data for the table `contribucciones` */
 
 insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,`imagen`,`id_categoria`,`id_usuario`,`confirmacion`) values 
-(1,'hola','hello',NULL,1,10,'si');
+(12,'shayd1','ruanoas','2022-12-0203916549494IMG-20221010-WA0016.jpg',1,NULL,'No');
 
 /*Table structure for table `palabras_espanol` */
 

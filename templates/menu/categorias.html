@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block titulo %}
-Menu
+Menu_categorias
 {% endblock %}
 
 
@@ -34,6 +34,8 @@ Menu
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
             <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
+                class="dropdown-item" href="#">Agregar frase</a></li>
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
           </ul>
         </div>
@@ -44,41 +46,102 @@ Menu
 
 
 
-<section>
+
+
+
+<div class="container">
   <div class="row row-cols-1 row-cols-md-4 text-dark">
     {% for frase in frases_categoria %}
     <div class="col p-2">
       <div class="card">
-        <div class="btn-group dropleft my-1 mr-2" style="display: flex;">
+        {% if session['rol'] == 'admin' %}
+        <div class="btn-group dropleft my-1 mr-2" style="display: flex; ">
           <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
             type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
-
             <li><a class="dropdown-item" href="">Editar</a></li>
             <li><a class="dropdown-item" href="">Eliminar</a></li>
-
           </ul>
         </div>
+        {% endif %}
         <img src="/static/img/frases_categoria/{{frase[3]}}" class="card-img-top" alt="">
         <div class="card-body">
-          <h1>{{frase[1]}}</h1>
-          <h3>{{frase[2]}}</h3>
+          <h2>{{frase[1]}}</h2>
+          <h4>{{frase[2]}}</h4>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
 
+</div>
 
 
-</section>
 
 
-<div class="svg-hero" style="height: 150px; overflow: hidden;">
-  <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-    <path d="M-27.99,85.35 C171.78,206.74 293.11,-71.54 500.00,49.99 L500.00,150.00 L0.00,150.00 Z"
-      style="stroke: none; fill: rgb(255, 255, 255);"></path>
-  </svg>
+
+
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear frase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <form action="{{url_for('crear_frase', id=id,nombre=nombre_categoria)}}" enctype="multipart/form-data"
+        method="post">
+        <div class="modal-body">
+          <div class="flash">
+            <p class="card-text text-center">
+              {% with messages = get_flashed_messages(category_filter=["error"]) %}
+              {% if messages %}
+            <ul class="alert alert-danger text-center">
+              {% for message in messages %}
+              <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
+            {% if messages %}
+            <ul class="alert alert-success text-center">
+              {% for message in messages %}
+              <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            </p>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">frase en español:</label>
+            <input type="text" class="form-control" name="frase" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Traducción:</label>
+            <input type="text" class="form-control" name="traduccion" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">imagen:</label>
+            <input class="form-control" type="file" name="imagen">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
 </div>
 
 
@@ -96,9 +159,8 @@ Menu
 
 
 
-<footer>
-  <h6 class="text-center">Copyright 2022 ITP todos los derechos reservados.</h6>
-</footer>
+
+
 
 {% endblock %}
 {% block js %}
