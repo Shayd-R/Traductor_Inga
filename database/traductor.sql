@@ -48,18 +48,15 @@ CREATE TABLE `contribucciones` (
   `imagen` varchar(255) DEFAULT NULL,
   `id_categoria` int DEFAULT NULL,
   `id_usuario` int DEFAULT NULL,
-  `confirmacion` varchar(10) DEFAULT 'No',
+  `confirmacion` varchar(10) CHARACTER SET utf16 COLLATE utf16_general_ci DEFAULT 'si',
   PRIMARY KEY (`id_contribuccion`),
   KEY `id_categoria` (`id_categoria`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `contribucciones_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `contribucciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf16;
 
 /*Data for the table `contribucciones` */
-
-insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,`imagen`,`id_categoria`,`id_usuario`,`confirmacion`) values 
-(12,'shayd1','ruanoas','2022-12-0203916549494IMG-20221010-WA0016.jpg',1,NULL,'No');
 
 /*Table structure for table `palabras_espanol` */
 

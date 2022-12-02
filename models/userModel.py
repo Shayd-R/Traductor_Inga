@@ -69,6 +69,16 @@ def cambioPassword(email, passwordencriptada):
     ))
     cursor.close()
 
+def editarFrase(id, frase, traduccion, imagenn):
+    imagen_sql=''
+    if imagenn:
+        imagen_sql=", imagen= '"+imagenn+"'"
+        sql = " frase_español= '"+frase+"', traduccion = '"+traduccion+"'" + imagen_sql + " WHERE id_contribuccion = '"+id+"'"
+    elif imagenn is None:
+        sql = " frase_español= '"+frase+"', traduccion = '"+traduccion+"'" + imagen_sql + " WHERE id_contribuccion = '"+id+"'"
+    cursor = db.cursor()    
+    cursor.execute("UPDATE contribucciones SET " + sql)
+    db.commit()
 
 
 

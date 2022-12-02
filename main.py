@@ -1,27 +1,30 @@
 
-from flask import Flask, jsonify,render_template,request,redirect,url_for,session,flash,json,make_response
+from flask import Flask, jsonify, render_template, request, redirect, url_for, session, flash, json, make_response
 from hashlib import sha256
 from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase, existeFrase, listarFrases
-from controllers import loginController,registroController,confirmarToken,restablecerPassword,cambiarPassword, autenticacionController
+from controllers import loginController, registroController, confirmarToken, restablecerPassword, cambiarPassword, autenticacionController
 from config.database import db
 
 app = Flask(__name__)
 app.secret_key = "##91!IasdyAjadfbdfan"
 
+
 @app.route("/", methods=["GET", "POST"])
 def inicio():
     return render_template("/inicio/inicio.html")
 
+
 @app.route("/inicio_session", methods=["GET", "POST"])
 def inicio_session():
-    if request.method=='POST':
-        email=request.form['email']
-        password=request.form['password']
-        if loginController.login(email,password) == True:
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        if loginController.login(email, password) == True:
             return redirect(url_for('muro'))
         else:
             return render_template("/inicio_session/inicio_session.html")
     return render_template("/inicio_session/inicio_session.html")
+
 
 @app.get("/exit")
 def exit():
@@ -29,11 +32,12 @@ def exit():
         session.clear()
     return redirect(url_for('inicio_session'))
 
+
 @app.route("/muro", methods=["GET", "POST"])
 def muro():
     if autenticacionController.vericarAutenticacion():
-        nombre=session['name']
-        rol=session['rol']
+        nombre = session['name']
+        rol = session['rol']
         cursor = db.cursor()
         cursor.execute("SELECT * FROM categorias")
         categorias = cursor.fetchall()
@@ -41,44 +45,46 @@ def muro():
     else:
         return redirect(url_for('inicio'))
 
+
 @app.route("/frasesCategoria/<string:id>/<string:nombre>", methods=["GET", "POST"])
 def frases(id, nombre):
     cursor = db.cursor()
     if autenticacionController.vericarAutenticacion():
-        name=session['name']
-        rol=session['rol']
-        cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+"  ")      
+        name = session['name']
+        rol = session['rol']
+        cursor.execute(
+            "SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")
         frases_categorias = cursor.fetchall()
-        print("hola-1")
-        return render_template("menu/categorias.html", nombre_categoria=nombre,id=id, name=name, rol=rol, frases_categoria=frases_categorias)
+        return render_template("menu/categorias.html", nombre_categoria=nombre, id=id, name=name, rol=rol, frases_categoria=frases_categorias)
     else:
-        return redirect(url_for('inicio'))    
+        return redirect(url_for('inicio'))
 
-  
+
 @app.route("/registrarUsuario", methods=["GET", "POST"])
 def registrar_usuario():
-    if request.method=='POST':
+    if request.method == 'POST':
         nombre = request.form.get("nombre")
         email = request.form.get("email")
         password = request.form.get("password")
-        if registroController.registro(nombre,email,password) == True:
+        if registroController.registro(nombre, email, password) == True:
             flash("Confirma tu correo")
         else:
-            return render_template("/registro/registro.html",nombre=nombre,email=email)
+            return render_template("/registro/registro.html", nombre=nombre, email=email)
     return render_template("/registro/registro.html")
+
 
 @app.route("/crearCategoria", methods=["GET", "POST"])
 def crear_categoria():
     if request.method == 'GET':
         return render_template('/menu/menu.html')
-    
+
     if request.method == 'POST':
         nombre = request.form.get('nombre')
         if nombre == "":
             flash("El campo nombre esta vacio", "error")
             return redirect(url_for('muro'))
         imagen = request.files.get('imagen')
-        resultado=existeCategoria.existe(nombre)
+        resultado = existeCategoria.existe(nombre)
         if resultado:
             flash("Ya existe esta categoria", "error")
             return redirect(url_for('muro'))
@@ -93,34 +99,36 @@ def crear_categoria():
 @app.route("/restorePassword", methods=["GET", "POST"])
 def restorePassword():
     if autenticacionController.vericarAutenticacion():
-        if request.method== 'POST':
-            email=request.form['email']
+        if request.method == 'POST':
+            email = request.form['email']
             if restablecerPassword.restablecer(email):
                 return redirect(url_for('inicio'))
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
     else:
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
-    
-    
+
+
 @app.get("/cambiarPass/<id>/<token>")
-def cambiarPass(id,token):
-    if confirmarToken.validateIdToken(id,token)==True:
-        return render_template("/restablecer_contraseña/restablecer_password.html",id=id)
+def cambiarPass(id, token):
+    if confirmarToken.validateIdToken(id, token) == True:
+        return render_template("/restablecer_contraseña/restablecer_password.html", id=id)
     else:
         return redirect(url_for('inicio_session'))
-    
+
+
 @app.post("/newPassword")
 def newPassword():
     if request.method == 'POST':
         id = request.form.get("id")
-        session['token'] =id
+        session['token'] = id
         password = request.form.get("password")
-        password_verificacion= request.form.get("password_verificacion")
-        if password==password_verificacion:
+        password_verificacion = request.form.get("password_verificacion")
+        if password == password_verificacion:
             if confirmarToken.validateToken(id):
-                cambiarPassword.cambiar(id,password)
+                cambiarPassword.cambiar(id, password)
                 return redirect(url_for('inicio_session'))
     return render_template("/restablecer_contraseña/restablecer_password.html")
+
 
 @app.route("/confirmarToken/<token>", methods=["GET", "POST"])
 def authToken(token):
@@ -129,82 +137,124 @@ def authToken(token):
     else:
         return redirect(url_for('inicio_session'))
 
+
 @app.route("/traductor", methods=["GET", "POST"])
 def traductor():
     return render_template("/traductor/traductor.html")
 
+
 @app.route("/traduccion", methods=["GET", "POST"])
 def traduccion():
-    if request.method=='POST':
-        texto_entrada= request.form['texto_entrada']
-        texto=texto_entrada.split()
-        traducido=[]
+    if request.method == 'POST':
+        texto_entrada = request.form['texto_entrada']
+        texto = texto_entrada.split()
+        traducido = []
         for palabra in texto:
             cursor = db.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='"+palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
-            a=cursor.fetchone()
-            if a==None:
-                a=palabra
+            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +
+                           palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
+            a = cursor.fetchone()
+            if a == None:
+                a = palabra
             else:
-                a=a['palabra a palabra']   
+                a = a['palabra a palabra']
             traducido.append(a)
             db.commit()
-        texto_salida=traduccion_texto.concatenar_palabras(traducido, "  ")
+        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
         return render_template("/traductor/traductor.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
     return render_template("/traductor/traductor.html")
 
 
 @app.route("/voz", methods=["GET", "POST"])
-def audio():    
-    texto_entrada= request.form['texto_entrada']
-    texto=texto_entrada.split()
-    traducido=[]
+def audio():
+    texto_entrada = request.form['texto_entrada']
+    texto = texto_entrada.split()
+    traducido = []
     for palabra in texto:
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='"+palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
-        a=cursor.fetchone()
-        if a==None:
-            a=palabra
+        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +
+                       palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
+        a = cursor.fetchone()
+        if a == None:
+            a = palabra
         else:
-            a=a['palabra a palabra']   
+            a = a['palabra a palabra']
         traducido.append(a)
         db.commit()
-        texto_salida=traduccion_texto.concatenar_palabras(traducido, "  ")
+        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
     voz_traductor.voz_texto(texto_salida)
     return render_template("/traductor/traductor.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
 
-@app.route("/verificacionContribuyente/<string:id>/<string:nombre>", methods=["GET", "POST"])
-def verificacionContribuyente(id, nombre):
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM contribucciones")      
-    frases_categorias = cursor.fetchall()
-    return render_template('/menu/categorias.html', frases_cateforia=frases_categorias)
 
 @app.route("/crearFrase/<string:id>/<string:nombre>", methods=["GET", "POST"])
 def crear_frase(id, nombre):
     if request.method == 'GET':
         return render_template('/menu/categorias.html')
-    
+
     if request.method == 'POST':
         frase = request.form.get('frase')
         if frase == "":
             flash("El campo frase esta vacio", "error")
-            return redirect(url_for('frases', id=id,nombre=nombre))
+            return redirect(url_for('frases', id=id, nombre=nombre))
         traduccion = request.form.get('traduccion')
+        if traduccion == "":
+            flash("El campo traduccion esta vacio", "error")
+            return redirect(url_for('frases', id=id, nombre=nombre))
+        id_usuario = session['id_usuario']
         imagen = request.files.get('imagen')
-        resultado=existeCategoria.existe(frase)
+        resultado = existeCategoria.existe(frase)
         if resultado:
             flash("Ya existe esta frase", "error")
-            return redirect(url_for('frases', id=id,nombre=nombre))
+            return redirect(url_for('frases', id=id, nombre=nombre))
         img = userModel.nombreImagen(imagen)
-        crearFrase.crear(id_categoria=id, frase=frase, traduccion=traduccion, imagen=img)
-  
+        crearFrase.crear(id_categoria=id, frase=frase,
+                         traduccion=traduccion, imagen=img, id_usuario=id_usuario)
         imagen.save('./static/img/frases_categoria/'+str(img))
         flash("Se ha creado la frase: "+frase, 'bueno')
-    return redirect(url_for('frases', id=id,nombre=nombre))
+    return redirect(url_for('frases', id=id, nombre=nombre))
 
 
-      
-    
+@app.route('/modaleditarFrase/<string:id_frase>/<string:id>/<string:nombre>', methods=['GET', 'POST'])
+def modal_editar(id_frase, id, nombre):
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM contribucciones WHERE id_contribuccion= "+id_frase)
+    a = cursor.fetchone()
+ 
+    return render_template("menu/editarFrase.html", id_frase=id_frase,id=id,nombre=nombre, frase=a["frase_español"], traduccion=a["traduccion"], imagen=a["imagen"])
+
+
+@app.route('/editarFrase/<string:id_frase>/<string:id>/<string:nombre>', methods=['GET', 'POST'])
+def editar_frase(id_frase, id, nombre):
+    if autenticacionController.vericarAutenticacion():
+        frase = request.form['frase']
+        traduccion = request.form['traduccion']
+        imagen = request.files['imagen']
+        if imagen:
+            nombreImagen = userModel.nombreImagen(imagen)
+            imagenn = nombreImagen
+            imagen.save('./static/img/frases_categoria/'+nombreImagen)
+        else:
+            imagenn = None
+        userModel.editarFrase(
+            frase=frase, traduccion=traduccion, imagenn=imagenn, id=id_frase)
+        flash('Se ha editado la frase correctamente')
+        return redirect(url_for('frases', id=id, nombre=nombre))
+    else:
+        return redirect(url_for('inicio'))
+
+
+@app.route("/verificacionContribuyente/<string:id>/<string:nombre>", methods=["GET", "POST"])
+def verificacionContribuyente(id, nombre):
+    cursor = db.cursor()
+    if autenticacionController.vericarAutenticacion():
+        name = session['name']
+        rol = session['rol']
+        cursor.execute(
+            "SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='No' ")
+        frases_categorias = cursor.fetchall()
+        return render_template("menu/verificacionContribucciones.html", nombre_categoria=nombre, id=id, name=name, rol=rol, frases_categoria=frases_categorias)
+    else:
+        return redirect(url_for('inicio'))
+
 
 app.run(debug=True)
