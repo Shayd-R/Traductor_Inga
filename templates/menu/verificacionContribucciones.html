@@ -22,7 +22,7 @@ Menu_verificacion
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <label for="" class="brand">
-        <img class="icono_itp" src="/static/img/menu/icono_itp.jpg">
+        <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/icono_itp.jpg"></a>
       </label>
       <div class="navbar-nav d-flex justify-content-center w-100">
         <h4>MENU CATEGORIAS</h4>
@@ -35,18 +35,9 @@ Menu_verificacion
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
             <li><a class="dropdown-item" href="#">Perfil</a></li>
-            {% if session['rol'] == 'admin' %}
-            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
-                class="dropdown-item" href="#">Agregar categoria</a></li>
-            <li><a type="button" class="dropdown-item" href="{{ url_for('verificacionContribuyente')}}">Verificacion de
-                contribucciones</a></li>
-            {% endif %}
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
-
-
           </ul>
         </div>
-
       </div>
     </div>
   </div>
@@ -59,7 +50,37 @@ Menu_verificacion
 
 
 <section>
-  <br>
+  <div class="flash">
+    <p class="card-text text-center">
+      {% with messages = get_flashed_messages(category_filter=["error"]) %}
+      {% if messages %}
+    <ul class="alert alert-danger text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["verificacion"]) %}
+    {% if messages %}
+    <ul class="alert alert-warning text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
+    {% if messages %}
+    <ul class="alert alert-success text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    </p>
+  </div>
   <br>
   <div class="container">
     <table class="table table-striped">
@@ -82,16 +103,14 @@ Menu_verificacion
           <td style="align-items: center; padding-top: 20px;">{{frase[2]}}</td>
           <td style="align-items: center; padding-top: 20px;">{{frase[3]}}</td>
           <td style="align-items: center; padding-top: 20px;">{{frase[4]}}</td>
-          <td ><img src="/static/img/frases_categoria/{{frase[5]}}" class="rounded" style="width: 50px; height:50px;">
+          <td><img src="/static/img/frases_categoria/{{frase[5]}}" class="rounded" style="width: 50px; height:50px;">
           </td>
-          <td >
+          <td>
             <div class="row" style="padding-top: 5px;">
               <div class="col-6" style="display: flex; flex-direction: column;">
-                <button class="btn btn-success">Confirmar</button>
+                <a type="button" class="btn btn-success" href="{{ url_for('verificar', id=frase[0])}}">Confirmar</a>
               </div>
-              <div class="col-6" style="display: flex; flex-direction: column;">
-                <button class="btn btn-danger">Denegar</button>
-              </div>
+
             </div>
           </td>
         </tr>

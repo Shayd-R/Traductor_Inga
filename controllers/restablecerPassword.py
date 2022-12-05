@@ -2,13 +2,10 @@ from flask import flash, session
 from models.enviarCorreo import enviar
 from models import establecerToken,nuevoToken, getUser
 def restablecer(email):
-    print(email)
     user = []
     user = getUser.User(email)
-    print(user)
     if user:
         id = str(user[0])
-        print(id)
         token = nuevoToken.crearToken()
         establecerToken.newToken(id,token)
         messages = "Restablecimiento de contraseña"

@@ -8,11 +8,9 @@ from config.database import db
 app = Flask(__name__)
 app.secret_key = "##91!IasdyAjadfbdfan"
 
-
 @app.route("/", methods=["GET", "POST"])
 def inicio():
     return render_template("/inicio/inicio.html")
-
 
 @app.route("/inicio_session", methods=["GET", "POST"])
 def inicio_session():
@@ -25,26 +23,24 @@ def inicio_session():
             return render_template("/inicio_session/inicio_session.html")
     return render_template("/inicio_session/inicio_session.html")
 
-
 @app.get("/exit")
 def exit():
     if autenticacionController.vericarAutenticacion():
         session.clear()
     return redirect(url_for('inicio_session'))
 
-
 @app.route("/muro", methods=["GET", "POST"])
 def muro():
     if autenticacionController.vericarAutenticacion():
+        id= session['id_usuario']
         nombre = session['name']
         rol = session['rol']
         cursor = db.cursor()
         cursor.execute("SELECT * FROM categorias")
         categorias = cursor.fetchall()
-        return render_template("menu/menu.html", nombre=nombre, rol=rol, categorias=categorias)
+        return render_template("menu/menu.html", nombre=nombre, rol=rol, id=id, categorias=categorias)
     else:
         return redirect(url_for('inicio'))
-
 
 @app.route("/frasesCategoria/<string:id>/<string:nombre>", methods=["GET", "POST"])
 def frases(id, nombre):
@@ -54,11 +50,10 @@ def frases(id, nombre):
         rol = session['rol']
         cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")
         frases_categorias = cursor.fetchall()
-        print(frases_categorias)
+        
         return render_template("menu/categorias.html", nombre_categoria=nombre, id=id, name=name, rol=rol, frases_categoria=frases_categorias)
     else:
         return redirect(url_for('inicio'))
-
 
 @app.route("/registrarUsuario", methods=["GET", "POST"])
 def registrar_usuario():
@@ -71,7 +66,6 @@ def registrar_usuario():
         else:
             return render_template("/registro/registro.html", nombre=nombre, email=email)
     return render_template("/registro/registro.html")
-
 
 @app.route("/crearCategoria", methods=["GET", "POST"])
 def crear_categoria():
@@ -90,11 +84,46 @@ def crear_categoria():
             return redirect(url_for('muro'))
         img = userModel.nombreImagen(imagen)
         crearCategoria.crear(nombre=nombre, imagen=img)
-        print(nombre)
         imagen.save('./static/img/categorias/'+str(img))
         flash("Se ha creado la categoria: "+nombre, 'bueno')
     return redirect(url_for('muro'))
 
+@app.route('/editarCategoria/<string:idcategoria>', methods=['GET', 'POST'])
+def editar_categoria(idcategoria):
+    if autenticacionController.vericarAutenticacion():
+        categoria = request.form['categoria']
+        imagen = request.files['imagen']
+        if imagen:
+            nombreImagen = userModel.nombreImagen(imagen)
+            imagenn = nombreImagen
+            imagen.save('./static/img/categorias/'+nombreImagen)
+        else:
+            imagenn = None
+        userModel.editarCategoria(idcategoria=idcategoria, categoria=categoria, imagenn=imagenn)
+        flash('Se ha editado la categoria correctamente','bueno')
+        return redirect(url_for('muro'))
+    else:
+        return redirect(url_for('inicio'))
+    
+@app.route('/eliminarCategoria/<string:id_categoria>', methods=['GET', 'POST'])
+def eliminar_categoria(id_categoria):
+    if autenticacionController.vericarAutenticacion(): 
+        userModel.eliminarCategoria(id_categoria=id_categoria)
+        flash('Se ha eliminado la categoria correctamente', 'error')
+        return redirect(url_for('muro'))
+    else:
+        return redirect(url_for('inicio')) 
+    
+@app.route("/ajaxmenu", methods=["GET", "POST"])
+def ajaxmenu():
+    cursor = db.cursor()
+    if request.method=='POST':
+        idcategoria=request.form['idcategoria']
+        id=request.form['id']
+        rol=request.form['rol']
+        cursor.execute("SELECT * FROM categorias WHERE id_categoria= "+idcategoria)
+        categoria = cursor.fetchall()
+    return jsonify({'htmlresponse': render_template('menu/responsecategoria.html', categoria=categoria, rol=rol, id=id)})
 
 @app.route("/restorePassword", methods=["GET", "POST"])
 def restorePassword():
@@ -107,14 +136,12 @@ def restorePassword():
     else:
         return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
 
-
 @app.get("/cambiarPass/<id>/<token>")
 def cambiarPass(id, token):
     if confirmarToken.validateIdToken(id, token) == True:
         return render_template("/restablecer_contraseña/restablecer_password.html", id=id)
     else:
         return redirect(url_for('inicio_session'))
-
 
 @app.post("/newPassword")
 def newPassword():
@@ -129,7 +156,6 @@ def newPassword():
                 return redirect(url_for('inicio_session'))
     return render_template("/restablecer_contraseña/restablecer_password.html")
 
-
 @app.route("/confirmarToken/<token>", methods=["GET", "POST"])
 def authToken(token):
     if confirmarToken.valToken(token) == True:
@@ -137,11 +163,9 @@ def authToken(token):
     else:
         return redirect(url_for('inicio_session'))
 
-
 @app.route("/traductor", methods=["GET", "POST"])
 def traductor():
     return render_template("/traductor/traductor.html")
-
 
 @app.route("/traduccion", methods=["GET", "POST"])
 def traduccion():
@@ -163,7 +187,6 @@ def traduccion():
         return render_template("/traductor/traductor.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
     return render_template("/traductor/traductor.html")
 
-
 @app.route("/voz", methods=["GET", "POST"])
 def audio():
     texto_entrada = request.form['texto_entrada']
@@ -182,7 +205,6 @@ def audio():
         texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
     voz_traductor.voz_texto(texto_salida)
     return render_template("/traductor/traductor.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
-
 
 @app.route("/crearFrase/<string:id>/<string:nombre>", methods=["GET", "POST"])
 def crear_frase(id, nombre):
@@ -232,9 +254,8 @@ def editar_frase(id_frase, id, nombre):
 def eliminar_frase(id_frase, id, nombre):
     if autenticacionController.vericarAutenticacion(): 
         userModel.eliminarFrase(id_frase=id_frase)
-        
         flash('Se ha eliminado la frase correctamente', 'error')
-        return redirect(url_for('frases', id=id, nombre=nombre))
+        return redirect(url_for('frases', id=id, nombre_categoria=nombre))
     else:
         return redirect(url_for('inicio'))    
 
@@ -248,8 +269,7 @@ def ajaxfile():
         cursor.execute(
             "SELECT * FROM contribucciones WHERE id_contribuccion= "+fraseid)
         frase = cursor.fetchall()
-        print(fraseid)
-    return jsonify({'htmlresponse': render_template('menu/response.html', frase=frase, nombre=nombre, id=id)})
+    return jsonify({'htmlresponse': render_template('menu/responsefrase.html', frase=frase, nombre=nombre, id=id)})
 
 @app.route("/verificacionContribuyente", methods=["GET", "POST"])
 def verificacionContribuyente():
@@ -277,9 +297,20 @@ def verificacionContribuyente():
             WHERE contribucciones.`confirmacion`='No'
         """)
         frases_categorias = cursor.fetchall()
-        print(frases_categorias)
         return render_template("menu/verificacionContribucciones.html", name=name, rol=rol, frases_categoria=frases_categorias)
     else:
         return redirect(url_for('inicio'))
     
+@app.route("/verificacionFrase/<string:id>", methods=["GET", "POST"])
+def verificar(id):
+    cursor = db.cursor()
+    if autenticacionController.vericarAutenticacion():
+        userModel.verificarFrase(id_frase=id)
+        flash("La frase ha sido confirmada", 'bueno')
+        return redirect(url_for('verificacionContribuyente'))
+    else:
+        return redirect(url_for('inicio'))
+    
+    db.commit()
+ 
 app.run(debug=True)

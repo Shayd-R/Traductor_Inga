@@ -2,7 +2,6 @@
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css')}}">
-
 {% endblock %}
 
 {% block titulo %}
@@ -11,8 +10,6 @@ Menu
 
 
 {%block contenido %}
-
-
 
 <nav class="navbar navbar-expand-lg bg-navar">
   <div class="container-fluid">
@@ -52,58 +49,65 @@ Menu
   </div>
 </nav>
 
-
-
-
-
-
-
-<section>
+<div class="container">
   <br>
-  <div class="container">
-    <div class="row row-cols-1 row-cols-md-4 text-dark">
-      {% for categoria in categorias %}
-      <div class="col p-2">
-        <div class="card">
-          {% if session['rol'] == 'admin' %}
-          <div class="btn-group dropleft my-1 mr-2" style="display: flex; ">
-            <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
-              type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
-              <li><a class="dropdown-item" href="">Editar</a></li>
-              <li><a class="dropdown-item" href="">Eliminar</a></li>
-            </ul>
-          </div>
-          {% endif %}
-          <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" alt="">
-          <div class="card-body">
-            <center><a type="button" class="btn btn-success"
-                href="{{ url_for('frases', id=categoria[0], nombre=categoria[1])}}">{{categoria[1]}}</a></center>
-          </div>
+  <div class="flash">
+    <p class="card-text text-center">
+      {% with messages = get_flashed_messages(category_filter=["error"]) %}
+      {% if messages %}
+    <ul class="alert alert-danger text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["verificacion"]) %}
+    {% if messages %}
+    <ul class="alert alert-warning text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
+    {% if messages %}
+    <ul class="alert alert-success text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    </p>
+  </div>
+  <div class="row row-cols-1 row-cols-md-4 text-dark">
+    {% for categoria in categorias %}
+    <div class="col p-2">
+      <div class="card">
+        {% if session['rol'] == 'admin' %}
+        <div class="btn-group dropleft my-1 mr-2" style="display: flex; ">
+          <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
+            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+          <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
+            <li><a class="categoriaid dropdown-item" data-idcatergoria="{{categoria[0]}}" data-id="{{id}}"
+                data-rol="{{rol}}" >Editar</a></li>
+            <li><a class="dropdown-item" href="{{url_for('eliminar_categoria', id_categoria=categoria[0])}}">Eliminar</a></li>
+          </ul>
+        </div>
+        {% endif %}
+        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" alt="">
+        <div class="card-body">
+          <center><a type="button" class="btn btn-success"
+              href="{{ url_for('frases', id=categoria[0], nombre=categoria[1])}}">{{categoria[1]}}</a></center>
         </div>
       </div>
-      {% endfor %}
     </div>
-
+    {% endfor %}
   </div>
-  
 
-
-
-
-
-
-
-
-
-</section>
-
-<footer>
-<p>Copyright 2022 ITP todos los derechos reservados.</p>
-
-</footer>
-
-
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -133,19 +137,47 @@ Menu
   </div>
 </div>
 
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar frase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" enctype="multipart/form-data" method="post">
+        <div class="modal-body">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".categoriaid").click(function () {
+      var idcategoria = $(this).data('idcatergoria');
+      var id = $(this).data('id');
+      var rol = $(this).data('rol');
+      console.log(idcategoria+" "+id+" "+rol)
+      
+      $.ajax({
+        url: '/ajaxmenu',
+        type: 'post',
+        data: { idcategoria: idcategoria, id: id, rol: rol },
+        success: function (data) {
+          $('.modal-body').html(data);
+          $('.modal-body').append(data.htmlresponse);
+          $("#exampleModal1").modal("show");
+        }
+      })
+    })
+
+
+  })
+
+</script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
 {% block js %}
 <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

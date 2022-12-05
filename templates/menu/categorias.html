@@ -11,8 +11,6 @@ Menu_categorias
 
 
 {%block contenido %}
-
-
 <nav class="navbar navbar-expand-lg bg-navar">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -21,7 +19,7 @@ Menu_categorias
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <label for="" class="brand">
-        <img class="icono_itp" src="/static/img/menu/icono_itp.jpg">
+        <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/icono_itp.jpg"></a>
       </label>
       <div class="navbar-nav d-flex justify-content-center w-100">
         <h4>{{nombre_categoria}}</h4>
@@ -87,7 +85,8 @@ Menu_categorias
           <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
             <li><a class="fraseid dropdown-item" data-idf="{{frase[0]}}" data-id="{{id}}"
                 data-nombre="{{nombre_categoria}}">Editar</a></li>
-            <li><a class="dropdown-item" href="{{url_for('eliminar_frase', id_frase=frase[0],id=id,nombre=nombre_categoria)}}">Eliminar</a></li>
+            <li><a class="dropdown-item" href="{{url_for('eliminar_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}">Eliminar</a></li>
+            <!---->
           </ul>
         </div>
         {% endif %}
@@ -176,8 +175,6 @@ Menu_categorias
   })
 
 </script>
-
-
 {% endblock %}
 {% block js %}
 <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>

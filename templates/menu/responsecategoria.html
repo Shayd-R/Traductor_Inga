@@ -1,0 +1,15 @@
+{% for row in categoria %}
+<div class="form-group">
+    <label class="col-form-label">Categoria:</label>
+    <input type="text" class="form-control" name="categoria" id="recipient-name" value="{{row[1]}}">
+</div>
+<div class="form-group">
+    <label class="col-form-label">imagen:</label>
+    <input class="form-control" type="file" name="imagen" value="{{row[2]}}">
+</div>
+
+</div>
+<hr>
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+<button type="submit" class="btn btn-primary" formaction="{{ url_for('editar_categoria', idcategoria=row[0]) }}">Editar</button>
+{% endfor %}

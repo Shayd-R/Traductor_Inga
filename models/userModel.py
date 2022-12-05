@@ -88,8 +88,28 @@ def eliminarFrase(id_frase):
     remove('./static/img/frases_categoria/'+str(imagen[3]))
     cursor.execute("DELETE FROM contribucciones WHERE id_contribuccion="+id_frase)
     db.commit()
-  
-   
 
+def verificarFrase(id_frase):
+    cursor = db.cursor()  
+    cursor.execute("UPDATE contribucciones SET confirmacion='si' WHERE id_contribuccion= "+str(id_frase))
+    db.commit()
 
+def editarCategoria(idcategoria, categoria, imagenn):
+    imagen_sql=''
+    if imagenn:
+        imagen_sql=", imagen_categoria= '"+imagenn+"'"
+        sql = " nombre_categoria= '"+categoria+"'" + imagen_sql + " WHERE id_categoria = '"+idcategoria+"'"
+    elif imagenn is None:
+        sql = " nombre_categoria= '"+categoria+"'" + imagen_sql + " WHERE id_categoria = '"+idcategoria+"'"
+    cursor = db.cursor()   
+    cursor.execute("UPDATE categorias SET " + sql)
+    db.commit()
+
+def eliminarCategoria(id_categoria):
+    cursor = db.cursor()  
+    cursor.execute("SELECT * FROM categorias WHERE id_categoria="+id_categoria)
+    imagen = cursor.fetchone()
+    remove('./static/img/categorias/'+str(imagen[2]))
+    cursor.execute("DELETE FROM categorias WHERE id_categoria="+id_categoria)
+    db.commit()
 
