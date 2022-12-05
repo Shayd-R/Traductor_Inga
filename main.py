@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify, render_template, request, redirect, url_for, session, flash, json, make_response
 from hashlib import sha256
-from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase, existeFrase, listarFrases
+from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase
 from controllers import loginController, registroController, confirmarToken, restablecerPassword, cambiarPassword, autenticacionController
 from config.database import db
 
@@ -52,9 +52,9 @@ def frases(id, nombre):
     if autenticacionController.vericarAutenticacion():
         name = session['name']
         rol = session['rol']
-        cursor.execute(
-            "SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")
+        cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")
         frases_categorias = cursor.fetchall()
+        print(frases_categorias)
         return render_template("menu/categorias.html", nombre_categoria=nombre, id=id, name=name, rol=rol, frases_categoria=frases_categorias)
     else:
         return redirect(url_for('inicio'))
@@ -151,8 +151,7 @@ def traduccion():
         traducido = []
         for palabra in texto:
             cursor = db.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +
-                           palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
+            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
             a = cursor.fetchone()
             if a == None:
                 a = palabra
@@ -172,8 +171,7 @@ def audio():
     traducido = []
     for palabra in texto:
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +
-                       palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
+        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
         a = cursor.fetchone()
         if a == None:
             a = palabra
@@ -207,21 +205,10 @@ def crear_frase(id, nombre):
             flash("Ya existe esta frase", "error")
             return redirect(url_for('frases', id=id, nombre=nombre))
         img = userModel.nombreImagen(imagen)
-        crearFrase.crear(id_categoria=id, frase=frase,
-                         traduccion=traduccion, imagen=img, id_usuario=id_usuario)
+        crearFrase.crear(id_categoria=id, frase=frase,traduccion=traduccion, imagen=img, id_usuario=id_usuario)
         imagen.save('./static/img/frases_categoria/'+str(img))
-        flash("Se ha creado la frase: "+frase, 'bueno')
+        flash("La frase '"+frase+"' estara en verificacion ", 'verificacion')
     return redirect(url_for('frases', id=id, nombre=nombre))
-
-
-@app.route('/modaleditarFrase/<string:id_frase>/<string:id>/<string:nombre>', methods=['GET', 'POST'])
-def modal_editar(id_frase, id, nombre):
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM contribucciones WHERE id_contribuccion= "+id_frase)
-    a = cursor.fetchone()
- 
-    return render_template("menu/editarFrase.html", id_frase=id_frase,id=id,nombre=nombre, frase=a["frase_español"], traduccion=a["traduccion"], imagen=a["imagen"])
-
 
 @app.route('/editarFrase/<string:id_frase>/<string:id>/<string:nombre>', methods=['GET', 'POST'])
 def editar_frase(id_frase, id, nombre):
@@ -235,26 +222,64 @@ def editar_frase(id_frase, id, nombre):
             imagen.save('./static/img/frases_categoria/'+nombreImagen)
         else:
             imagenn = None
-        userModel.editarFrase(
-            frase=frase, traduccion=traduccion, imagenn=imagenn, id=id_frase)
-        flash('Se ha editado la frase correctamente')
+        userModel.editarFrase(frase=frase, traduccion=traduccion, imagenn=imagenn, id=id_frase)
+        flash('Se ha editado la frase correctamente','bueno')
         return redirect(url_for('frases', id=id, nombre=nombre))
     else:
         return redirect(url_for('inicio'))
 
+@app.route('/eliminarFrase/<string:id_frase>/<string:id>/<string:nombre>', methods=['GET', 'POST'])
+def eliminar_frase(id_frase, id, nombre):
+    if autenticacionController.vericarAutenticacion(): 
+        userModel.eliminarFrase(id_frase=id_frase)
+        
+        flash('Se ha eliminado la frase correctamente', 'error')
+        return redirect(url_for('frases', id=id, nombre=nombre))
+    else:
+        return redirect(url_for('inicio'))    
 
-@app.route("/verificacionContribuyente/<string:id>/<string:nombre>", methods=["GET", "POST"])
-def verificacionContribuyente(id, nombre):
+@app.route("/ajaxfile", methods=["GET", "POST"])
+def ajaxfile():
+    cursor = db.cursor()
+    if request.method=='POST':
+        fraseid=request.form['fraseid']
+        id=request.form['id']
+        nombre=request.form['nombre']
+        cursor.execute(
+            "SELECT * FROM contribucciones WHERE id_contribuccion= "+fraseid)
+        frase = cursor.fetchall()
+        print(fraseid)
+    return jsonify({'htmlresponse': render_template('menu/response.html', frase=frase, nombre=nombre, id=id)})
+
+@app.route("/verificacionContribuyente", methods=["GET", "POST"])
+def verificacionContribuyente():
     cursor = db.cursor()
     if autenticacionController.vericarAutenticacion():
         name = session['name']
         rol = session['rol']
-        cursor.execute(
-            "SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='No' ")
+        cursor.execute("""
+            SELECT 
+                `contribucciones`.`id_contribuccion`,
+                `usuarios`.`nombre`,
+                `contribucciones`.`frase_español`,
+                `contribucciones`.`traduccion`,
+                `categorias`.`nombre_categoria`,
+                `contribucciones`.`imagen`,
+                `contribucciones`.`confirmacion`
+            FROM `traductor`.`contribucciones`
+                INNER JOIN `traductor`.`categorias`
+                    ON (   `contribucciones`.`id_categoria` = `categorias`.`id_categoria`
+                    )
+                INNER JOIN `traductor`.`usuarios`
+                    ON (
+                    `contribucciones`.`id_usuario` = `usuarios`.`id_usuario`
+                    )
+            WHERE contribucciones.`confirmacion`='No'
+        """)
         frases_categorias = cursor.fetchall()
-        return render_template("menu/verificacionContribucciones.html", nombre_categoria=nombre, id=id, name=name, rol=rol, frases_categoria=frases_categorias)
+        print(frases_categorias)
+        return render_template("menu/verificacionContribucciones.html", name=name, rol=rol, frases_categoria=frases_categorias)
     else:
         return redirect(url_for('inicio'))
-
-
+    
 app.run(debug=True)

@@ -38,7 +38,8 @@ Menu_verificacion
             {% if session['rol'] == 'admin' %}
             <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
                 class="dropdown-item" href="#">Agregar categoria</a></li>
-            <li><a type="button" class="dropdown-item" href="{{ url_for('verificacionContribuyente')}}">Verificacion de contribucciones</a></li>
+            <li><a type="button" class="dropdown-item" href="{{ url_for('verificacionContribuyente')}}">Verificacion de
+                contribucciones</a></li>
             {% endif %}
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
 
@@ -58,34 +59,46 @@ Menu_verificacion
 
 
 <section>
-  
-  
-  <table class="table">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">contribuyente</th>
-        <th scope="col">Frase</th>
-        <th scope="col">Traducion</th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Imagen</th>
-        <th scope="col">Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for frase in frases_categoria %}
-      <tr>
-        <th scope="row">{{frase[0]}}</th>
-        <td>{{frase[1]}}</td>
-        <td>{{frase[2]}}</td>
-        <td>{{frase[3]}}</td>
-        <td>{{frase[5]}}</td>
-        <td>{{frase[4]}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
+  <br>
+  <br>
+  <div class="container">
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">contribuyente</th>
+          <th scope="col">Frase</th>
+          <th scope="col">Traducion</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Imagen</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for frase in frases_categoria %}
+        <tr class="table-warning">
+          <th scope="row" style="align-items: center; padding-top: 20px;">{{frase[0]}}</th>
+          <td style="align-items: center; padding-top: 20px;">{{frase[1]}}</td>
+          <td style="align-items: center; padding-top: 20px;">{{frase[2]}}</td>
+          <td style="align-items: center; padding-top: 20px;">{{frase[3]}}</td>
+          <td style="align-items: center; padding-top: 20px;">{{frase[4]}}</td>
+          <td ><img src="/static/img/frases_categoria/{{frase[5]}}" class="rounded" style="width: 50px; height:50px;">
+          </td>
+          <td >
+            <div class="row" style="padding-top: 5px;">
+              <div class="col-6" style="display: flex; flex-direction: column;">
+                <button class="btn btn-success">Confirmar</button>
+              </div>
+              <div class="col-6" style="display: flex; flex-direction: column;">
+                <button class="btn btn-danger">Denegar</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 
 

@@ -3,6 +3,7 @@ from datetime import date, datetime
 from config import settings
 from email.message import EmailMessage
 from smtplib import SMTP
+from os import remove
 
 from flask import url_for
 
@@ -80,7 +81,15 @@ def editarFrase(id, frase, traduccion, imagenn):
     cursor.execute("UPDATE contribucciones SET " + sql)
     db.commit()
 
-
+def eliminarFrase(id_frase):
+    cursor = db.cursor()  
+    cursor.execute("SELECT * FROM contribucciones WHERE id_contribuccion="+id_frase)
+    imagen = cursor.fetchone()
+    remove('./static/img/frases_categoria/'+str(imagen[3]))
+    cursor.execute("DELETE FROM contribucciones WHERE id_contribuccion="+id_frase)
+    db.commit()
+  
+   
 
 
 
