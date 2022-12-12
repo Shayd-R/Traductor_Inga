@@ -8,7 +8,7 @@ def cambiar(id,password):
         valorPass = re.search(patternpw, password)
         autenticacion = False
         if not valorPass or password=='':
-            flash('* Contraseña:')
+            flash('Contraseña:', 'error')
             flash('El campo contraseña debe contener un mínimo de 8 caracteres, un máximo de 20, letras, (minúsculas y MAYÚSCULAS) y Números','error')
         else:
             passwordCod=generate_password_hash(password)

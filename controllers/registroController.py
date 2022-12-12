@@ -10,20 +10,20 @@ def registro(nombre,email,password):
         userAuth = False
         if nombre == '':
             isValid = False
-            flash('* Nombre')
+            flash('Nombre', 'error')
         if email == '':
             isValid = False
-            flash('* Email')
+            flash('Email', 'error')
         if not passwordval or password=='':
             isValid = False
-            flash('* Contraseña:')
-            flash('El campo contraseña debe contener un mínimo de 8 caracteres, un máximo de 20, letras, (minúsculas y MAYÚSCULAS) y Números')
+            flash('Contraseña', 'error')
+            flash('El campo contraseña debe contener un mínimo de 8 caracteres, un máximo de 20, letras(minúsculas y MAYÚSCULAS) y Números', 'error')
         if isValid == False:
             return render_template("/registro/registro.html",nombre=nombre,email=email)
         else:
             result = existeEmail.existe(email)
             if result:
-                flash("El email "+email+" ya se encuentra registrado")
+                flash("El email "+email+" ya se encuentra registrado", 'bueno')
                 return redirect('/inicio_session')
             else:
                 password=generate_password_hash(password)
@@ -38,5 +38,5 @@ def registro(nombre,email,password):
                     
         return userAuth
     except:
-        flash("Ha habido un problema al enviar el correo")
+        flash("Ha habido un problema al enviar el correo", 'error')
       

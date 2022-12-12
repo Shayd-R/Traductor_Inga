@@ -61,9 +61,14 @@ def registrar_usuario():
         nombre = request.form.get("nombre")
         email = request.form.get("email")
         password = request.form.get("password")
-        if registroController.registro(nombre, email, password) == True:
-            flash("Confirma tu correo")
+        reppassword = request.form.get("reppassword")
+        if password == reppassword:
+            if registroController.registro(nombre, email, password) == True:
+                flash("Confirma tu correo", 'bueno')
+            else:
+                return render_template("/registro/registro.html", nombre=nombre, email=email)
         else:
+            flash('Las contraseñas no coinciden', 'error')
             return render_template("/registro/registro.html", nombre=nombre, email=email)
     return render_template("/registro/registro.html")
 
@@ -178,7 +183,7 @@ def traduccion():
             cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
             a = cursor.fetchone()
             if a == None:
-                a = palabra
+                a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
             else:
                 a = a['palabra a palabra']
             traducido.append(a)
@@ -255,7 +260,7 @@ def eliminar_frase(id_frase, id, nombre):
     if autenticacionController.vericarAutenticacion(): 
         userModel.eliminarFrase(id_frase=id_frase)
         flash('Se ha eliminado la frase correctamente', 'error')
-        return redirect(url_for('frases', id=id, nombre_categoria=nombre))
+        return redirect(url_for('frases', id=id, nombre=nombre))
     else:
         return redirect(url_for('inicio'))    
 
@@ -313,4 +318,6 @@ def verificar(id):
     
     db.commit()
  
+
+    
 app.run(debug=True)
