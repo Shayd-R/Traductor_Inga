@@ -31,7 +31,6 @@ Menu
             {{nombre}} &nbsp; {{rol}}
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
             {% if session['rol'] == 'admin' %}
             <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
                 class="dropdown-item" href="#">Agregar categoria</a></li>
@@ -97,7 +96,7 @@ Menu
           </ul>
         </div>
         {% endif %}
-        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" alt="">
+        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" style=" height: 200px;">
         <div class="card-body">
           <center><a type="button" class="btn btn-success"
               href="{{ url_for('frases', id=categoria[0], nombre=categoria[1])}}">{{categoria[1]}}</a></center>

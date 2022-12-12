@@ -8,14 +8,20 @@
 
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    
     background: #b9caf7;
 }
 
+.contenedor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+   
+}
+
 .container {
+    
     width: 690px;
     background: #fff;
     border-radius: 7px;

@@ -1,12 +1,7 @@
 {% extends 'base_html/base_2.html' %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/traductor.css')}}">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
+
 {% endblock %}
 
 {% block titulo %}
@@ -16,39 +11,44 @@ Traductor
 
 
 {%block contenido %}
-<form action="{{url_for('traduccion_inga')}}" enctype="" method="POST">
-    <div class="container">
-        <div class="wrapper">
-            <div class="text-input">
-                <textarea class="from-text" name="texto_entrada" id="texto_entrada"
-                    placeholder="iskribii rimai">{{texto_entrada}}</textarea>
-                <textarea class="to-text" name="texto_salida" id="texto_salida" placeholder="Traducción" readonly
-                    disabled>{{texto_salida}}</textarea>
+<div class="">
+    <h2><a href="{{url_for('inicio')}}"><i class="fas fa-arrow-left" style="color: black; margin: 20px; margin-top: 20px;"></i></a></h2>
+    <br>
+</div>
+<div class="contenedor">
+    <form action="{{url_for('traduccion_inga')}}" enctype="" method="POST">
+        <div class="container">
+            <div class="wrapper">
+                <div class="text-input">
+                    <textarea class="from-text" name="texto_entrada" id="texto_entrada"
+                        placeholder="iskribii rimai">{{texto_entrada}}</textarea>
+                    <textarea class="to-text" name="texto_salida" id="texto_salida" placeholder="Traducción" readonly
+                        disabled>{{texto_salida}}</textarea>
+                </div>
+                <ul class="controls">
+                    <li class="row from">
+                        <select>
+                            <option value="">Inga</option>
+                        </select>
+                    </li>
+                    <li class="exchange">
+                        <a href="{{url_for('traductor')}}"><i class="fas fa-exchange-alt"></i></a>
+                    </li>
+                    <li class="row to">
+                        <select>
+                            <option value="">Español</option>
+                        </select>
+                        <div class="icons">
+                            <button class="boton" type="submit" id="voice"
+                                formaction="{{url_for('audio', texto_salida=texto_salida, texto_entrada=texto_entrada)}}"><i
+                                    class="fas fa-volume-up"></i></button>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
-            <ul class="controls">
-                <li class="row from">
-                    <select>
-                        <option value="">Inga</option>
-                    </select>
-                </li>
-                <li class="exchange">
-                    <a href="{{url_for('traductor')}}"><i class="fas fa-exchange-alt"></i></a>
-                </li>
-                <li class="row to">
-                    <select>
-                        <option value="">Español</option>
-                    </select>
-                    <div class="icons">
-                        <button class="boton" type="submit" id="voice"
-                            formaction="{{url_for('audio', texto_salida=texto_salida, texto_entrada=texto_entrada)}}"><i
-                                class="fas fa-volume-up"></i></button>
-                    </div>
-                </li>
-            </ul>
-
+            <input class="button" type="submit" value="Traduccir texto">
         </div>
-        <input class="button" type="submit" value="Traduccir texto">
-    </div>
-</form>
-
+    </form>
+</div>
 {% endblock %}
