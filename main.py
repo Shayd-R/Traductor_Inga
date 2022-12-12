@@ -180,19 +180,15 @@ def traductor_inga():
 def traduccion():
     if request.method == 'POST':
         texto_entrada = request.form['texto_entrada']
-        texto = texto_entrada.split()
-        traducido = []
-        for palabra in texto:
-            cursor = db.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' ")
-            a = cursor.fetchone()
-            if a == None:
-                a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
-            else:
-                a = a['palabra a palabra']
-            traducido.append(a)
-            db.commit()
-        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +texto_entrada+"' ")
+        a = cursor.fetchone()
+        if a == None:
+            a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+        else:
+            a = a['palabra a palabra']
+        db.commit()
+        texto_salida = a
         return render_template("/traductor/traductor.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
     return render_template("/traductor/traductor.html")
 
@@ -200,57 +196,45 @@ def traduccion():
 def traduccion_inga():
     if request.method == 'POST':
         texto_entrada = request.form['texto_entrada']
-        texto = texto_entrada.split()
-        traducido = []
-        for palabra in texto:
-            cursor = db.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +palabra+"' ")
-            a = cursor.fetchone()
-            if a == None:
-                a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
-            else:
-                a = a['traduccion']
-            traducido.append(a)
-            db.commit()
-        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +texto_entrada+"' ")
+        a = cursor.fetchone()
+        if a == None:
+            a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+        else:
+            a = a['traduccion']
+        db.commit()
+        texto_salida = a
         return render_template("/traductor/traductor_inga.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
     return render_template("/traductor/traductor_inga.html")
 
 @app.route("/voz_inga", methods=["GET", "POST"])
 def audio_inga():
     texto_entrada = request.form['texto_entrada']
-    texto = texto_entrada.split()
-    traducido = []
-    for palabra in texto:
-        cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +palabra+"' ")
-        a = cursor.fetchone()
-        if a == None:
-            a = palabra
-        else:
-            a = a['traduccion']
-        traducido.append(a)
-        db.commit()
-        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +texto_entrada+"' ")
+    a = cursor.fetchone()
+    if a == None:
+        a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+    else:
+        a = a['traduccion']
+    db.commit()
+    texto_salida = a
     voz_traductor.voz_texto(texto_salida)
     return render_template("/traductor/traductor_inga.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
 
 @app.route("/voz", methods=["GET", "POST"])
 def audio():
     texto_entrada = request.form['texto_entrada']
-    texto = texto_entrada.split()
-    traducido = []
-    for palabra in texto:
-        cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
-        a = cursor.fetchone()
-        if a == None:
-            a = palabra
-        else:
-            a = a['palabra a palabra']
-        traducido.append(a)
-        db.commit()
-        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +texto_entrada+"' ")
+    a = cursor.fetchone()
+    if a == None:
+        a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+    else:
+        a = a['palabra a palabra']
+    db.commit()
+    texto_salida = a
     voz_traductor.voz_texto(texto_salida)
     return render_template("/traductor/traductor.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
 
@@ -361,6 +345,5 @@ def verificar(id):
     
     db.commit()
  
-
     
 app.run(debug=True)
