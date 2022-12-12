@@ -345,5 +345,16 @@ def verificar(id):
     
     db.commit()
  
+@app.route("/contacto", methods=["GET", "POST"])
+def contacto():
+    return render_template("/informacion/contacto.html")
+
+@app.route("/privacidad", methods=["GET", "POST"])
+def privacidad():
+    return render_template("/informacion/privacidad.html")
+
+@app.route("/ayuda", methods=["GET", "POST"])
+def ayuda():
+    return render_template("/informacion/ayuda.html")
     
 app.run(debug=True)

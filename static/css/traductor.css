@@ -9,7 +9,10 @@
 
 body {
     
-    background: #b9caf7;
+    background-image: url(/static/img/login/24452_festival-del-perdon-artesanias-colombia-2017-g.jpg) ;
+    
+    background-size: cover;
+    min-height: 100vh;
 }
 
 .contenedor{
