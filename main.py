@@ -172,6 +172,10 @@ def authToken(token):
 def traductor():
     return render_template("/traductor/traductor.html")
 
+@app.route("/traductor_inga", methods=["GET", "POST"])
+def traductor_inga():
+    return render_template("/traductor/traductor_inga.html")
+
 @app.route("/traduccion", methods=["GET", "POST"])
 def traduccion():
     if request.method == 'POST':
@@ -180,7 +184,7 @@ def traduccion():
         traducido = []
         for palabra in texto:
             cursor = db.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' OR palabra_espanol LIKE '%"+palabra+"%' ")
+            cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +palabra+"' ")
             a = cursor.fetchone()
             if a == None:
                 a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
@@ -191,6 +195,45 @@ def traduccion():
         texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
         return render_template("/traductor/traductor.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
     return render_template("/traductor/traductor.html")
+
+@app.route("/traduccion_inga", methods=["GET", "POST"])
+def traduccion_inga():
+    if request.method == 'POST':
+        texto_entrada = request.form['texto_entrada']
+        texto = texto_entrada.split()
+        traducido = []
+        for palabra in texto:
+            cursor = db.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +palabra+"' ")
+            a = cursor.fetchone()
+            if a == None:
+                a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+            else:
+                a = a['traduccion']
+            traducido.append(a)
+            db.commit()
+        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
+        return render_template("/traductor/traductor_inga.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
+    return render_template("/traductor/traductor_inga.html")
+
+@app.route("/voz_inga", methods=["GET", "POST"])
+def audio_inga():
+    texto_entrada = request.form['texto_entrada']
+    texto = texto_entrada.split()
+    traducido = []
+    for palabra in texto:
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +palabra+"' ")
+        a = cursor.fetchone()
+        if a == None:
+            a = palabra
+        else:
+            a = a['traduccion']
+        traducido.append(a)
+        db.commit()
+        texto_salida = traduccion_texto.concatenar_palabras(traducido, "  ")
+    voz_traductor.voz_texto(texto_salida)
+    return render_template("/traductor/traductor_inga.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
 
 @app.route("/voz", methods=["GET", "POST"])
 def audio():

@@ -16,27 +16,27 @@ Traductor
 
 
 {%block contenido %}
-<form action="{{url_for('traduccion')}}" enctype="" method="POST">
+<form action="{{url_for('traduccion_inga')}}" enctype="" method="POST">
     <div class="container">
         <div class="wrapper">
             <div class="text-input">
                 <textarea class="from-text" name="texto_entrada" id="texto_entrada"
-                    placeholder="Escribir texto">{{texto_entrada}}</textarea>
+                    placeholder="iskribii rimai">{{texto_entrada}}</textarea>
                 <textarea class="to-text" name="texto_salida" id="texto_salida" placeholder="Traducción" readonly
                     disabled>{{texto_salida}}</textarea>
             </div>
             <ul class="controls">
                 <li class="row from">
                     <select>
-                        <option value="">Español</option>
+                        <option value="">Inga</option>
                     </select>
                 </li>
                 <li class="exchange">
-                    <a href="{{url_for('traductor_inga')}}"><i class="fas fa-exchange-alt"></i></a>
+                    <a href="{{url_for('traductor')}}"><i class="fas fa-exchange-alt"></i></a>
                 </li>
                 <li class="row to">
                     <select>
-                        <option value="">Inga</option>
+                        <option value="">Español</option>
                     </select>
                     <div class="icons">
                         <button class="boton" type="submit" id="voice"
