@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v13.1.1 (64 bit)
-MySQL - 8.0.30 : Database - traductor
+SQLyog Enterprise v13.1.1 (32 bit)
+MySQL - 10.4.21-MariaDB : Database - traductor
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 8.0.30 : Database - traductor
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`traductor` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`traductor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `traductor`;
 
@@ -21,7 +21,7 @@ USE `traductor`;
 DROP TABLE IF EXISTS `categorias`;
 
 CREATE TABLE `categorias` (
-  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_categoria` varchar(2555) DEFAULT NULL,
   `imagen_categoria` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_categoria`)
@@ -42,19 +42,19 @@ insert  into `categorias`(`id_categoria`,`nombre_categoria`,`imagen_categoria`) 
 DROP TABLE IF EXISTS `contribucciones`;
 
 CREATE TABLE `contribucciones` (
-  `id_contribuccion` int NOT NULL AUTO_INCREMENT,
+  `id_contribuccion` int(11) NOT NULL AUTO_INCREMENT,
   `frase_español` varchar(255) DEFAULT NULL,
   `traduccion` varchar(255) DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
-  `id_categoria` int DEFAULT NULL,
-  `id_usuario` int DEFAULT NULL,
-  `confirmacion` varchar(10) CHARACTER SET utf16 COLLATE utf16_general_ci DEFAULT 'no',
+  `id_categoria` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `confirmacion` varchar(10) DEFAULT 'no',
   PRIMARY KEY (`id_contribuccion`),
   KEY `id_categoria` (`id_categoria`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `contribucciones_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `contribucciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf16;
 
 /*Data for the table `contribucciones` */
 
@@ -63,21 +63,21 @@ insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,
 (2,'Buenos dias','Puangui','2022-12-0515935885354buenos dias.jpeg',6,8,'si'),
 (3,'Buenas tardes','Chisiapuangui','2022-12-05151041915563tardes.jpeg',6,8,'si'),
 (4,'Buenas noches','Tutaiapunagui','2022-12-05151141259579noches.jpeg',6,8,'si'),
-(5,'Ha pasado mucho tiempo','Achká puncha iliska ka.','2022-12-05151158528313necesito mas timepo.jpg',6,8,'si'),
-(6,'Me alegra mucho verte','ajai aliachiwa kamta kawangamanda.','2022-12-05151214406126todo va muy bien.jpeg',6,8,'si'),
+(5,'Ha pasado mucho tiempo','Achká puncha iliska ka','2022-12-05151158528313necesito mas timepo.jpg',6,8,'si'),
+(6,'Me alegra mucho verte','ajai aliachiwa kamta kawangamanda','2022-12-05151214406126todo va muy bien.jpeg',6,8,'si'),
 (7,'Yo muy bien','Nuka allillita','2022-12-05151231111032todo bien.jpg',6,8,'si'),
-(8,'¿Usted como esta?','Kam imasatak chisiapuakungi?','2022-12-05151251809617estoy bien, gracias.jpg',6,8,'si'),
+(8,'¿Usted como esta?','¿Kam imasatak chisiapuakungi?','2022-12-05151251809617estoy bien, gracias.jpg',6,8,'si'),
 (9,'Hola','Ala','2022-12-05151356159247hola.png',6,8,'si'),
-(10,'¿Como te va hoy?','¿imasatak riku kamta kunapuncha?.','2022-12-051514952405estoy bien, gracias.jpg',6,8,'si'),
-(11,'¿Cómo va tu dia?','¿imasatak riku kamva puncha?.','2022-12-0515142972194que me recomeinda.webp',6,8,'si'),
-(12,'¿Cómo estas?','¿ imasata kangi?.','2022-12-05151445842098un gusto conocerte.jpeg',6,8,'si'),
+(10,'¿Como te va hoy?','¿imasatak riku kamta kunapuncha?','2022-12-051514952405estoy bien, gracias.jpg',6,8,'si'),
+(11,'¿Cómo va tu dia?','¿imasatak riku kamva puncha?','2022-12-0515142972194que me recomeinda.webp',6,8,'si'),
+(12,'¿Cómo estas?','¿ imasata kangi?','2022-12-05151445842098un gusto conocerte.jpeg',6,8,'si'),
 (13,'¿Cómo has estado?','¿ imasatak kashangi?','2022-12-0515150951707un gusto conocerte.jpeg',6,8,'si'),
 (14,'¿Cómo te va?','¿imasatak rikungi?','2022-12-05151622482607como te va.jpeg',6,8,'si'),
 (15,'¿Qué hay de nuevo?','¿ matak  uiariku?','2022-12-05151656312577de nuevo.jpeg',6,8,'si'),
-(16,'Me alegra verte','kawangamanda nukata aliachiua.','2022-12-05151714379204todo va muy bien.jpeg',6,8,'si'),
-(17,'Hace tiempo que no te veo','achka puncha man kawariua kamta.','2022-12-0515173947707asi es.webp',6,8,'si'),
-(19,'Nos vemos mañana','ñam kauanakusunchi kaia.','2022-12-0515192975612mañana.jpeg',6,8,'si'),
-(20,'Hasta la proxima','sug urakama.','2022-12-05151933127623despedida.jpeg',6,8,'si'),
+(16,'Me alegra verte','kawangamanda nukata aliachiua','2022-12-05151714379204todo va muy bien.jpeg',6,8,'si'),
+(17,'Hace tiempo que no te veo','achka puncha man kawariua kamta','2022-12-0515173947707asi es.webp',6,8,'si'),
+(19,'Nos vemos mañana','ñam kauanakusunchi kaia','2022-12-0515192975612mañana.jpeg',6,8,'si'),
+(20,'Hasta la proxima','sug urakama','2022-12-05151933127623despedida.jpeg',6,8,'si'),
 (21,'Buena suerte','allilla richu','2022-12-0515203075267suerte.jpg',6,8,'si'),
 (22,'Ha sido lindo hablar contigo','nukata sumawashka kamwa rimangapa.','2022-12-0515031781817has sido lindo hablar contigo.jpeg',4,8,'si'),
 (23,'Bienvenido','allilla Samushangi','2022-12-0515041128520bienvenido.jpeg',4,8,'si'),
@@ -93,64 +93,65 @@ insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,
 (33,'¿quiere algo para beber?','¿imatak munagi upianga?','2022-12-05145323581738quiere algo para beber.jpeg',3,8,'si'),
 (34,'Sí, quiero agua, por favor','ari munani  iaku dius manda.','2022-12-05145336886005si, quiero agua,, porfavor.jpeg',3,8,'si'),
 (35,'Esta sopa esta demasiado caliente','kai api ka ajai rupa.','2022-12-05145351977887la sopaesta demasiado caliente.jpg',3,8,'si'),
-(36,'Mi carne esta cruda. ¿me puede traer otro, por favor?','¿dius manda apamuai ikuti sug?.','2022-12-0514547962614carne cruda.webp',3,8,'si'),
+(36,'Mi carne esta cruda. ¿me puede traer otro, por favor?','¿dius manda apamuai ikuti sug?','2022-12-0514547962614carne cruda.webp',3,8,'si'),
 (37,'Quiero un vaso de café','sug wisinga cafe munani.','2022-12-05145424982569vaso de cafe.JPG',3,8,'si'),
 (38,'Quiero un','munani sug','2022-12-051455669854810quieroun.jpg',3,8,'si'),
 (39,'Gracias','pai.','2022-12-0514552026742711gracias.jpg',3,8,'si'),
 (40,'¿puedo ir a baño?','sakiguang ringapa ispadiruma.','2022-12-051445429342231baño.jpg',2,8,'si'),
-(41,'¿puedes repetirlo porfavor?','munang ikuti ninga dius manda?','2022-12-051445533927142repetir.jpg',2,8,'si'),
-(42,'¿puedo borrar esto?','sakiguang kaita anchuchingapa?.','2022-12-051446118417493borrar.jpg',2,8,'si'),
-(43,'No puedo escuchar','man uiariwa.','2022-12-051446245539324noescuchar.jpg',2,8,'si'),
+(41,'¿puedes repetirlo porfavor?','¿munang ikuti ninga dius manda?','2022-12-051445533927142repetir.jpg',2,8,'si'),
+(42,'¿puedo borrar esto?','¿sakiguang kaita anchuchingapa?','2022-12-051446118417493borrar.jpg',2,8,'si'),
+(43,'No puedo escuchar','man uiariwa','2022-12-051446245539324noescuchar.jpg',2,8,'si'),
 (44,'Una vez más','ikuti sug','2022-12-051446378066395unavezmas.jpg',2,8,'si'),
-(45,'¿Entiendes','iuiangi?','2022-12-05144652363666entiendes.jpg',2,8,'si'),
+(45,'¿Entiendes','¿iuiangi?','2022-12-05144652363666entiendes.jpg',2,8,'si'),
 (46,'No entiendo','mam iuiani','2022-12-05144729584467noentiendo.jpg',2,8,'si'),
-(47,'Cómo se dice','imasatak nidiru ka.','2022-12-051447151151288comosedice.jpg',2,8,'si'),
-(48,'¿Que significa?','imatak rigcha?.','2022-12-05144749387918que significa.jpg',2,8,'si'),
-(49,'Necesito ayuda','aidai ministiwa.','2022-12-0514481034349210necesitoayuda.jpg',2,8,'si'),
-(50,'¿Tenemos tarea?','ima rurangapa iukanchi?.','2022-12-0514482644160711tenemostarea.jpg',2,8,'si'),
-(51,'¿Tienes una pluma / bolígrafo?','sug kilkadiru iukangi?','2022-12-0514484059160712boligrafo.jpg',2,8,'si'),
-(52,'Tengo una pregunta','sug tapui iukani.','2022-12-0514485291697513pregunta.jpg',2,8,'si'),
-(53,'Borrador','anchuchidiru.','2022-12-0514491357242borrador.jpg',2,8,'si'),
-(54,'Necesito más tiempo','ministiwa sug urakuna.','2022-12-0514493417954114tiempo.jpg',2,8,'si'),
-(55,'¿Qué te parece tu trabajo?','Imatak  rigcha  kamta kamba labor?.','2022-12-051440292401061queteparecetrabajo.jpg',1,8,'si'),
-(56,'¿necesitas ayuda con eso?','aidai ministingi chiua?.','2022-12-051440485378342necesitoayuda.jpg',1,8,'si'),
-(57,'Te contactare pronto','man unaipi willasakim.','2022-12-05144115311183contactar.jpg',1,8,'si'),
-(58,'Feliz de ayudar','aidagpi aliachiua.','2022-12-05144113905774felizdeayudar.jpg',1,8,'si'),
-(59,'La reunión ha sido cacelada','tandaridu niska man tiangapka.','2022-12-051441282431475reunioncancelada.jpg',1,8,'si'),
-(60,'La fecha limite es','maikam puncha tukuriura.','2022-12-051441475985256fechalimite.jpg',1,8,'si'),
-(61,'¿Cuántas horas trabajas a la semana?','Masa ura kanchis punchapi tshabajitu rurang.','2022-12-051441599322937horassemana.jpg',1,8,'si'),
-(62,'¿Cuándo sales del trabajo?','maikan puncha llugsingapkangi  tshabajumanda?','2022-12-05144212601478salidadeltrabajo.jpg',1,8,'si'),
-(63,'¿Dónde trabajas?','maipitak tshabajakungi?.','2022-12-051442248826779dondetrabajas.jpg',1,8,'si'),
-(64,'Trabajo en','nukapa tshabaju ka.','2022-12-051442461532710trabajoen.jpg',1,8,'si'),
-(65,'Trabajo con','imauapas tshabajani.','2022-12-05144339594426reunion cancelada.jpg',1,8,'si'),
-(66,'No hablo inga','inga man rimani.','2022-12-05153455785247noentiendo.jpg',5,8,'si'),
-(67,'¿Habla español?','español rimangi?.','2022-12-05154115597781inga.jpg',5,8,'si'),
-(68,'¿puedo usar su teléfono?','kamba rimadiru manchiwai?.','2022-12-05154226441173puedousartelefono.jpg',5,8,'si'),
-(69,'¿Dónde esta la temimnal?','Maipita ka terminal?.','2022-12-05154354431514terminal.jpg',5,8,'si'),
+(47,'Cómo se dice','¿imasatak nidiru ka?','2022-12-051447151151288comosedice.jpg',2,8,'si'),
+(48,'¿Que significa?','¿imatak rigcha?','2022-12-05144749387918que significa.jpg',2,8,'si'),
+(49,'Necesito ayuda','aidai ministiwa','2022-12-0514481034349210necesitoayuda.jpg',2,8,'si'),
+(50,'¿Tenemos tarea?','¿ima rurangapa iukanchi?','2022-12-0514482644160711tenemostarea.jpg',2,8,'si'),
+(51,'¿Tienes una pluma / bolígrafo?','¿sug kilkadiru iukangi?','2022-12-0514484059160712boligrafo.jpg',2,8,'si'),
+(52,'Tengo una pregunta','sug tapui iukani','2022-12-0514485291697513pregunta.jpg',2,8,'si'),
+(53,'Borrador','anchuchidiru','2022-12-0514491357242borrador.jpg',2,8,'si'),
+(54,'Necesito más tiempo','ministiwa sug urakuna','2022-12-0514493417954114tiempo.jpg',2,8,'si'),
+(55,'¿Qué te parece tu trabajo?','¿Imatak  rigcha  kamta kamba labor?','2022-12-051440292401061queteparecetrabajo.jpg',1,8,'si'),
+(56,'¿necesitas ayuda con eso?','¿aidai ministingi chiua?','2022-12-051440485378342necesitoayuda.jpg',1,8,'si'),
+(57,'Te contactare pronto','man unaipi willasakim','2022-12-05144115311183contactar.jpg',1,8,'si'),
+(58,'Feliz de ayudar','aidagpi aliachiua','2022-12-05144113905774felizdeayudar.jpg',1,8,'si'),
+(59,'La reunión ha sido cacelada','tandaridu niska man tiangapka','2022-12-051441282431475reunioncancelada.jpg',1,8,'si'),
+(60,'La fecha limite es','maikam puncha tukuriura','2022-12-051441475985256fechalimite.jpg',1,8,'si'),
+(61,'¿Cuántas horas trabajas a la semana?','Masa ura kanchis punchapi tshabajitu rurang','2022-12-051441599322937horassemana.jpg',1,8,'si'),
+(62,'¿Cuándo sales del trabajo?','¿maikan puncha llugsingapkangi  tshabajumanda?','2022-12-05144212601478salidadeltrabajo.jpg',1,8,'si'),
+(63,'¿Dónde trabajas?','¿maipitak tshabajakungi?','2022-12-051442248826779dondetrabajas.jpg',1,8,'si'),
+(64,'Trabajo en','nukapa tshabaju ka','2022-12-051442461532710trabajoen.jpg',1,8,'si'),
+(65,'Trabajo con','imauapas tshabajani','2022-12-05144339594426reunion cancelada.jpg',1,8,'si'),
+(66,'No hablo inga','inga man rimani','2022-12-05153455785247noentiendo.jpg',5,8,'si'),
+(67,'¿Habla español?','¿español rimangi?','2022-12-05154115597781inga.jpg',5,8,'si'),
+(68,'¿puedo usar su teléfono?','¿kamba rimadiru manchiwai?','2022-12-05154226441173puedousartelefono.jpg',5,8,'si'),
+(69,'¿Dónde esta la temimnal?','¿Maipita ka terminal?','2022-12-05154354431514terminal.jpg',5,8,'si'),
 (70,'Estoy perdido','chingaska kani','2022-12-05155226265955perdido.jpg',5,8,'si'),
-(71,'¿Dónde está?','maipita kangi?.','2022-12-051553773613712pregunta.jpg',5,8,'si'),
-(72,'¿Podría traducir esto para mí?','munangi kai rimadiruta chukapuanga?','2022-12-05155509223287traducir.jpg',5,8,'si'),
-(73,'¿podría hablar más despacio?','munangi allimanda rimanga?.','2022-12-0515646021198ablardespacio.jpg',5,8,'si'),
-(74,'No he entiendo lo que ha dicho','man iuiani kam rimakugta.','2022-12-05155794975812pregunta.jpg',5,8,'si'),
-(75,'¿podría decírmelo de nuevo?','munagi ikuti rimawuanga ? .','2022-12-051561839435810denuevo.jpg',5,8,'si'),
-(76,'¿Qué hora es?','masa urataka?.','2022-12-051563177011711hora.jpg',5,8,'si'),
-(77,'¿Puedo hacerle una pregunta?','sakiwangi kamta  tapungapa?.','2022-12-05156438412512pregunta.jpg',5,8,'si'),
-(78,'¿A que hora nos vamos?','imasa uratak risunchi?.','2022-12-05156557131011hora.jpg',5,8,'si'),
-(79,'Esta es mi maleta','kai ka nukapa aparidiru.','2022-12-0515714580368esta es mimaleta.webp',5,8,'si'),
-(80,'Mi maleta no esta','nukapa aparidiru man ka.','2022-12-0515737179718ncesito ayuda.webp',5,8,'si'),
-(81,'¿Dónde me puedo quedar?','nuka maipitak chaiangapkani?.','2022-12-0515753124657que me recomeinda.webp',5,8,'si'),
-(82,'Quiero una habitación porfavor','munani sug atun uku Dius manda.','2022-12-051587165723habitacion.jpg',5,8,'si');
+(71,'¿Dónde está?','¿maipita kangi?','2022-12-051553773613712pregunta.jpg',5,8,'si'),
+(72,'¿Podría traducir esto para mí?','¿munangi kai rimadiruta chukapuanga?','2022-12-05155509223287traducir.jpg',5,8,'si'),
+(73,'¿podría hablar más despacio?','¿munangi allimanda rimanga?','2022-12-0515646021198ablardespacio.jpg',5,8,'si'),
+(74,'No he entiendo lo que ha dicho','man iuiani kam rimakugta','2022-12-05155794975812pregunta.jpg',5,8,'si'),
+(75,'¿podría decírmelo de nuevo?','¿munagi ikuti rimawuanga ?','2022-12-051561839435810denuevo.jpg',5,8,'si'),
+(76,'¿Qué hora es?','¿masa urataka?','2022-12-051563177011711hora.jpg',5,8,'si'),
+(77,'¿Puedo hacerle una pregunta?','¿sakiwangi kamta  tapungapa?','2022-12-05156438412512pregunta.jpg',5,8,'si'),
+(78,'¿A que hora nos vamos?','¿imasa uratak risunchi?','2022-12-05156557131011hora.jpg',5,8,'si'),
+(79,'Esta es mi maleta','kai ka nukapa aparidiru','2022-12-0515714580368esta es mimaleta.webp',5,8,'si'),
+(80,'Mi maleta no esta','nukapa aparidiru man ka','2022-12-0515737179718ncesito ayuda.webp',5,8,'si'),
+(81,'¿Dónde me puedo quedar?','¿nuka maipitak chaiangapkani?','2022-12-0515753124657que me recomeinda.webp',5,8,'si'),
+(82,'Quiero una habitación porfavor','munani sug atun uku Dius manda','2022-12-051587165723habitacion.jpg',5,8,'si'),
+(173,'¿que te parece tu trabajo?','¿Imatak rigcha kamta kamba labor?','2022-12-1315194453830Captura de pantalla (956).png',1,8,'si');
 
 /*Table structure for table `palabras_espanol` */
 
 DROP TABLE IF EXISTS `palabras_espanol`;
 
 CREATE TABLE `palabras_espanol` (
-  `id` int DEFAULT NULL,
+  `id` int(11) DEFAULT NULL,
   `palabra_espanol` varchar(1500) DEFAULT NULL,
   `traduccion` varchar(1500) DEFAULT NULL,
   `palabra a palabra` varchar(1500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `palabras_espanol` */
 
@@ -731,7 +732,7 @@ insert  into `palabras_espanol`(`id`,`palabra_espanol`,`traduccion`,`palabra a p
 (574,'ceremonias','hacer efectuar ciertas (el médico tradicional) v.t. takichii -, efectuarse ciertas v.r. takichirii','takichii- takichirii'),
 (575,'cernidor','s- susunga','susunga'),
 (576,'cernir','v.t. susui -, hacer susuchii -se v.r. susurii','susui- susuchii- susurii'),
-(577,'cerrado/a','p.p. wichkaska','wichkaska'),
+(577,'cerrado','p.p. wichkaska','wichkaska'),
 (578,'cerrar','v.t. wichkai','wichkai'),
 (579,'cerrarse','v.r. wichkarii','wichkarii'),
 (580,'cerveza','s- chiri- winja','chiri-  winja'),
@@ -2785,18 +2786,19 @@ insert  into `palabras_espanol`(`id`,`palabra_espanol`,`traduccion`,`palabra a p
 (2628,'zarazo','adj ichu- jichu','ichu- jichu'),
 (2629,' zig-zag','adj, adv kingu kingu','kingu kingu'),
 (2630,'zumbar','v.r. chinchimirii -, hacer v.t. chinchimirichii \n','chinchimirii - chinchimirichii'),
-(2631,'zumbarse','sitarii','sitarii');
+(2631,'zumbarse','sitarii','sitarii'),
+(2632,'cerrada','wichkaska','wichkaska');
 
 /*Table structure for table `palabras_inga` */
 
 DROP TABLE IF EXISTS `palabras_inga`;
 
 CREATE TABLE `palabras_inga` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `palabra_inga` varchar(500) NOT NULL,
   `traduccion` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8;
 
 /*Data for the table `palabras_inga` */
 
@@ -6119,10 +6121,10 @@ insert  into `palabras_inga`(`id`,`palabra_inga`,`traduccion`) values
 DROP TABLE IF EXISTS `pronombres`;
 
 CREATE TABLE `pronombres` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `P_pronombre` varchar(500) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `pronombres` */
 
@@ -6138,21 +6140,20 @@ insert  into `pronombres`(`id`,`P_pronombre`) values
 DROP TABLE IF EXISTS `usuarios`;
 
 CREATE TABLE `usuarios` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf16 COLLATE utf16_general_ci DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
   `rol` varchar(255) DEFAULT 'contribuyente',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf16;
 
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`id_usuario`,`nombre`,`email`,`password`,`token`,`estado`,`rol`) values 
 (8,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$Bko57XF7WzeRfCnY$ec757d4b069c524b83b415ca4a3a044613590dcd537873c5d75abd796425be05',NULL,'activo','admin'),
-(12,'shayd','shaydruano3@gmail.com','pbkdf2:sha256:260000$ghDizftiEBffSyHI$735a38517ecd9c2b4fbc45cbe534b5224d668077f8c6abb6b54d1eeb3144e97e',NULL,'activo','contribuyente'),
 (13,'admin','admin','pbkdf2:sha256:260000$KvJv3xjqSjCB7gjs$beae2faf16b149da9dba11e43dd1dd302653dacaf85f5f1f8ad2746a9df2c64a',NULL,'activo','admin');
 
 /*Table structure for table `verbos` */
@@ -6160,10 +6161,10 @@ insert  into `usuarios`(`id_usuario`,`nombre`,`email`,`password`,`token`,`estado
 DROP TABLE IF EXISTS `verbos`;
 
 CREATE TABLE `verbos` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `palabra` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `verbos` */
 
