@@ -16,31 +16,48 @@ body{
 
 }
 
+
 .icono-itp {
     border-radius: 10%;
 }
 
-.bg-navar{
+/*logos*/
+.brandd img{
+    width: 60px;
+    height:60px;
+    background-size: cover;
+}
+
+.branddd img{
+    width: 60px;
+    height:60px;
+    background-size: cover;
+}
+
+.brandddd img{
+    width: 60px;
+    height:60px;
+    background-size: cover;
+}
+
+
+.bg-withe{
     background: #fff !important;
     position: fixed;
     z-index: 100;
     width: 100%;
 }
 
-.bg-dark1{
+.navbar{
     background-color:#393e46;
     position:fixed;
     z-index: 100;
     width: 100%;
-    border-bottom: 2px solid #fdbb2d;
+    border-bottom: 2px solid #fdbb2dd6;
 
 }
 
-@media (min-width: 768px){
-    .bg-dark{
-        background-color: transparent !important; 
-    }
-}
+
 
 
  
@@ -78,66 +95,17 @@ body{
     bottom: 0;
     left: 0;
     width: 100%;
-
+   
 }
 
-
-/* segunda seccion*/
-
-.Perfil{
-    background-color: #e8e4e1;
-    padding-top: 80px;
-    padding-bottom: 80px;
-    text-align: center;
-}
-
-.Perfil h1{
-    font-family: 'MuseoModerno';
-    font-size: 50px;
-    padding-bottom: 13px;
-}
-
-.Perfil h4{
-    font-family:'';
-    font-size: 35px;
-    padding-bottom: 13px;
-    letter-spacing: 7px;
-}
-
-.Perfil p{
-    font-family: '';
-    font-size: 22px;
-    font-weight: 500; /*peso de la fuente*/
-}
-
-.Galeria h4{
-    font-family: 'MuseoModerno';
-    font-size: 22px;
-    font-weight: 500;
-    padding-bottom: 10px;
-}
-
-.Galeria .col-lg-4{
-    margin: 0 !important;
-    padding: 3px;
-    transition: 0.2s linear;
-}
-
-.Galeria .col-lg-4:hover{
-    transform: scale(1.05);
-    transition: 0.2s linear;
-    z-index: 1;
-}
 
 .Galeria .row img{
     width: 100%;
     height: 250px;
 }
 
-.itp{
-    color: rgb(16, 75, 84) !important;
 
-}
+/*tamaño del logo*/
 
 .brand img{
     width: 80px;
@@ -162,11 +130,20 @@ body{
 
 
 footer {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(227, 54, 54);
     text-align: center;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30px;
+    height: 100px;
     color: rgb(0, 0, 0);
+}
+
+.card-body{
+    background: linear-gradient(160deg, #65fafa 0%, #f7c967 100%);
+}
+
+.navbar{
+    background: linear-gradient(160deg, #65fafa 0%, #f6614d 100%);
+    
 }

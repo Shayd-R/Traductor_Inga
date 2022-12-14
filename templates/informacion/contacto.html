@@ -11,8 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/acerca_traductor.css')}}">
+    <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
 
-    <title>Hello, world!</title>
+    <title>acerca del traductor </title>
   </head>
   <body>
     
@@ -21,6 +22,13 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
                     <div class="container-fluid">
+                      <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                          <a href="{{url_for('inicio')}}" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-left-long"></i>    
+                          </a>
+                        </li>
+                      </ul>
                       <label for="" class="brand">
                         <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
                       </label>
@@ -79,9 +87,9 @@
             <br>1.Traduce palabras fácilmente. <br>
             2.Registrate con tu correo y contraseña.<br>
             3.Escoge alguna categoría de nuestro Menú.<br>
-            4.aprede las frases más comunes de nuestros idiomas.<br>
-            5.revisa nuestras políticas de privacidad y condiciones.<br>
-            6.si necesitas ayuda lee nuestro manual de usuario.<br>
+            4.Aprede las frases más comunes de nuestros idiomas.<br>
+            5.Revisa nuestras políticas de privacidad y condiciones.<br>
+            6.Si necesitas ayuda lee nuestro manual de usuario.<br>
              
             
             <br>
@@ -91,29 +99,29 @@
 
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="img/imagen1.jpg" alt="">
+            <img src="static/img/acerca_traductor/1traductor.png" alt="">
           </div>
           <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="img/imagen2.jpg" alt="">
+            <img src="static/img/acerca_traductor/2registro.png" alt="">
           </div>
           <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="img/acercadeltraductor/3menu.png" alt="">
+            <img src="static/img/acerca_traductor/3menu.png" alt="">
           </div>
           <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="img/acercadeltraductor/4frases.png" alt="">
+            <img src="static/img/acerca_traductor/4frases.png" alt="">
           </div>
           <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="img/imagen5.jpg" alt="">
+            <img src="static/img/acerca_traductor/5privacidad.png" alt="">
           </div>
           <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="img/imagen6.jpg" alt="">
+            <img src="static/img/acerca_traductor/6manual.png" alt="">
           </div>
         </div>
       </div>
     </section>
 
     <footer class="Foot">
-      <h5 class="text-center">ITP 2022 Todos los derechos reservados.</h5>
+      <h4 class="text-center"><br><br>ITP 2022 todos los derechos reservados.</h4>
     </footer>
 
    

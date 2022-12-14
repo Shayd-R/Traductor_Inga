@@ -61,7 +61,7 @@ body {
 }
 
 .register-bg {
-    background-image: url(/static/img/login/as.jpg);
+    background-image: url(/static/img/login/collar.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 85vh;

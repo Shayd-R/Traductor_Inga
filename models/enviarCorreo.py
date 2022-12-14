@@ -6,7 +6,7 @@ def enviar(asunto,email,content):
     try:
         message = EmailMessage()
         message ['Subject'] = asunto
-        message['From'] = 'shaydruano2020@itp.edu.co'
+        message['From'] = 'traductornativo@itp.edu.co'
         message['To'] = email
         message.set_content(content, subtype='html')
         username = settings.SMTP_USERNAME

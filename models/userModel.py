@@ -36,11 +36,11 @@ def nombreImagen(imagen):
 def correoVerificacion(email, link):
     msg = EmailMessage()
     msg.set_content("Confirmar tu correo aqui: {} ".format(link))
-    msg["Subject"] = "Registro en Foodrosif"
-    msg["From"] = "shaydruano2020@itp.edu.co"
+    msg["Subject"] = "Registro"
+    msg["From"] = "traductornativo@itp.edu.co"
     msg["To"] = email
-    username = "shaydruano2020@itp.edu.co"
-    password = "1006663258"  
+    username = "traductornativo@itp.edu.co"
+    password = "Colombia123**"    
     server = SMTP("smtp.gmail.com:587")
     server.starttls()
     server.login(username, password)
@@ -51,10 +51,10 @@ def correoRestablecerPassword(email, link_password):
     msg = EmailMessage()
     msg.set_content("Para restablecer tu contraseña ingresa al siguiente link (Tiempo limite 2 min) : {} ".format(link_password))
     msg["Subject"] = "Recuperar contraseña"
-    msg["From"] = "shaydruano2020@itp.edu.co"
+    msg["From"] = "traductornativo@itp.edu.co"
     msg["To"] = email
-    username = "shaydruano2020@itp.edu.co"
-    password = "1006663258"  
+    username = "traductornativo@itp.edu.co"
+    password = "Colombia123**"  
     server = SMTP("smtp.gmail.com:587")
     server.starttls()
     server.login(username, password)

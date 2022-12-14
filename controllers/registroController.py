@@ -28,7 +28,7 @@ def registro(nombre,email,password):
             else:
                 password=generate_password_hash(password)
                 token = nuevoToken.crearToken()
-                asunto = "Registro en Foodrosif. Activa tu cuenta "+nombre+""
+                asunto = "Registro. Activa tu cuenta "+nombre+""
                 content = "<h2>Confirma tu correo electrónico: "+email+" </h2>\n<h4>Activa tu cuenta dando clic al siguiente enlace </h4>\n<a target='_blank' href='http://localhost:5000/confirmarToken/"+token+"'>Activar</a>"
                 emailReceived = enviarCorreo.enviar(asunto,email,content)
                 emailReceived = True

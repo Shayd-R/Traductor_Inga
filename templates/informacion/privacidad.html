@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/acerca_traductor.css')}}">
+    <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
 
     <title>Privacidad y condiciones</title>
   </head>
@@ -21,6 +22,13 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
                     <div class="container-fluid">
+                      <ul class="navbar-nav nav-flex-icons">
+                        <li class="nav-item">
+                          <a href="{{url_for('inicio')}}" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-left-long"></i>    
+                          </a>
+                        </li>
+                      </ul>
                         <label for="" class="brand">
                             <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
                           </label>
@@ -36,8 +44,11 @@
                   </nav>
             </div>
         </div>
+        <div class="">
+          <h2><a href="{{url_for('inicio')}}"><i class="fas fa-arrow-left" style="color: rgb(255, 255, 255); margin: 20px; margin-top: 20px; "></i></a></h2>
+          <br>
+        </div>
         
-    
         <div class="roww">
           <div class="col-sm-12 col-md-6 col-lg-4">
             <img src="/static/img/privacidad/icono.jpg" alt="">
@@ -55,9 +66,9 @@
 
     <section class="Perfil">
       <div class="container text-center">
-        <h3> Politica de Privacidad</h3>
+        <h3> </h3>
         <p></p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo at nesciunt neque repellat cum consectetur beatae cupiditate aliquam aspernatur illo vitae, eligendi molestiae aperiam debitis voluptas, magnam ratione nulla sapiente.</p>
+        <p></p>
       </div>
     </section>
 
@@ -65,18 +76,17 @@
       <div class="container">
         <div class="text-center">
           <h3><br><br>Condiciones del servicio</h3>
-          <h4><br>
-
-          </h4>
+          <p></p>
+          <p></p>
         </div>
-
+      </div>
 
     </section>
 
     
 
-    <footer >
-      <h4 class="text-center">ITP 2022 Todos los derechos reservados.</h4>
+    <footer class="Foot">
+      <h4 class="text-center"><br><br>ITP 2022 todos los derechos reservados.</h4>
     </footer>
 
    
