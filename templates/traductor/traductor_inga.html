@@ -23,6 +23,13 @@ Traductor
       
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
           <div class="container-fluid">
+            <ul class="navbar-nav nav-flex-icons">
+              <li class="nav-item">
+                <a href="{{url_for('inicio')}}" class="nav-link">
+                  <i class="fa-sharp fa-solid fa-left-long"></i>    
+                </a>
+              </li>
+            </ul>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -31,12 +38,14 @@ Traductor
             <label for="" class="brand">
                 <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
               </label>
-            <div class="navbar-nav d-flex justify-content-center w-100">
-              <a class="nav-link" href="{{url_for('contacto')}}">Acerca de traductor Inga Español</a>
-              <a class="nav-link" href="{{url_for('privacidad')}}">privacidad y condiciones</a>
-              <a class="nav-link" href="{{url_for('ayuda')}}">Ayuda</a>
-              <a class="nav-link" href="{{url_for('inicio_session')}}">Ingresar</a>
-            </div>
+              <center>
+                <div class="navbar-nav d-flex justify-content-center w-100">
+                  <a class="nav-link" href="{{url_for('contacto')}}">Acerca de traductor Inga Español</a>
+                  <a class="nav-link" href="{{url_for('privacidad')}}">privacidad y condiciones</a>
+                  <a class="nav-link" href="{{url_for('ayuda')}}">Ayuda</a>
+                  <a class="nav-link" href="{{url_for('inicio_session')}}">Ingresar</a>
+                </div>
+              </center>
           </div>
           </div>
        </nav>

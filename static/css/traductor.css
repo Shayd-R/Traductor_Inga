@@ -5,6 +5,11 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+.brandd img{
+    width: 60px;
+    height:60px;
+    background-size: cover;
+}
 
 
 .contenedor{
