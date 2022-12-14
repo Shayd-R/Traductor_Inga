@@ -82,7 +82,11 @@ Menu_categorias
           <th scope="col">Frase</th>
           <th scope="col">Traducion</th>
           <th scope="col">Imagen</th>
+          {% if session['rol'] == 'admin' %}
+         
           <th scope="col">Opciones</th>
+         
+          {% endif %}
         </tr>
       </thead>
       <tbody>
@@ -92,6 +96,8 @@ Menu_categorias
           <td style="align-items: center; padding-top: 20px; font-size: 25px;">{{frase[2]}}</td>
           <td><img src="/static/img/frases_categoria/{{frase[3]}}" class="rounded" style="width: 100px; height:100px;">
           </td>
+          {% if session['rol'] == 'admin' %}
+          
           <td>
             <div class="row" style="padding-top: 5px;">
               <div class="col-6" style="display: flex; flex-direction: column;">
@@ -105,6 +111,8 @@ Menu_categorias
 
             </div>
           </td>
+          
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>

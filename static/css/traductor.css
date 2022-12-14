@@ -310,3 +310,20 @@ body{
 .navbar{
     background: linear-gradient(160deg, #65fafa 0%, #f7c967 100%);
 }
+
+
+.bg-dark{
+    background-color: #393e46 !important;
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+}
+
+.bg-dark1{
+    background-color:#3562a9;
+    position:fixed;
+    z-index: 100;
+    width: 100%;
+    border-bottom: 2px solid #fdbb2d;
+
+}
