@@ -6,7 +6,7 @@ def enviar(asunto,email,content):
     try:
         message = EmailMessage()
         message ['Subject'] = asunto
-        message['From'] = 'traductornativo@itp.edu.co'
+        message['From'] = settings.SMTP_USERNAME
         message['To'] = email
         message.set_content(content, subtype='html')
         username = settings.SMTP_USERNAME
@@ -20,5 +20,4 @@ def enviar(asunto,email,content):
     except:
         print("Error occured in send email")
         received = False
-        
     return received
