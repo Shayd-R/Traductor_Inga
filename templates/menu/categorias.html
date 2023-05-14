@@ -31,8 +31,7 @@ Menu_categorias
             {{name}} &nbsp; {{rol}}
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
-            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
-                class="dropdown-item" href="#">Agregar frase</a></li>
+            <li></li>
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
           </ul>
         </div>
@@ -46,35 +45,51 @@ Menu_categorias
     <p class="card-text text-center">
       {% with messages = get_flashed_messages(category_filter=["error"]) %}
       {% if messages %}
-      <ul class="alert alert-danger text-center">
-        {% for message in messages %}
-        <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}
-      {% with messages = get_flashed_messages(category_filter=["verificacion"]) %}
-      {% if messages %}
-      <ul class="alert alert-warning text-center">
-        {% for message in messages %}
-        <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}
-      {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
-      {% if messages %}
-      <ul class="alert alert-success text-center">
-        {% for message in messages %}
-        <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}
+    <ul class="alert alert-danger text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["verificacion"]) %}
+    {% if messages %}
+    <ul class="alert alert-warning text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
+    {% if messages %}
+    <ul class="alert alert-success text-center">
+      {% for message in messages %}
+      <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     </p>
   </div>
-  <h2><a href="{{url_for('muro')}}"><i class="bi bi-arrow-left" style="color: #fff; width: 20px; height: 20px;"></i></a></h2>
   <br>
+  <div class="row">
+    <div class="col-6 ">
+      <h2><a href="{{url_for('muro')}}"><i class="bi bi-arrow-left"
+            style="color: #fff; width: 20px; height: 20px;"></i></a></h2>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4"> 
+          <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          data-bs-whatever="@getbootstrap" class="btn btn-success" href="#">Agregar frase</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
   <div class="row row-cols-1 row-cols-md-4 text-dark">
     <table class="table table-striped">
       <thead class="table-dark">
@@ -83,9 +98,9 @@ Menu_categorias
           <th scope="col">Traducion</th>
           <th scope="col">Imagen</th>
           {% if session['rol'] == 'admin' %}
-         
+
           <th scope="col">Opciones</th>
-         
+
           {% endif %}
         </tr>
       </thead>
@@ -97,51 +112,28 @@ Menu_categorias
           <td><img src="/static/img/frases_categoria/{{frase[3]}}" class="rounded" style="width: 100px; height:100px;">
           </td>
           {% if session['rol'] == 'admin' %}
-          
+
           <td>
             <div class="row" style="padding-top: 5px;">
               <div class="col-6" style="display: flex; flex-direction: column;">
                 <a type="button" class="btn btn-primary fraseid " data-idf="{{frase[0]}}" data-id="{{id}}"
-                data-nombre="{{nombre_categoria}}">Editar</a>
+                  data-nombre="{{nombre_categoria}}">Editar</a>
               </div>
               <div class="col-6" style="display: flex; flex-direction: column;">
-              
-                <a type="button" class="btn btn-danger" href="{{url_for('eliminar_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}">Eliminar</a>
+
+                <a type="button" class="btn btn-danger"
+                  href="{{url_for('eliminar_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}">Eliminar</a>
               </div>
 
             </div>
           </td>
-          
+
           {% endif %}
         </tr>
         {% endfor %}
       </tbody>
     </table>
 
-    <!--
-    {% for frase in frases_categoria %}
-    <div class="col p-2">
-      <div class="card">
-        {% if session['rol'] == 'admin' %}
-        <div class="btn-group dropleft my-1 mr-2" style="display: flex; ">
-          <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
-            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
-          <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
-            <li><a class="fraseid dropdown-item" data-idf="{{frase[0]}}" data-id="{{id}}"
-                data-nombre="{{nombre_categoria}}">Editar</a></li>
-            <li><a class="dropdown-item" href="{{url_for('eliminar_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}">Eliminar</a></li>
-            
-          </ul>
-        </div>
-        {% endif %}
-        <img src="/static/img/frases_categoria/{{frase[3]}}" class="card-img-top" alt="">
-        <div class="card-body">
-          <h2>{{frase[1]}}</h2>
-          <h4>{{frase[2]}}</h4>
-        </div>
-      </div>
-    </div>
-    {% endfor %}-->
   </div>
 </div>
 
@@ -174,8 +166,6 @@ Menu_categorias
           <button type="submit" class="btn btn-primary">Agregar</button>
         </div>
       </form>
-
-
     </div>
   </div>
 </div>
@@ -214,8 +204,6 @@ Menu_categorias
         }
       })
     })
-
-
   })
 
 </script>

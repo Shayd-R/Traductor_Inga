@@ -36,9 +36,11 @@ def muro():
         nombre = session['name']
         rol = session['rol']
         cursor = db.cursor()
+        cursor.execute("SELECT * FROM usuarios where id_usuario='"+str(id)+"'")
+        imagen=cursor.fetchone()
         cursor.execute("SELECT * FROM categorias")
         categorias = cursor.fetchall()
-        return render_template("menu/menu.html", nombre=nombre, rol=rol, id=id, categorias=categorias)
+        return render_template("menu/menu.html", imagen=imagen[1], nombre=nombre, rol=rol, id=id, categorias=categorias)
     else:
         return redirect(url_for('inicio'))
 

@@ -107,9 +107,20 @@ def editarCategoria(idcategoria, categoria, imagenn):
 
 def eliminarCategoria(id_categoria):
     cursor = db.cursor()  
+    cursor.execute("SELECT * FROM contribucciones WHERE id_categoria="+id_categoria)
+    imagen = cursor.fetchone()
+    if imagen[3]=="" or imagen[3] is not None:
+        print(imagen[3])
+    else:
+        remove('./static/img/frases_categoria/'+str(imagen[3]))
+
+    cursor.execute("DELETE FROM contribucciones WHERE id_categoria="+id_categoria)
     cursor.execute("SELECT * FROM categorias WHERE id_categoria="+id_categoria)
     imagen = cursor.fetchone()
-    remove('./static/img/categorias/'+str(imagen[2]))
+    if imagen[2]=="" or imagen[2] is not None:
+        print(imagen[2])
+    else:
+        remove('./static/img/categorias/'+str(imagen[2]))
     cursor.execute("DELETE FROM categorias WHERE id_categoria="+id_categoria)
     db.commit()
 

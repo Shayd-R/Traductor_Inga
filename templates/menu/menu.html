@@ -38,6 +38,8 @@ Menu
             <li><a type="button" class="dropdown-item" href="{{ url_for('verificacionContribuyente') }}">Verificacion de
                 contribucciones</a></li>
             {% endif %}
+            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap"
+              class="dropdown-item" href="#">Perfil</a></li>
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
 
 
@@ -96,9 +98,11 @@ Menu
           <i class="fa fa-bars py-1 ml-2" aria-hidden="true" style="width: 20px; height: 20px; font-size:20px"
             type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1" data-bs-popper="static">
+            
             <li><a class="categoriaid dropdown-item" data-idcatergoria="{{categoria[0]}}" data-id="{{id}}"
                 data-rol="{{rol}}" >Editar</a></li>
-            <li><a class="dropdown-item" href="{{url_for('eliminar_categoria', id_categoria=categoria[0])}}">Eliminar</a></li>
+            
+                <li><a class="dropdown-item" href="{{url_for('eliminar_categoria', id_categoria=categoria[0])}}">Eliminar</a></li>
           </ul>
         </div>
         {% endif %}
@@ -156,6 +160,8 @@ Menu
     </div>
   </div>
 </div>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
