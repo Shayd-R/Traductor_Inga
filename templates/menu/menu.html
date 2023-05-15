@@ -33,6 +33,7 @@ Menu
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
             {% if session['rol'] == 'admin' %}
+            <li><a type="button" class="dropdown-item" href="{{ url_for('perfil') }}">Perfil</a></li>
             <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
                 class="dropdown-item" href="#">Agregar categoria</a></li>
             <li><a type="button" class="dropdown-item" href="{{ url_for('verificacionContribuyente') }}">Verificacion de
@@ -102,9 +103,9 @@ Menu
           </ul>
         </div>
         {% endif %}
-        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" style=" height: 200px;">
+        <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" style=" height: 215px;">
         <div class="card-body">
-          <center><a type="button" class="btn btn-success"
+          <center><a type="button" class="btn btn-danger"
               href="{{ url_for('frases', id=categoria[0], nombre=categoria[1])}}">{{categoria[1]}}</a></center>
         </div>
       </div>
