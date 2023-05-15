@@ -270,7 +270,8 @@ footer {
 }
 
 
-/* */
+
+
 
 body{
     background-color: #eeeeee;
@@ -332,3 +333,11 @@ body{
     border-bottom: 2px solid #fdbb2d;
 
 }
+
+.btn-sucess {
+     
+    background-color:#ff0404;
+
+}
+
+

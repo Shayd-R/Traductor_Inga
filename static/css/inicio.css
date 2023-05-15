@@ -2,7 +2,7 @@ body{
     background-color: #eeeeee;
   
     position: relative;
-    background-image: linear-gradient(#888585, #ffffff41 100%), url(../img/inicio/inicio_1.jpg);
+    background-image: linear-gradient(#4a14fa87, #b3328878 100%), url(../img/inicio/inicio_4.jpg);
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
@@ -40,7 +40,7 @@ body{
 
 
 .bg-withe{
-    background: #fff !important;
+    background: #ffffff !important;
     position: fixed;
     z-index: 100;
     width: 100%;
@@ -51,9 +51,10 @@ body{
     position:fixed;
     z-index: 100;
     width: 100%;
-    border-bottom: 2px solid #fdbb2dd6;
+    border-bottom: 2px solid #fdbb2dd6; 
 
 }
+
 
 
 
@@ -85,8 +86,27 @@ body{
      /*relleno  alto y ancho  tambien espaceador */   
     text-decoration: none;  /* quita la rayita  de la referencia */
     border-radius: 5px;  /* silueta del boton*/
+    
    
 }
+
+/*link del nadvar pagina de inicio*/
+.navbar-nav a{
+    font-family: 'Montserrat';
+    color:#000000;
+    font-size: 20px;
+     /*relleno  alto y ancho  tambien espaceador */   
+    text-decoration: none;  /* quita la rayita  de la referencia */
+    border-radius: 5px;
+    font-weight: 900;
+    opacity: 39;
+}
+
+
+.nav-link {
+    color: rgb(0, 0, 0);
+}
+
 
 .svg-hero{
     position: absolute;
@@ -113,11 +133,12 @@ body{
 
 
 
-
 .card {
-    padding-top: 10px;
-    background: #808080 !important;
+    padding-top: 5px;
+    background: hsla(178, 93%, 62%, 0.952) !important;
     height: min-content;
+    border-radius: 5px;
+    
 }
 
 .img{
@@ -127,8 +148,10 @@ body{
 }
 
 
+
+
 footer {
-    background-color: rgb(227, 54, 54);
+    background-color: rgb(21, 163, 192);
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -137,11 +160,15 @@ footer {
     color: rgb(0, 0, 0);
 }
 
+/* para la parte de abajo de recuadro*/
 .card-body{
-    background: linear-gradient(160deg, #65fafa 0%, #f7c967 100%);
+    background: linear-gradient(160deg, #842fb9d3 0%, #f91492c3 100%);
+    border-radius: 50% 10em/ 10% 20em;
+
 }
 
 .navbar{
-    background: linear-gradient(160deg, #65fafa 0%, #f6614d 100%);
+    background: linear-gradient(160deg, #69e450 0%, #31a7d9 100%);
     
 }
+
