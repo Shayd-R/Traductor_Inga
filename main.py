@@ -17,6 +17,7 @@ def inicio_session():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        print(email+"---"+password)
         if loginController.login(email, password) == True:
             return redirect(url_for('muro'))
         else:
