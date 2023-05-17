@@ -15,13 +15,14 @@ def login(correo,password):
     else:
         if existeEmail.existe(correo):
             result = existeEmail.existe(correo)
-            validarPassword = check_password_hash(result[3],password)
+            validarPassword = check_password_hash(result[4],password)
+            print(result[4]+"-1-"+password)
             if validarPassword:
-                if result[5] == 'activo':
+                if result[6] == 'activo':
                     session['id_usuario'] = result[0]
-                    session['username'] = result[2]
-                    session['name']= result[1]
-                    session['rol'] = result[6]
+                    session['username'] = result[3]
+                    session['name']= result[2]
+                    session['rol'] = result[7]
                     return validarPassword
                 else:
                     return flash("La cuenta aún no ha sido activada, revisa tu correo electrónico",'error')
