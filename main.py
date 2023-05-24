@@ -135,14 +135,12 @@ def ajaxmenu():
 
 @app.route("/restorePassword", methods=["GET", "POST"])
 def restorePassword():
-    if autenticacionController.vericarAutenticacion():
-        if request.method == 'POST':
-            email = request.form['email']
-            if restablecerPassword.restablecer(email):
-                return redirect(url_for('inicio'))
-        return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
-    else:
-        return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
+    if request.method == 'POST':
+        email = request.form['email']  
+        if restablecerPassword.restablecer(email):
+            return redirect(url_for('inicio'))
+    return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
+    
 
 @app.get("/cambiarPass/<id>/<token>")
 def cambiarPass(id, token):

@@ -10,6 +10,7 @@ def User(email):
     except: 
         print("Error occured in getUser")
         return flash('El email '+email+' no está registrado','error')
+    
 def IdUser(id):
     try:
         id = str(id)
