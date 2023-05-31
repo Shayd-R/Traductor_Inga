@@ -54,7 +54,7 @@ CREATE TABLE `contribucciones` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `contribucciones_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `contribucciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf16;
 
 /*Data for the table `contribucciones` */
 
@@ -139,7 +139,9 @@ insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,
 (79,'Esta es mi maleta','kai ka nukapa aparidiru','2022-12-0515714580368esta es mimaleta.webp',5,8,'si'),
 (80,'Mi maleta no esta','nukapa aparidiru man ka','2022-12-0515737179718ncesito ayuda.webp',5,8,'si'),
 (81,'¿Dónde me puedo quedar?','¿nuka maipitak chaiangapkani?','2022-12-0515753124657que me recomeinda.webp',5,8,'si'),
-(82,'Quiero una habitación porfavor','munani sug atun uku Dius manda','2022-12-051587165723habitacion.jpg',5,8,'si');
+(82,'Quiero una habitación porfavor','munani sug atun uku Dius manda','2022-12-051587165723habitacion.jpg',5,8,'si'),
+(176,'asd','ruano','2023-05-30132125106223',1,8,'no'),
+(177,'aasd','asd','2023-05-3117305876898',6,32,'no');
 
 /*Table structure for table `palabras_espanol` */
 
@@ -6026,15 +6028,13 @@ CREATE TABLE `usuarios` (
   `estado` varchar(255) DEFAULT NULL,
   `rol` varchar(255) DEFAULT 'contribuyente',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf16;
 
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`id_usuario`,`imagen`,`nombre`,`email`,`password`,`token`,`estado`,`rol`) values 
 (8,'hola.jpeg','admin','admin','pbkdf2:sha256:260000$KvJv3xjqSjCB7gjs$beae2faf16b149da9dba11e43dd1dd302653dacaf85f5f1f8ad2746a9df2c64a',NULL,'activo','admin'),
-(23,NULL,'shayd','shaydruano@gmail.com','pbkdf2:sha256:260000$xO4xpgWwfykneRlB$291c160546469f6a705a60af0501e0fcf068da0e01dfc78fb3e4a9399982953e','kP39Y8',NULL,'contribuyente'),
-(27,NULL,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$P9OsM8FgLQkiVhgP$1f2f7c773fc119f850c0de5e31fb1704e72867f64b14e2ad66941410acba5570',NULL,'activo','contribuyente'),
-(29,'','Bombom','shaydruano3@gmail.com','pbkdf2:sha256:260000$7uIO8TMmQmPucM9p$af56c9b6ee5273801ee53cb09fbdfb9f3c72dc8ba6ace9a8450686c18d24e6e3',NULL,'activo','contribuyente');
+(32,NULL,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$EHWrdcNZm71kqOX4$7f9b1f107860907d5c3a16cd32785b99347931da3633229f4d962f6eec48d2f7',NULL,'activo','contribuyente');
 
 /*Table structure for table `verbos` */
 
