@@ -275,6 +275,15 @@ Menu
             width: 45px;
             height: 45px;
             border-radius: 50%;
+          }
+
+          .seccion-perfil-usuario .perfil-usuario-avatar .boton-avatar input[type='file'] {
+            position: absolute;
+            transform: scale(2);
+            opacity: 0;           
+          }
+
+          input[type='file']::-webkit-file-upload-button{
             cursor: pointer;
           }
 
@@ -393,6 +402,9 @@ Menu
               margin-left: 1rem;
               margin-top: 0;
             }
+
+
+
           }
         </style>
 
@@ -407,17 +419,15 @@ Menu
             <div class="perfil-usuario-portada">
               <div class="perfil-usuario-avatar">
                 <img src="/static/img/usuarios/{{imagen}}" alt="img-avatar">
-                <form action="">
-                  <input type="file" name="imagen_perfil" id="imagen_perfil" value="c">
-                </form>
-                <button type="button" class="boton-avatar" action="">
-
+                <button type="button" class="boton-avatar">
+                  <input type="file">
                   <i class="far fa-image"></i>
                 </button>
               </div>
-              <!--<button type="button" class="boton-portada">
+
+              <button type="button" class="boton-portada">
                 <i class="far fa-image"></i> Cambiar fondo
-              </button>-->
+              </button>
             </div>
           </div>
           <div class="perfil-usuario-body">

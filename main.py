@@ -346,7 +346,7 @@ def verificar(id):
     
     db.commit()
  
-@app.route("/perfil", methods=["GET", "POST"])
+@app.route("/perfil/", methods=["GET", "POST"])
 def perfil():
     return render_template("/menu/perfil.html")
 
