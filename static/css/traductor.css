@@ -12,6 +12,7 @@
 }
 
 
+
 .contenedor{
     display: flex;
     align-items: center;
@@ -262,7 +263,7 @@ body {
 }
 
 footer {
-    background-color: rgb(105, 230, 86);
+    background-color: rgb(24, 156, 183);
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -277,7 +278,7 @@ body{
     background-color: #eeeeee;
   
     position: relative;
-    background-image: linear-gradient(#a7a4a4, #ffffff00 100%), url(../img/login/traductor.jpg);
+    background-image: linear-gradient(#f4f4f410, #90797998 100%), url(../img/traductor/macaw-g26dcb0eb7_1280-1home.jpg);
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
@@ -295,7 +296,9 @@ body{
     position: fixed;
     z-index: 100;
     width: 100%;
+       
 }
+
 
 .bg-white{
     background-color:#393e46;
@@ -314,7 +317,7 @@ body{
 
 
 .navbar{
-    background: linear-gradient(160deg, #65fafa 0%, #f7c967 100%);
+    background: linear-gradient(160deg, #32e0f0 0%, #6ced2c 100%);
 }
 
 
@@ -340,4 +343,99 @@ body{
 
 }
 
+.container-fluid{
+    width: 30%;
+    height: 11vh;
+  
 
+
+}
+
+.navbar-nav{
+    width: 345%;
+    
+
+    color: #393e46;
+    position: relative;top: -40px; left: -40px;
+    text-decoration:none;
+    
+    
+
+}
+
+.navbar-nav,a{
+    text-decoration:none;
+    color: #000000;
+    font-family: 'Montserrat';
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 900;
+    opacity: 90%;
+    word-spacing: 0.25em;
+    
+
+    
+    
+  
+    
+
+}
+/*para sombrearel clic del los link*/
+.navbar a:hover{
+    background: linear-gradient(180deg, #0c29ce 0%, #32d5b2 100%);
+    border-radius: 1%;
+}
+
+/*CALIFICATIVO DE ESTRELLA*/
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+  }
+  .rating > input {
+    display: none;
+  }
+  .rating > label:before {
+    content: "\2605";
+    font-size: 30px;
+    padding: 5px;
+    color: #524848;
+    cursor: pointer;
+  }
+  .rating > input:checked ~ label:before {
+    color: #ffca08;
+  }
+
+  /* boton para calificar */
+
+  .container .buttonn{
+    
+    width: 30%;
+    padding: 1px;
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    border-radius: 5px;
+    background: #d73bd2;
+    color: rgb(255, 255, 255);
+    position:absolute;
+        left: 35%;
+        top: 89%
+      
+        ;
+}
+
+/*flechas para cambiar de lenguaje*/
+.exchange{
+    position:absolute;
+    left: 48%;
+    top: 61%;
+    background: #e8e1e7;
+    border-radius: 30px;
+    padding: 5px;
+    
+}
