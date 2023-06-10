@@ -32,11 +32,7 @@ body{
     background-size: cover;
 }
 
-.brandddd img{
-    width: 60px;
-    height:60px;
-    background-size: cover;
-}
+
 
 
 .bg-withe{
@@ -62,9 +58,12 @@ body{
  
 .Text-hero{
     
-    color: #fff;
+    color: #00fff7;
     font-family: '';
     padding: 100px;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;
+   
+    font: 1.5em Georgia, "Bitstream Charter", "URW Bookman L", "Century Schoolbook L", serif;
 }
 
 .Text-hero h3{
@@ -105,6 +104,11 @@ body{
 
 .nav-link {
     color: rgb(0, 0, 0);
+}
+
+.navbar a:hover{
+    background: linear-gradient(180deg, #fd7a7ae1 0%, #15e4ffec 100%);
+    border-radius: 1%;
 }
 
 
@@ -151,13 +155,13 @@ body{
 
 
 footer {
-    background-color: rgb(21, 163, 192);
+    background-color: rgb(0, 142, 171);
     text-align: center;
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 100px;
-    color: rgb(0, 0, 0);
+    color: rgb(250, 250, 250);
 }
 
 /* para la parte de abajo de recuadro*/
@@ -168,7 +172,15 @@ footer {
 }
 
 .navbar{
-    background: linear-gradient(160deg, #69e450 0%, #31a7d9 100%);
+    background: linear-gradient(160deg, #32e0f0 0%, #6ced2c 100%);
+    color: #000000;
+
     
 }
 
+.dropdown-menu {
+
+background: linear-gradient(160deg, #f41ec6bc 0%, #31a7d980 100%);
+border-radius:50%;
+
+}

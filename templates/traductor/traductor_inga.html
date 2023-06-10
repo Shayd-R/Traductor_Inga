@@ -40,7 +40,7 @@ Traductor
               </label>
               <center>
                 <div class="navbar-nav d-flex justify-content-center w-100">
-                  <a class="nav-link" href="{url_for('contacto')}}">Acerca de traductor Inga Español</a>
+                  <a class="nav-link" href="{{url_for('contacto')}}">Acerca de traductor Inga Español</a>
                   <a class="nav-link" href="{{url_for('privacidad')}}">privacidad y condiciones</a>
                   <a class="nav-link" href="{{url_for('ayuda')}}">Ayuda</a>
                   <a class="nav-link" href="{{url_for('inicio_session')}}">Ingresar</a>
@@ -80,6 +80,7 @@ Traductor
                         <select>
                             <option value="">Español</option>
                         </select>
+                        
                         <div class="icons">
                             <button class="boton" type="submit" id="voice"
                                 formaction="{{url_for('audio', texto_salida=texto_salida, texto_entrada=texto_entrada)}}"><i
@@ -87,10 +88,30 @@ Traductor
                         </div>
                     </li>
                 </ul>
-
+              
             </div>
             <input class="button" type="submit" value="Traduccir texto">
+            <!-- calificativo de estrellas-->
+            <div class="rating">
+              <input type="radio" id="star5" name="rating" value="5">
+              <label for="star5"></label>
+              <input type="radio" id="star4" name="rating" value="4">
+              <label for="star4"></label>
+              <input type="radio" id="star3" name="rating" value="3">
+              <label for="star3"></label>
+              <input type="radio" id="star2" name="rating" value="2">
+              <label for="star2"></label>
+              <input type="radio" id="star1" name="rating" value="1">
+              <label for="star1"></label>
+
+              <!--boton calificar la traduccion-->
+              <div>
+                <input class="buttonn center" type="submit" value="Califica esta traduccion">
+              
+                </div>
+            </div>
         </div>
+        
     </form>
 </div>
 <footer>

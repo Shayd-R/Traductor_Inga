@@ -7,3 +7,5 @@ def getToken(token):
         return myresult
     except: 
         print("Error en getTokenUser")
+
+        
