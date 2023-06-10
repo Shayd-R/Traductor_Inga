@@ -44,6 +44,34 @@ def muro():
         return render_template("menu/menu.html", imagen=imagen[1], nombre=nombre, rol=rol, id=id, categorias=categorias)
     else:
         return redirect(url_for('inicio'))
+    
+@app.route('/editarPerfil/<string:idperfil>', methods=['GET', 'POST'])
+def editar_perfil(idperfil):
+    if autenticacionController.vericarAutenticacion():
+        imagen_perfil = request.files['imagen_perfil']
+        
+        if imagen_perfil:
+            nombreImagen = userModel.nombreImagen(imagen_perfil)
+            print(nombreImagen)
+            imagenn = nombreImagen
+            imagen_perfil.save('./static/img/usuarios/'+nombreImagen)
+        else:
+            imagenn = None
+        userModel.editarPerfil(idperfil=idperfil, imagenn=imagenn)
+        flash('Se ha editado el perfil correctamente','bueno')
+        return redirect(url_for('muro'))
+    else:
+        return redirect(url_for('inicio'))
+    
+@app.route("/ajaxperfil", methods=["GET", "POST"])
+def ajaxperfil():
+    cursor = db.cursor()
+    if request.method=='POST':
+        id=request.form['id']
+        print(id)
+        cursor.execute("SELECT * FROM usuarios WHERE id_usuario= "+ id)
+        usuario = cursor.fetchall()
+    return jsonify({'htmlresponse': render_template('menu/responseperfil.html', usuario=usuario)})
 
 @app.route("/frasesCategoria/<string:id>/<string:nombre>", methods=["GET", "POST"])
 def frases(id, nombre):

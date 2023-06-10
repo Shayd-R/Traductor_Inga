@@ -94,6 +94,14 @@ def verificarFrase(id_frase):
     cursor.execute("UPDATE contribucciones SET confirmacion='si' WHERE id_contribuccion= "+str(id_frase))
     db.commit()
 
+def editarPerfil(idperfil, imagenn):    
+    cursor = db.cursor()   
+    cursor.execute("UPDATE usuarios SET imagen = '" + imagenn + "' WHERE id_usuario= '"+idperfil+"'")
+    db.commit()
+
+
+
+
 def editarCategoria(idcategoria, categoria, imagenn):
     imagen_sql=''
     if imagenn:
