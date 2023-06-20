@@ -33,18 +33,14 @@ Menu
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menu" data-bs-popper="static">
             {% if session['rol'] == 'admin' %}
-            <li><a type="button" class="dropdown-item" href="{{ url_for('perfil') }}">Perfil</a></li>
+            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap"
+              class="perfilid dropdown-item" data-id="{{id}}" href="#">Perfil</a></li>
             <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
                 class="dropdown-item" href="#">Agregar categoria</a></li>
             <li><a type="button" class="dropdown-item" href="{{ url_for('verificacionContribuyente') }}">Verificacion de
                 contribucciones</a></li>
             {% endif %}
-            <li><a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap"
-                class="perfilid dropdown-item" data-id="{{id}}" href="#">Perfil1</a></li>
-                <!--data-rol="{{rol}}" data-imagen_perfil="{{imagen[0]}}" data-nombre="{{nombre}}"-->
             <li><a class="dropdown-item" href="{{ url_for('exit') }}">Salir</a></li>
-
-
           </ul>
         </div>
 

@@ -99,9 +99,6 @@ def editarPerfil(idperfil, imagenn):
     cursor.execute("UPDATE usuarios SET imagen = '" + imagenn + "' WHERE id_usuario= '"+idperfil+"'")
     db.commit()
 
-
-
-
 def editarCategoria(idcategoria, categoria, imagenn):
     imagen_sql=''
     if imagenn:
@@ -115,13 +112,6 @@ def editarCategoria(idcategoria, categoria, imagenn):
 
 def eliminarCategoria(id_categoria):
     cursor = db.cursor()  
-    cursor.execute("SELECT * FROM contribucciones WHERE id_categoria="+id_categoria)
-    imagen = cursor.fetchone()
-    if imagen[3]=="" or imagen[3] is not None:
-        print(imagen[3])
-    else:
-        remove('./static/img/frases_categoria/'+str(imagen[3]))
-
     cursor.execute("DELETE FROM contribucciones WHERE id_categoria="+id_categoria)
     cursor.execute("SELECT * FROM categorias WHERE id_categoria="+id_categoria)
     imagen = cursor.fetchone()
