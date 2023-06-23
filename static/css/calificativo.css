@@ -1,0 +1,86 @@
+body{
+    background-color: #eeeeee;
+  
+    position: relative;
+    background-image: linear-gradient(#bbacec7f, #ff767650 100%), url(../img/inicio/inicio_1.jpg);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover;
+    background-attachment: fixed;
+}
+
+
+.container {
+    margin-top: 50px;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .input-group {
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }
+
+  .table {
+    background: rgb(254, 199, 199);
+  }
+
+
+/*navbar*/
+  .navbar{
+    background: linear-gradient(160deg, #32e0f0 0%, #6ced2c 100%);
+    color: #000000;
+
+    
+}
+
+.navbar{
+  background-color:#393e46;
+  position:static;
+  z-index: 100;
+  width: 100%;
+  border-bottom: 2px solid #fdbb2dd6; 
+
+}
+
+/*tamaño imagen*/
+
+.brand img{
+  width: 55px;
+  height: 55px;
+  background-size: cover;
+}
+
+.img{
+  border-color: #393e46;
+  border-radius: 5px;
+  background-size:contain;
+}
+
+
+/*tipo de letra */
+
+.navbar-nav,a{
+  color: #000000;
+  font-family: 'Montserrat';
+    ;
+    font-size: 23px;
+     /*relleno  alto y ancho  tambien espaceador */   
+    text-decoration: none;  /* quita la rayita  de la referencia */
+    border-radius: 5px; 
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(0, 0, 0);
+}
+
+/* celdas titulos del cuadro*/
+th {
+  background: rgb(77, 222, 77);
+}
