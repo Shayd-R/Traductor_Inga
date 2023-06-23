@@ -2,7 +2,7 @@ body{
     background-color: #eeeeee;
   
     position: relative;
-    background-image: linear-gradient(#4a14fa87, #b3328878 100%), url(../img/inicio/inicio_4.jpg);
+    background-image: linear-gradient(#8866f65a, #f875cc64 100%), url(../img/inicio/inicio_4.jpg);
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
@@ -136,8 +136,8 @@ body{
 /*tamaño del logo*/
 
 .brand img{
-    width: 80px;
-    height: 50px;
+    width: 50px;
+    height: 40px;
     background-size: cover;
 }
 
@@ -190,3 +190,30 @@ background: linear-gradient(160deg, #f41ec6bc 0%, #31a7d980 100%);
 border-radius:50%;
 
 }
+/*Boton para entrar al calificativo*/
+
+.mi-boton {
+    padding: 10px 20px;
+    background-color: #0fc415;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    left: 1%;
+    top: 1%;
+    position: relative;
+  }
+  
+  
+  
+  
+  
+  /*tabla de calificativo*/
+
+
+  
