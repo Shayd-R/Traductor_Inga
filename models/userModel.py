@@ -16,11 +16,14 @@ def correoExistente(email):
 
 def resgistrarUsuario(nombre, email, password, token):
     cursor = db.cursor(dictionary=True)
-    cursor.execute("INSERT INTO usuarios(nombre, email, password, token) VALUES (%s, %s, %s, %s)",
+    registro=datetime.now()
+    registro=registro.strftime("%Y-%m-%d")
+    cursor.execute("INSERT INTO usuarios(nombre, email, password, registro, token) VALUES (%s, %s, %s, %s, %s)",
         (
             nombre,
             email,
             password,
+            str(registro),
             token,
         ),
     )       
@@ -94,10 +97,27 @@ def verificarFrase(id_frase):
     cursor.execute("UPDATE contribucciones SET confirmacion='si' WHERE id_contribuccion= "+str(id_frase))
     db.commit()
 
-def editarPerfil(idperfil, imagenn):    
-    cursor = db.cursor()   
-    cursor.execute("UPDATE usuarios SET imagen = '" + imagenn + "' WHERE id_usuario= '"+idperfil+"'")
-    db.commit()
+def editarPerfil(idperfil, imagenn, nombre, direccion, telefono, ubicacion, nacimiento): 
+    variables = {
+        'imagen': imagenn if imagenn else '',
+        'nombre': nombre if nombre else '',
+        'direccion': direccion if direccion else '',
+        'telefono': telefono if telefono else '',
+        'ubicacion': ubicacion if ubicacion else '',
+        'nacimiento': nacimiento if nacimiento else ''
+    }
+    
+    sql_parts = []
+    for key, value in variables.items():
+        sql_parts.append("{} = '{}'".format(key, value))
+    
+    if sql_parts:
+        sql = ', '.join(sql_parts)
+        query = "UPDATE usuarios SET {} WHERE id_usuario = '{}'".format(sql, idperfil)
+        
+        cursor = db.cursor()
+        cursor.execute(query)
+        db.commit()
 
 def editarCategoria(idcategoria, categoria, imagenn):
     imagen_sql=''

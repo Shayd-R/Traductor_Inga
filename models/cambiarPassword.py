@@ -8,5 +8,6 @@ def setNewPassword(password,id):
         
         return True
     except:
+        print("No se pudo cambiar la contraseña del usuario")
         return False
     

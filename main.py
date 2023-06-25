@@ -17,7 +17,6 @@ def inicio_session():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        print(email+"---"+password)
         if loginController.login(email, password) == True:
             return redirect(url_for('muro'))
         else:
@@ -48,16 +47,21 @@ def muro():
 @app.route('/editarPerfil/<string:idperfil>', methods=['GET', 'POST'])
 def editar_perfil(idperfil):
     if autenticacionController.vericarAutenticacion():
+        nombre=request.form['nombre']
+        direccion=request.form['direccion']
+        telefono=request.form['telefono']
+        ubicacion=request.form['ubicacion']
+        nacimiento=request.form['nacimiento']
         imagen_perfil = request.files['imagen_perfil']
         
+    
         if imagen_perfil:
             nombreImagen = userModel.nombreImagen(imagen_perfil)
-            print(nombreImagen)
             imagenn = nombreImagen
             imagen_perfil.save('./static/img/usuarios/'+nombreImagen)
         else:
             imagenn = None
-        userModel.editarPerfil(idperfil=idperfil, imagenn=imagenn)
+        userModel.editarPerfil(idperfil=idperfil, imagenn=imagenn, nombre=nombre, direccion=direccion, telefono=telefono, ubicacion=ubicacion, nacimiento=nacimiento)
         flash('Se ha editado el perfil correctamente','bueno')
         return redirect(url_for('muro'))
     else:
@@ -68,7 +72,6 @@ def ajaxperfil():
     cursor = db.cursor()
     if request.method=='POST':
         id=request.form['id']
-        print(id)
         cursor.execute("SELECT * FROM usuarios WHERE id_usuario= "+ id)
         usuario = cursor.fetchall()
     return jsonify({'htmlresponse': render_template('menu/responseperfil.html', usuario=usuario)})

@@ -19,82 +19,68 @@
     </div>
     <div class="perfil-usuario-body">
         <div class="perfil-usuario-bio">
-            <h3 class="titulo">{{usuario[2]}}</h3>
-            <p class="texto"></p>
+
+            <ul class="lista-datos">
+                <li>Nombre:</li>
+            </ul>
+            <ul class="lista-datos">
+                <li>
+                    <input type="text" name="nombre" id="nombre" value="{{usuario[2]}}" style="outline: none;">
+                </li>
+            </ul>
+
         </div>
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
                 <li><i class="icono fas fa-building"></i> Rol:</li>
             </ul>
             <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[7]}}">
-                </form>
+
+                <input type="text" name="rol" id="rol" value="{{usuario[3]}}" disabled>
+
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-map-signs"></i> Direccion:</li>
-             
+
             </ul>
             <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[]}}">
-                </form>
+
+                <input type="text" name="direccion" id="direccion" value="{{usuario[4]}}">
+
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-phone-alt"></i> Telefono:</li>
-             
-            </ul>
-            <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[]}}">
-                </form>
-            </ul>
-            <ul class="lista-datos">
-                <li><i class="icono fas fa-briefcase"></i> Trabaja en:</li>
-             
-            </ul>
-            <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[]}}">
-                </form>
-            </ul>
 
+            </ul>
+            <ul class="lista-datos">
+
+                <input type="text" name="telefono" id="telefono" value="{{usuario[5]}}">
+
+            </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-map-marker-alt"></i> Ubicacion:</li>
-             
+
             </ul>
             <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[]}}">
-                </form>
+
+                <input type="text" name="ubicacion" id="ubicacion" value="{{usuario[6]}}">
+
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-calendar-alt"></i> Nacimiento:</li>
-             
             </ul>
             <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[]}}">
-                </form>
+                <input type="date" name="nacimiento" id="nacimiento" value="{{usuario[7]}}">
             </ul>
-            
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-user-check"></i> Registro:</li>
-             
             </ul>
             <ul class="lista-datos">
-                <form action="">
-                    <input type="text" value="{{usuario[]}}">
-                </form>
+                <input type="text" value="{{usuario[8]}}" disabled>
             </ul>
-                      
-            
-            
-
-
         </div>
-        
+
         <div class="redes-sociales">
             <a href="https://www.facebook.com/" class="boton-redes facebook fab fa-facebook-f"><i
                     class="icon-facebook"></i></a>
