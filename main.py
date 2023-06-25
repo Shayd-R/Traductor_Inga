@@ -381,6 +381,10 @@ def verificar(id):
 def perfil():
     return render_template("/menu/perfil.html")
 
+@app.route("/calificativo", methods=["GET", "POST"])
+def calificativo():
+    return render_template("/menu/calificativo.html")
+
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():
     return render_template("/informacion/contacto.html")
