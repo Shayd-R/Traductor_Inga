@@ -19,7 +19,14 @@ body{
 
 .icono-itp {
     border-radius: 10%;
+    position:absolute;
+        left: 35%;
+        top: 89%
+      
+        ;
 }
+
+
 
 /*logos*/
 .brandd img{
