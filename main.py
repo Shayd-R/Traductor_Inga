@@ -385,6 +385,10 @@ def perfil():
 def calificativo():
     return render_template("/menu/calificativo.html")
 
+@app.route("/responcecalificativo", methods=["GET", "POST"])
+def responcecalificativo():
+    return render_template("/menu/responcecalificativo.html")
+
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():
     return render_template("/informacion/contacto.html")

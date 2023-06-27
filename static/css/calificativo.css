@@ -84,3 +84,27 @@ body{
 th {
   background: rgb(77, 222, 77);
 }
+
+
+
+
+.mi-botonn {
+  padding: 10px 20px;
+  background-color: #0fc415;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: n;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  left: 3%;
+  top: 32%;
+  position: absolute;
+}
+
+
+
+
