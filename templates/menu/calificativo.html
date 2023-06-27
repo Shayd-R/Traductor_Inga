@@ -38,22 +38,20 @@
           <th><h5>Español</h5></th>
           <th><h5>Inga</h5></th>
           <th><h5>calificar</h5></th>
-          
           <th><h5>Comentario</h5></th>
         </tr>
       </thead>
       <tbody>
+        {% for palabra in palabras%}
         <tr>
-          <td><h5>John</h5></td>
-          <td><h5>Doe</h5></td>
+          <td><h5>{{palabra[1]}}</h5></td>
+          <td><h5>{{palabra[2]}}</h5></td>
           <td>
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success">
-                  <i class="fas fa-check"></i> Bien 
-                </button>
-                <button type="button" class="btn btn-danger">
-                  <i class="fas fa-times"></i> Mal
-                </button>
+              <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success">Bien {{palabra[3]}}</a>
+              <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger">Mal {{palabra[4]}}</a>
+                
+                
               </div>
           </td>
         
@@ -62,27 +60,8 @@
             <button class="btn btn-primary">Enviar</button>
           </td>
         </tr>
-        <tr>
-            <td><h5>John</h5></td>
-            <td><h5>Doe</h5></td>
-            <td>
-              <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-success">
-                    <i class="fas fa-check"></i> Bien 
-                  </button>
-                  <button type="button" class="btn btn-danger">
-                    <i class="fas fa-times"></i> Mal
-                  </button>
-                </div>
-            </td>
-          
-            <td>
-              <input type="text" class="form-control">
-              <button class="btn btn-primary">Enviar</button>
-            </td>
-          </tr>
+        {% endfor %}
         
-        <!-- Agrega más filas según sea necesario -->
       </tbody>
     </table>
   </div>
