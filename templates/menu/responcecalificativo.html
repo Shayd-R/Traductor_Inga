@@ -20,24 +20,14 @@
           <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
         </label>
         <div class="navbar-nav d-flex justify-content-center w-100">
-          <a class="nav-link" href="">CALIFICATIVO</a>
+          <a class="nav-link" href="">PALABRAS CALIFICADAS</a>
           
         </div>
       </div>
     </div>
   </nav>
 
-  <div class="hola">
-    <h2><a href=""><i class="fas fa-arrow-left"
-          style="color: rgba(255, 255, 255, 0); margin: 20px; margin-top: 20px; "></i></a>
-        
-          <a href="{{url_for('responcecalificativo')}}" class="mi-botonn">Palabras calificadas y comentarios</a>
-          
-    </h2>
-    <br>
-    
-      
-  </div>
+  
 
   <div class="container">
     
@@ -47,35 +37,30 @@
         <tr>
           <th><h5>Español</h5></th>
           <th><h5>Inga</h5></th>
-          <th><h5>Calificar</h5></th>
-          <th><h5>Conteo</h5></th>
+          <th><h5>Calificacion</h5></th>
+          
           <th><h5>Comentario</h5></th>
         </tr>
       </thead>
       <tbody>
-        {% for palabra in palabras%}
         <tr>
-          <td><h5>{{palabra[1]}}</h5></td>
-          <td><h5>{{palabra[2]}}</h5></td>
+          <td><h5>John rivera</h5></td>
+          <td><h5>hola como estas</h5></td>
           <td>
-            <div class="btn-group" role="group">
-              <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success">Bien {{palabra[3]}}</a>
-              <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger">Mal {{palabra[4]}}</a>
-                
-                
-              </div>
+            <h5>bien</h5>
           </td>
-          <td><h5>5</h5></td>
+          
           <td>
-            <input type="text" class="form-control">
-            <button class="btn btn-primary">Enviar</button>
+            <h5>la palabra esta bien</h5>
           </td>
         </tr>
-        {% endfor %}
         
+        
+        <!-- Agrega más filas según sea necesario -->
       </tbody>
     </table>
 
+   
     
   </div>
 </body>

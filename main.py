@@ -436,6 +436,10 @@ def mal(id, id_usuario):
             db.commit()  
     return redirect(url_for("calificativo", id_usuario=id_usuario))
 
+@app.route("/responcecalificativo", methods=["GET", "POST"])
+def responcecalificativo():
+    return render_template("/menu/responcecalificativo.html")
+
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():
     return render_template("/informacion/contacto.html")
