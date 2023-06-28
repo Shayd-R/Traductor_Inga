@@ -106,15 +106,12 @@ def editarPerfil(idperfil, imagenn, nombre, direccion, telefono, ubicacion, naci
         'ubicacion': ubicacion if ubicacion else '',
         'nacimiento': nacimiento if nacimiento else ''
     }
-    
     sql_parts = []
     for key, value in variables.items():
         sql_parts.append("{} = '{}'".format(key, value))
-    
     if sql_parts:
         sql = ', '.join(sql_parts)
         query = "UPDATE usuarios SET {} WHERE id_usuario = '{}'".format(sql, idperfil)
-        
         cursor = db.cursor()
         cursor.execute(query)
         db.commit()
