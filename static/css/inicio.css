@@ -152,7 +152,7 @@ body{
 
 .card {
     padding-top: 5px;
-    background: hsla(178, 93%, 62%, 0.952) !important;
+    background: hsla(233, 79%, 78%, 0.952) !important;
     height: min-content;
     border-radius: 5px;
     
@@ -185,7 +185,7 @@ footer {
 }
 
 .navbar{
-    background: linear-gradient(160deg, #32e0f0 0%, #6ced2c 100%);
+    background: linear-gradient(160deg, #32e0f0 0%, #67f420 100%);
     color: #000000;
 
     
