@@ -17,7 +17,6 @@ def inicio_session():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        print(email+"---"+password)
         if loginController.login(email, password) == True:
             return redirect(url_for('muro'))
         else:
@@ -48,16 +47,19 @@ def muro():
 @app.route('/editarPerfil/<string:idperfil>', methods=['GET', 'POST'])
 def editar_perfil(idperfil):
     if autenticacionController.vericarAutenticacion():
+        nombre=request.form['nombre']
+        direccion=request.form['direccion']
+        telefono=request.form['telefono']
+        ubicacion=request.form['ubicacion']
+        nacimiento=request.form['nacimiento']
         imagen_perfil = request.files['imagen_perfil']
-        
         if imagen_perfil:
             nombreImagen = userModel.nombreImagen(imagen_perfil)
-            print(nombreImagen)
             imagenn = nombreImagen
             imagen_perfil.save('./static/img/usuarios/'+nombreImagen)
         else:
             imagenn = None
-        userModel.editarPerfil(idperfil=idperfil, imagenn=imagenn)
+        userModel.editarPerfil(idperfil=idperfil, imagenn=imagenn, nombre=nombre, direccion=direccion, telefono=telefono, ubicacion=ubicacion, nacimiento=nacimiento)
         flash('Se ha editado el perfil correctamente','bueno')
         return redirect(url_for('muro'))
     else:
@@ -68,7 +70,6 @@ def ajaxperfil():
     cursor = db.cursor()
     if request.method=='POST':
         id=request.form['id']
-        print(id)
         cursor.execute("SELECT * FROM usuarios WHERE id_usuario= "+ id)
         usuario = cursor.fetchall()
     return jsonify({'htmlresponse': render_template('menu/responseperfil.html', usuario=usuario)})
@@ -167,8 +168,7 @@ def restorePassword():
         email = request.form['email']  
         if restablecerPassword.restablecer(email):
             return redirect(url_for('inicio'))
-    return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")
-    
+    return render_template("/correo_restablecer_contraseña/correoRestablecerPassword.html")   
 
 @app.get("/cambiarPass/<id>/<token>")
 def cambiarPass(id, token):
@@ -371,16 +371,70 @@ def verificar(id):
         return redirect(url_for('verificacionContribuyente'))
     else:
         return redirect(url_for('inicio'))
-    
     db.commit()
  
 @app.route("/perfil/", methods=["GET", "POST"])
 def perfil():
     return render_template("/menu/perfil.html")
 
-@app.route("/calificativo", methods=["GET", "POST"])
-def calificativo():
-    return render_template("/menu/calificativo.html")
+@app.route("/calificativo/<string:id_usuario>", methods=["GET", "POST"])
+def calificativo(id_usuario):
+    cursor = db.cursor()
+    cursor.execute("""
+    SELECT pi.id, pi.palabra_inga, pi.traduccion, CONCAT(COALESCE(SUM(cr.bien), 0), '') AS bien, CONCAT(COALESCE(SUM(cr.mal), 0), '') AS mal
+    FROM palabras_inga AS PI
+    LEFT JOIN calificativo_reacciones AS cr ON pi.id = cr.id_palabra_inga
+    GROUP BY pi.id, pi.palabra_inga, pi.traduccion LIMIT 20;
+    """)
+    palabras = cursor.fetchall()
+    return render_template("/menu/calificativo.html", palabras=palabras, id_usuario=id_usuario)
+
+@app.route('/bien/<string:id>/<string:id_usuario>', methods=["GET", "POST"])
+def bien(id, id_usuario):
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM calificativo_reacciones WHERE id_palabra_inga = "+id+" AND id_usuario="+id_usuario)
+    verificacion=cursor.fetchone()
+    print(verificacion)
+    if verificacion==None:
+        cursor.execute("INSERT calificativo_reacciones(id_palabra_inga, id_usuario, bien) VALUES  ("+id+", "+id_usuario+", bien + 1)") 
+        db.commit()
+        return redirect(url_for("calificativo", id_usuario=id_usuario))
+    else:    
+        if verificacion[3]=="0" and verificacion[4]=="0":
+            cursor.execute("UPDATE calificativo_reacciones SET bien = bien + 1 WHERE id_palabra_inga = "+id+" AND id_usuario = "+id_usuario)
+            db.commit()
+        if verificacion[3]=="1":
+            cursor.execute("UPDATE calificativo_reacciones SET bien = bien - 1 WHERE id_palabra_inga = "+id+" AND id_usuario = "+id_usuario)  
+            db.commit()
+        if verificacion[4]=="1":
+            cursor.execute("UPDATE calificativo_reacciones SET bien = bien + 1, mal = mal - 1 WHERE id_palabra_inga = "+id+" AND id_usuario = "+id_usuario)
+            db.commit()
+        return redirect(url_for("calificativo", id_usuario=id_usuario))
+
+@app.route('/mal/<string:id>/<string:id_usuario>', methods=["GET", "POST"])
+def mal(id, id_usuario):
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM calificativo_reacciones WHERE id_palabra_inga = "+id+" AND id_usuario="+id_usuario)
+    verificacion=cursor.fetchone()
+    if verificacion==None:
+        print("aa")
+        cursor.execute("INSERT calificativo_reacciones(id_palabra_inga, id_usuario, mal) VALUES  ("+id+", "+id_usuario+", mal + 1)")  
+        db.commit()
+        return redirect(url_for("calificativo", id_usuario=id_usuario))
+    else:
+        print(verificacion)
+        if verificacion[4]=="0" and verificacion[3]=="0":
+            cursor.execute("UPDATE calificativo_reacciones SET mal = mal + 1 WHERE id_palabra_inga = "+id+" AND id_usuario = "+id_usuario)
+            db.commit()
+        if verificacion[4]=="1":
+            sql="UPDATE calificativo_reacciones SET mal = mal - 1 WHERE id_palabra_inga = "+id+" AND id_usuario = "+id_usuario
+            print(sql)
+            cursor.execute(sql) 
+            db.commit() 
+        if verificacion[3]=="1":
+            cursor.execute("UPDATE calificativo_reacciones SET bien = bien - 1, mal = mal + 1 WHERE id_palabra_inga = "+id+" AND id_usuario = "+id_usuario)
+            db.commit()  
+    return redirect(url_for("calificativo", id_usuario=id_usuario))
 
 @app.route("/responcecalificativo", methods=["GET", "POST"])
 def responcecalificativo():

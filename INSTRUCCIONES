@@ -11,15 +11,15 @@ pip install -r requirements.txt
 
 4. despues de eso se crea un archivo el cual sea .env en el cual va a pegar esto:
 
-MYSQL_HOSTNAME=localhost
-MYSQL_USERNAME=root
+MYSQL_HOSTNAME='localhost'
+MYSQL_USERNAME='root'
 MYSQL_PASSWORD =
-MYSQL_DATABASE=traductor
+MYSQL_DATABASE='traductor'
 MYSQL_PORT=3306
 
-SMTP_HOSTNAME=smtp.gmail.com:587
-SMTP_USERNAME=shaydruano2020@itp.edu.co
-SMTP_PASSWORD=1006663258
+SMTP_HOSTNAME='smtp.gmail.com:587'
+SMTP_USERNAME='traductornativo@itp.edu.co'
+SMTP_PASSWORD='Colombia123**'
 
 5. por ultimo se ejecuta el script de la base de datos que esta ahi en la carpeta "database"
 6. con el entorno activado de ya se procede a arrancar el programa con 

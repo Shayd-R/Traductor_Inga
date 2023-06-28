@@ -8,5 +8,4 @@ def listar(id):
         db.commit()
         return True
     except:
-        print("No se pudo cambiar el estado en la empresa")
         return False

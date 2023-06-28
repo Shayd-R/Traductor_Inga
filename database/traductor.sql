@@ -25,7 +25,7 @@ CREATE TABLE `categorias` (
   `nombre_categoria` varchar(2555) DEFAULT NULL,
   `imagen_categoria` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf16;
 
 /*Data for the table `categorias` */
 
@@ -54,7 +54,7 @@ CREATE TABLE `contribucciones` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `contribucciones_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`),
   CONSTRAINT `contribucciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf16;
 
 /*Data for the table `contribucciones` */
 
@@ -6028,13 +6028,14 @@ CREATE TABLE `usuarios` (
   `estado` varchar(255) DEFAULT NULL,
   `rol` varchar(255) DEFAULT 'contribuyente',
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf16;
 
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`id_usuario`,`imagen`,`nombre`,`email`,`password`,`token`,`estado`,`rol`) values 
-(8,'hola.jpeg','admin','admin','pbkdf2:sha256:260000$KvJv3xjqSjCB7gjs$beae2faf16b149da9dba11e43dd1dd302653dacaf85f5f1f8ad2746a9df2c64a',NULL,'activo','admin'),
-(32,NULL,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$EHWrdcNZm71kqOX4$7f9b1f107860907d5c3a16cd32785b99347931da3633229f4d962f6eec48d2f7',NULL,'activo','contribuyente');
+(8,'2023-06-12232359535600descargar.png','admin','admin','pbkdf2:sha256:260000$KvJv3xjqSjCB7gjs$beae2faf16b149da9dba11e43dd1dd302653dacaf85f5f1f8ad2746a9df2c64a',NULL,'activo','admin'),
+(32,NULL,'shayd','shaydruano2@gmail.com','pbkdf2:sha256:260000$EHWrdcNZm71kqOX4$7f9b1f107860907d5c3a16cd32785b99347931da3633229f4d962f6eec48d2f7',NULL,'activo','contribuyente'),
+(34,NULL,'shayd','shaydruano@gmail.com','pbkdf2:sha256:260000$xtFPXfXDUAFkq1wo$2e9cae5f63e90465c93e25cae6c8fb7c562fdb1cff85380de309af95740ad310',NULL,'activo','contribuyente');
 
 /*Table structure for table `verbos` */
 

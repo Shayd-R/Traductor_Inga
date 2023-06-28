@@ -7,5 +7,5 @@ def setnewToken(id):
         db.commit()
         return True
     except:
-        print("No se pudo cambiar el estado en la empresa")
+        print("No se pudo cambiar el estado del usuario")
         return False

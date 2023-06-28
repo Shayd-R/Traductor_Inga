@@ -53,9 +53,10 @@
         </tr>
       </thead>
       <tbody>
+        {% for palabra in palabras%}
         <tr>
-          <td><h5>John sss</h5></td>
-          <td><h5>Doedddddd,ddddddd,dd</h5></td>
+          <td><h5>{{palabra[1]}}</h5></td>
+          <td><h5>{{palabra[2]}}</h5></td>
           <td>
             <div class="num">
             
@@ -70,6 +71,9 @@
                   <h5>1</h5>
                 </button>
               
+              <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success">Bien {{palabra[3]}}</a>
+              <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger">Mal {{palabra[4]}}</a>
+                
                 
               </div>
               
@@ -91,9 +95,8 @@
             </div>
           </td>
         </tr>
+        {% endfor %}
         
-        
-        <!-- Agrega más filas según sea necesario -->
       </tbody>
     </table>
 
