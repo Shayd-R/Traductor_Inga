@@ -48,7 +48,6 @@
           <th><h5>Español</h5></th>
           <th><h5>Inga</h5></th>
           <th><h5>Calificar y conteo</h5></th>
-          
           <th><h5>Comentario</h5></th>
         </tr>
       </thead>
@@ -61,32 +60,11 @@
             <div class="num">
             
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success">
-                  <i class="fas fa-check"></i> Bien 
-                  <h5>3</h5>
-                </button>
-                
-                <button type="button" class="btn btn-danger">
-                  <i class="fas fa-times"></i> Mal
-                  <h5>1</h5>
-                </button>
-              
-              <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success">Bien {{palabra[3]}}</a>
-              <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger">Mal {{palabra[4]}}</a>
-                
-                
+              <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success"><i class="fas fa-check"></i> Bien <h5>{{palabra[3]}}</h5></a>
+              <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger"><i class="fas fa-times"></i> Mal <h5>{{palabra[4]}}</h5></a>
+              </div>    
               </div>
-              
-                
-                  
-                 
-                
-                
-              </div>
-              
-              
           </td>
-          
           <td>
             <input type="text" class="form-control">
             <button class="btn btn-primary">Enviar</button>
