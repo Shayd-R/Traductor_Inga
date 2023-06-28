@@ -28,7 +28,7 @@ body{
   }
 
   .table {
-    background: rgb(254, 199, 199);
+    background: rgb(247, 200, 200);
   }
 
 
@@ -106,5 +106,11 @@ th {
 }
 
 
+.iper,a{
+
+  color: rgb(8, 32, 252);
+  
+
+}
 
 

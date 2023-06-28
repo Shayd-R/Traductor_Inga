@@ -31,7 +31,7 @@
     <h2><a href=""><i class="fas fa-arrow-left"
           style="color: rgba(255, 255, 255, 0); margin: 20px; margin-top: 20px; "></i></a>
         
-          <a href="{{url_for('responcecalificativo')}}" class="mi-botonn">Palabras calificadas y comentarios</a>
+          
           
     </h2>
     <br>
@@ -47,8 +47,8 @@
         <tr>
           <th><h5>Español</h5></th>
           <th><h5>Inga</h5></th>
-          <th><h5>Calificar</h5></th>
-          <th><h5>Conteo</h5></th>
+          <th><h5>Calificar y conteo</h5></th>
+          
           <th><h5>Comentario</h5></th>
         </tr>
       </thead>
@@ -57,19 +57,38 @@
           <td><h5>John sss</h5></td>
           <td><h5>Doedddddd,ddddddd,dd</h5></td>
           <td>
+            <div class="num">
+            
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-success">
                   <i class="fas fa-check"></i> Bien 
+                  <h5>3</h5>
                 </button>
+                
                 <button type="button" class="btn btn-danger">
                   <i class="fas fa-times"></i> Mal
+                  <h5>1</h5>
                 </button>
+              
+                
               </div>
+              
+                
+                  
+                 
+                
+                
+              </div>
+              
+              
           </td>
-          <td><h5>5</h5></td>
+          
           <td>
             <input type="text" class="form-control">
             <button class="btn btn-primary">Enviar</button>
+            <div class="iper">
+            <a href="{{url_for('responcecalificativo')}}">Ver comentario</a>
+            </div>
           </td>
         </tr>
         
