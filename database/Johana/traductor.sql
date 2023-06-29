@@ -16,6 +16,51 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`traductor` /*!40100 DEFAULT CHARACTER S
 
 USE `traductor`;
 
+/*Table structure for table `calificativo_comentarios` */
+
+DROP TABLE IF EXISTS `calificativo_comentarios`;
+
+CREATE TABLE `calificativo_comentarios` (
+  `id_calificativo_comentario` int(11) NOT NULL AUTO_INCREMENT,
+  `id_palabras_inga` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `comentario` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_calificativo_comentario`),
+  KEY `id_palabras_inga` (`id_palabras_inga`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `calificativo_comentarios_ibfk_1` FOREIGN KEY (`id_palabras_inga`) REFERENCES `palabras_inga` (`id`),
+  CONSTRAINT `calificativo_comentarios_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_general_ci;
+
+/*Data for the table `calificativo_comentarios` */
+
+/*Table structure for table `calificativo_reacciones` */
+
+DROP TABLE IF EXISTS `calificativo_reacciones`;
+
+CREATE TABLE `calificativo_reacciones` (
+  `id_calificativo_reacion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_palabra_inga` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `bien` varchar(255) DEFAULT '0',
+  `mal` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id_calificativo_reacion`),
+  KEY `id_palabra_inga` (`id_palabra_inga`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `calificativo_reacciones_ibfk_1` FOREIGN KEY (`id_palabra_inga`) REFERENCES `palabras_inga` (`id`),
+  CONSTRAINT `calificativo_reacciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf16 COLLATE=utf16_general_ci;
+
+/*Data for the table `calificativo_reacciones` */
+
+insert  into `calificativo_reacciones`(`id_calificativo_reacion`,`id_palabra_inga`,`id_usuario`,`bien`,`mal`) values 
+(1,1,8,'0','0'),
+(18,2,8,'0','0'),
+(20,1,31,'0','0'),
+(21,2,31,'1','0'),
+(22,3,8,'1','0'),
+(23,4,8,'1','0');
+
 /*Table structure for table `categorias` */
 
 DROP TABLE IF EXISTS `categorias`;
@@ -62,7 +107,7 @@ CREATE TABLE `contribucciones` (
 /*Data for the table `contribucciones` */
 
 insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,`imagen`,`id_categoria`,`id_usuario`,`confirmacion`,`frases-audios`) values 
-(1,'Hola ¿Cómo esta?','Ala, ¿imasatak kangi?','2023-06-251820298273255.jpg',6,8,'si','Ala, imasatak kangi.opus'),
+(1,'Hola ¿Cómo esta?','Ala, ¿imasatak kangi?','2023-06-251820298273255.jpg',6,8,'si','Ala imasatak kangi.opus'),
 (2,'Buenos dias','Puangui','2023-06-2518205681461122.jpg',6,8,'si','Puangui.opus'),
 (3,'Buenas tardes','Chisiapuangui','2023-06-251821823335859.jpg',6,8,'si','Chisiapuangi.opus'),
 (4,'Buenas noches','Tutaiapunagui','2023-06-2518211963483033.jpg',6,8,'si','Tutapunagui.opus'),
@@ -193,6 +238,19 @@ insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,
 (230,'hermana','ñaña (entre mujeres)','2023-06-28214625354340fin2.jpg',21,8,'si',NULL),
 (231,'tio','turi','2023-06-28214636592030fin3.jpg',21,8,'si',NULL),
 (232,'tia','pani','2023-06-28214725805611tia.jpg',21,8,'si',NULL);
+
+/*Table structure for table `ensayo` */
+
+DROP TABLE IF EXISTS `ensayo`;
+
+CREATE TABLE `ensayo` (
+  `id` double DEFAULT NULL,
+  `palabra_espanol` varchar(255) DEFAULT NULL,
+  `traduccion` varchar(255) DEFAULT NULL,
+  `palabra a palabra` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+/*Data for the table `ensayo` */
 
 /*Table structure for table `palabras_espanol` */
 
