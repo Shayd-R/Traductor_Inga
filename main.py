@@ -1,7 +1,7 @@
 
 from flask import Flask, jsonify, render_template, request, redirect, url_for, session, flash, json, make_response
 from hashlib import sha256
-from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase
+from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase, crearComentario
 from controllers import loginController, registroController, confirmarToken, restablecerPassword, cambiarPassword, autenticacionController
 from config.database import db
 
@@ -384,7 +384,7 @@ def calificativo(id_usuario):
     SELECT pi.id, pi.palabra_inga, pi.traduccion, CONCAT(COALESCE(SUM(cr.bien), 0), '') AS bien, CONCAT(COALESCE(SUM(cr.mal), 0), '') AS mal
     FROM palabras_inga AS PI
     LEFT JOIN calificativo_reacciones AS cr ON pi.id = cr.id_palabra_inga
-    GROUP BY pi.id, pi.palabra_inga, pi.traduccion LIMIT 20;
+    GROUP BY pi.id, pi.palabra_inga, pi.traduccion ORDER BY RAND() LIMIT 20;
     """)
     palabras = cursor.fetchall()
     return render_template("/menu/calificativo.html", palabras=palabras, id_usuario=id_usuario)
@@ -436,9 +436,50 @@ def mal(id, id_usuario):
             db.commit()  
     return redirect(url_for("calificativo", id_usuario=id_usuario))
 
-@app.route("/responcecalificativo", methods=["GET", "POST"])
-def responcecalificativo():
-    return render_template("/menu/responcecalificativo.html")
+@app.route("/responcecalificativo/<string:id_usuario>", methods=["GET", "POST"])
+def responcecalificativo( id_usuario):
+    cursor = db.cursor()
+    cursor.execute(""" 
+    SELECT palabras_inga.`palabra_inga`, palabras_inga.`traduccion`
+    FROM calificativo_comentarios 
+    JOIN palabras_inga ON calificativo_comentarios.`id_palabras_inga` = palabras_inga.`id`
+    """)
+    traduccion = cursor.fetchone()
+    cursor.execute(""" 
+    SELECT id_calificativo_comentario, palabras_inga.`palabra_inga`, palabras_inga.`traduccion`, usuarios.`nombre`, comentario, usuarios.`id_usuario`
+    FROM calificativo_comentarios 
+    JOIN palabras_inga ON calificativo_comentarios.`id_palabras_inga` = palabras_inga.`id`
+    JOIN usuarios ON calificativo_comentarios.`id_usuario` = usuarios.`id_usuario`
+    """ )
+    palabras = cursor.fetchall()
+    
+    return render_template("/menu/responcecalificativo.html", palabras=palabras, traduccion=traduccion, id_usuario=id_usuario)
+
+@app.route("/eliminarComentario/<string:id>/<string:id_usuario>", methods=["GET", "POST"])
+def eliminarComentario(id, id_usuario):
+    cursor = db.cursor()
+    print(id+"cc"+id_usuario)
+    cursor.execute("DELETE FROM calificativo_comentarios WHERE id_calificativo_comentario = "+id+" AND id_usuario = "+id_usuario)
+    print("aa")
+    db.commit()    
+    flash("Se ha eliminado un comentario", 'error')
+    return redirect(url_for("responcecalificativo", id_usuario=id_usuario))
+
+@app.route("/comentario/<string:id>", methods=["GET", "POST"])
+def comentario(id):
+    if request.method == 'GET':
+        id_usuario = session['id_usuario']
+        return redirect(url_for('calificativo', id_usuario=id_usuario))
+
+    if request.method == 'POST':
+        comentario = request.form.get('comentario')
+        id_usuario = session['id_usuario']
+        if comentario == "":
+            flash("El campo esta vacio", "error")
+            return redirect(url_for('calificativo', id_usuario=id_usuario))
+        crearComentario.crear(comentario=comentario, id_usuario=id_usuario, id=id)
+        flash("comentario enviado", 'bueno')
+    return redirect(url_for('calificativo', id_usuario=id_usuario))
 
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Tabla con Bootstrap</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/calificativo.css')}}">
- 
+
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <div class="container-fluid">
@@ -21,68 +23,77 @@
         </label>
         <div class="navbar-nav d-flex justify-content-center w-100">
           <a class="nav-link" href="">PALABRAS CALIFICADAS</a>
-          
+
         </div>
       </div>
     </div>
   </nav>
 
-  
+
 
   <div class="container">
-    
-    
+
+
     <table class="table">
       <thead>
         <tr>
-          <th><h5>Español</h5></th>
-          <th><h5>Inga</h5></th>
-          
-          
-         
+          <th>
+            <h5>Español</h5>
+          </th>
+          <th>
+            <h5>Inga</h5>
+          </th>
+
+
+
         </tr>
       </thead>
       <tbody>
+
         <tr>
-          <td><h5>John rivera</h5></td>
-          <td><h5>hola como estas</h5></td>
+         
+          <td>
+            <h5>{{traduccion[0]}}</h5>
+          </td>
+          <td>
+            <h5>{{traduccion[1]}}</h5>
+          </td>
           
-          
-          
+          <table class="table">
+            <thead>
+              <tr>
 
-        <table class="table">
-          <thead>
-            <tr>
-              
-              
-              
-              <th><h5>Comentarios</h5></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              
-              
-              
-              <td>
-                <p><h5>hola como estas bien todo bien</h5></p>
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
-              </td>
-            </tr>
-        
-        
-       
-      </tbody>
-    </table>
 
-    
 
-   
-    
+                <th>
+                  <h5>Comentarios</h5>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for palabra in palabras%}
+              <tr>
+                <td>
+                  <p>
+                  <h5>{{palabra[4]}}</h5>
+                  <h5>{{palabra[3]}}</h5>
+                  </p>
+                  {% if id_usuario == palabra[5] %}
+                    <a href="{{ url_for('eliminarComentario', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger" >Eliminar</a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+
+
+            </tbody>
+          </table>
+
+
+
+
+
   </div>
 </body>
+
 </html>
-
-
-

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Tabla con Bootstrap</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/calificativo.css')}}">
- 
+
 </head>
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <div class="container-fluid">
@@ -21,7 +23,7 @@
         </label>
         <div class="navbar-nav d-flex justify-content-center w-100">
           <a class="nav-link" href="">CALIFICATIVO</a>
-          
+
         </div>
       </div>
     </div>
@@ -30,58 +32,102 @@
   <div class="hola">
     <h2><a href=""><i class="fas fa-arrow-left"
           style="color: rgba(255, 255, 255, 0); margin: 20px; margin-top: 20px; "></i></a>
-        
-          
-          
+
+
+
     </h2>
     <br>
-    
-      
+
+
   </div>
 
   <div class="container">
-    
-    
+
+    <div class="flash">
+      <p class="card-text text-center">
+        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}
+      <ul class="alert alert-danger text-center">
+        {% for message in messages %}
+        <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% with messages = get_flashed_messages(category_filter=["verificacion"]) %}
+      {% if messages %}
+      <ul class="alert alert-warning text-center">
+        {% for message in messages %}
+        <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% with messages = get_flashed_messages(category_filter=["bueno"]) %}
+      {% if messages %}
+      <ul class="alert alert-success text-center">
+        {% for message in messages %}
+        <li style="padding-left: 5px; list-style: none;"><small>{{message}}</small></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      </p>
+    </div>
     <table class="table">
       <thead>
         <tr>
-          <th><h5>Español</h5></th>
-          <th><h5>Inga</h5></th>
-          <th><h5>Calificar y conteo</h5></th>
-          <th><h5>Comentario</h5></th>
+          <th>
+            <h5>Español</h5>
+          </th>
+          <th>
+            <h5>Inga</h5>
+          </th>
+          <th>
+            <h5>Calificar y conteo</h5>
+          </th>
+          <th>
+            <h5>Comentario</h5>
+          </th>
         </tr>
       </thead>
       <tbody>
         {% for palabra in palabras%}
         <tr>
-          <td><h5>{{palabra[1]}}</h5></td>
-          <td><h5>{{palabra[2]}}</h5></td>
           <td>
-            <div class="num">
-            
-            <div class="btn-group" role="group">
-              <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success"><i class="fas fa-check"></i> Bien <h5>{{palabra[3]}}</h5></a>
-              <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger"><i class="fas fa-times"></i> Mal <h5>{{palabra[4]}}</h5></a>
-              </div>    
-              </div>
+            <h5>{{palabra[1]}}</h5>
           </td>
           <td>
-            <input type="text" class="form-control">
-            <button class="btn btn-primary">Enviar</button>
-            <div class="iper">
-            <a href="{{url_for('responcecalificativo')}}">Ver comentario</a>
+            <h5>{{palabra[2]}}</h5>
+          </td>
+          <td>
+            <div class="num">
+
+              <div class="btn-group" role="group">
+                <a href="{{ url_for('bien', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-success"><i
+                    class="fas fa-check"></i> Bien <h5>{{palabra[3]}}</h5></a>
+                <a href="{{ url_for('mal', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger"><i
+                    class="fas fa-times"></i> Mal <h5>{{palabra[4]}}</h5></a>
+              </div>
             </div>
+          </td>
+          <td>
+            <form action="{{url_for('comentario', id=palabra[0])}}" method="post">
+              <input type="text" name="comentario" id="comentario" class="form-control">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+              <div class="iper">
+                <a href="{{url_for('responcecalificativo', id=palabra[0], id_usuario=id_usuario)}}">Ver comentario</a>
+              </div>
+            </form>
           </td>
         </tr>
         {% endfor %}
-        
+
       </tbody>
     </table>
 
-    
+
   </div>
 </body>
+
 </html>
-
-
-
