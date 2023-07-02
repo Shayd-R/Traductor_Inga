@@ -82,7 +82,6 @@ def frases(id, nombre):
         rol = session['rol']
         cursor.execute("SELECT * FROM contribucciones WHERE id_categoria= "+id+" and confirmacion='si' ")
         frases_categorias = cursor.fetchall()
-        
         return render_template("menu/categorias.html", nombre_categoria=nombre, id=id, name=name, rol=rol, frases_categoria=frases_categorias)
     else:
         return redirect(url_for('inicio'))
@@ -319,6 +318,15 @@ def eliminar_frase(id_frase, id, nombre):
         return redirect(url_for('frases', id=id, nombre=nombre))
     else:
         return redirect(url_for('inicio'))    
+
+@app.route('/audioFrase/<string:id_frase>/<string:id>/<string:nombre>', methods=['GET', 'POST'])
+def audio_frase(id_frase, id, nombre):
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM contribucciones WHERE id_contribuccion='" +id_frase+"' ")
+    frase=cursor.fetchone()
+    b=frase['frases-audios']
+    voz_traductor.reproducir_audio('C:/Users/shayd\OneDrive/Estudio\SEMESTRE 6/PRACTICAS EMPRESARIALES/PRACTICAS/Traductor_Practicas/static/Audio/Inga/'+b)
+    return redirect(url_for('frases', id=id, nombre=nombre))
 
 @app.route("/ajaxfile", methods=["GET", "POST"])
 def ajaxfile():

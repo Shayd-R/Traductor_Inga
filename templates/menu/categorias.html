@@ -96,6 +96,7 @@ Menu_categorias
         <tr style="font-size: 25px;">
           <th scope="col">Frase</th>
           <th scope="col">Traducion</th>
+          <th scope="col">Audio</th>
           <th scope="col">Imagen</th>
           {% if session['rol'] == 'admin' %}
 
@@ -109,6 +110,7 @@ Menu_categorias
         <tr class="table-warning">
           <td style="align-items: center; padding-top: 20px; font-size: 25px;">{{frase[1]}}</td>
           <td style="align-items: center; padding-top: 20px; font-size: 25px;">{{frase[2]}}</td>
+          <td style="align-items: center; padding-top: 20px; font-size: 25px;"><a href="{{ url_for('audio_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}" class="btn btn-success">Audio</a></td>
           <td><img src="/static/img/frases_categoria/{{frase[3]}}" class="rounded" style="width: 100px; height:100px;">
           </td>
           {% if session['rol'] == 'admin' %}
