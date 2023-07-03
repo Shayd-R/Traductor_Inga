@@ -99,16 +99,19 @@ def verificarFrase(id_frase):
 
 def editarPerfil(idperfil, imagenn, nombre, direccion, telefono, ubicacion, nacimiento): 
     variables = {
-        'imagen': imagenn if imagenn else '',
+        'imagen': imagenn if not(imagenn) is None else imagenn,
         'nombre': nombre if nombre else '',
         'direccion': direccion if direccion else '',
         'telefono': telefono if telefono else '',
         'ubicacion': ubicacion if ubicacion else '',
         'nacimiento': nacimiento if nacimiento else ''
     }
+
     sql_parts = []
     for key, value in variables.items():
-        sql_parts.append("{} = '{}'".format(key, value))
+        if value is not None:
+            sql_parts.append("{} = '{}'".format(key, value))
+
     if sql_parts:
         sql = ', '.join(sql_parts)
         query = "UPDATE usuarios SET {} WHERE id_usuario = '{}'".format(sql, idperfil)
