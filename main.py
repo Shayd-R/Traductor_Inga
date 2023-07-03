@@ -5,8 +5,10 @@ from models import voz_traductor, traduccion_texto, userModel, crearCategoria, e
 from controllers import loginController, registroController, confirmarToken, restablecerPassword, cambiarPassword, autenticacionController
 from config.database import db
 
+
 app = Flask(__name__)
 app.secret_key = "##91!IasdyAjadfbdfan"
+
 
 @app.route("/", methods=["GET", "POST"])
 def inicio():
@@ -501,4 +503,4 @@ def privacidad():
 def ayuda():
     return render_template("/informacion/ayuda.html")
     
-app.run(debug=True)
+app.run()
