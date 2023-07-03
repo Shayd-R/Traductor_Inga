@@ -239,19 +239,6 @@ insert  into `contribucciones`(`id_contribuccion`,`frase_español`,`traduccion`,
 (231,'tio','turi','2023-06-28214636592030fin3.jpg',21,8,'si',NULL),
 (232,'tia','pani','2023-06-28214725805611tia.jpg',21,8,'si',NULL);
 
-/*Table structure for table `ensayo` */
-
-DROP TABLE IF EXISTS `ensayo`;
-
-CREATE TABLE `ensayo` (
-  `id` double DEFAULT NULL,
-  `palabra_espanol` varchar(255) DEFAULT NULL,
-  `traduccion` varchar(255) DEFAULT NULL,
-  `palabra a palabra` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-/*Data for the table `ensayo` */
-
 /*Table structure for table `palabras_espanol` */
 
 DROP TABLE IF EXISTS `palabras_espanol`;
@@ -6455,25 +6442,6 @@ insert  into `palabras_inga`(`id`,`palabra_inga`,`traduccion`) values
 (3316,'wistuiarii','llegar a torcerse'),
 (3317,'witsaja','clase de palma(Tiene espinas y cría en el valle de Sibundoy)');
 
-/*Table structure for table `pronombres` */
-
-DROP TABLE IF EXISTS `pronombres`;
-
-CREATE TABLE `pronombres` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `P_pronombre` varchar(500) DEFAULT NULL,
-  KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
-
-/*Data for the table `pronombres` */
-
-insert  into `pronombres`(`id`,`P_pronombre`) values 
-(1,'yo,usted'),
-(2,'tu,usted'),
-(3,'el, ella'),
-(4,'nosotros'),
-(5,'ellos, ellas');
-
 /*Table structure for table `usuarios` */
 
 DROP TABLE IF EXISTS `usuarios`;
@@ -6500,18 +6468,6 @@ CREATE TABLE `usuarios` (
 insert  into `usuarios`(`id_usuario`,`imagen`,`nombre`,`rol`,`direccion`,`telefono`,`ubicacion`,`nacimiento`,`registro`,`email`,`password`,`token`,`estado`) values 
 (8,'2023-06-298496379059Fanart Hollow Knight, Thibaud Pourplanche.jpeg','admin','admin','union','None','qq','2023-06-06',NULL,'admin','pbkdf2:sha256:260000$KvJv3xjqSjCB7gjs$beae2faf16b149da9dba11e43dd1dd302653dacaf85f5f1f8ad2746a9df2c64a',NULL,'activo'),
 (31,'','shayd1','contribuyente','Mocoa  ','3107531564  ','aa','2003-06-25','2023-06-21','shaydruano@gmail.com','pbkdf2:sha256:260000$QKea3p9z1TvfRne2$a896d33fba1c459e8eff4a5aef4247d5e69211e29ad19265923d22bb473a1aa1',NULL,'activo');
-
-/*Table structure for table `verbos` */
-
-DROP TABLE IF EXISTS `verbos`;
-
-CREATE TABLE `verbos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `palabra` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-/*Data for the table `verbos` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
