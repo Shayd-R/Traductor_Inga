@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "##91!IasdyAjadfbdfan"
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def inicio():
     return render_template("/inicio/inicio.html")
 
@@ -504,4 +504,4 @@ def ayuda():
     return render_template("/informacion/ayuda.html")
 
 if __name__=="__main__":
-   app.run(debug=True)
+   app.run(debug=False)
