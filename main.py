@@ -503,5 +503,4 @@ def privacidad():
 def ayuda():
     return render_template("/informacion/ayuda.html")
     
-
 app.run()
