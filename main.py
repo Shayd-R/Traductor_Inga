@@ -9,7 +9,6 @@ from config.database import db
 app = Flask(__name__)
 app.secret_key = "##91!IasdyAjadfbdfan"
 
-
 @app.route("/")
 def inicio():
     return render_template("/inicio/inicio.html")
@@ -394,7 +393,7 @@ def calificativo(id_usuario):
     SELECT pi.id, pi.palabra_inga, pi.traduccion, CONCAT(COALESCE(SUM(cr.bien), 0), '') AS bien, CONCAT(COALESCE(SUM(cr.mal), 0), '') AS mal
     FROM palabras_inga AS PI
     LEFT JOIN calificativo_reacciones AS cr ON pi.id = cr.id_palabra_inga
-    GROUP BY pi.id, pi.palabra_inga, pi.traduccion ORDER BY RAND() LIMIT 20;
+    GROUP BY pi.id, pi.palabra_inga, pi.traduccion ORDER BY pi.`id` ASC LIMIT 20;
     """)
     palabras = cursor.fetchall()
     return render_template("/menu/calificativo.html", palabras=palabras, id_usuario=id_usuario)
@@ -446,34 +445,34 @@ def mal(id, id_usuario):
             db.commit()  
     return redirect(url_for("calificativo", id_usuario=id_usuario))
 
-@app.route("/responcecalificativo/<string:id_usuario>", methods=["GET", "POST"])
-def responcecalificativo( id_usuario):
+@app.route("/responcecalificativo/<string:id>/<int:id_usuario>", methods=["GET", "POST"])
+def responcecalificativo(id, id_usuario):
     cursor = db.cursor()
     cursor.execute(""" 
-    SELECT palabras_inga.`palabra_inga`, palabras_inga.`traduccion`
+    SELECT calificativo_comentarios.`id_palabras_inga`, palabras_inga.`palabra_inga`, palabras_inga.`traduccion`
     FROM calificativo_comentarios 
     JOIN palabras_inga ON calificativo_comentarios.`id_palabras_inga` = palabras_inga.`id`
-    """)
+    WHERE calificativo_comentarios.`id_palabras_inga`=
+    """+id)
     traduccion = cursor.fetchone()
     cursor.execute(""" 
     SELECT id_calificativo_comentario, palabras_inga.`palabra_inga`, palabras_inga.`traduccion`, usuarios.`nombre`, comentario, usuarios.`id_usuario`
     FROM calificativo_comentarios 
     JOIN palabras_inga ON calificativo_comentarios.`id_palabras_inga` = palabras_inga.`id`
     JOIN usuarios ON calificativo_comentarios.`id_usuario` = usuarios.`id_usuario`
-    """ )
+    WHERE calificativo_comentarios.`id_palabras_inga`=
+    """+id )
     palabras = cursor.fetchall()
     
-    return render_template("/menu/responcecalificativo.html", palabras=palabras, traduccion=traduccion, id_usuario=id_usuario)
+    return render_template("/menu/responcecalificativo.html", palabras=palabras,  traduccion=traduccion, id_usuario=id_usuario)
 
 @app.route("/eliminarComentario/<string:id>/<string:id_usuario>", methods=["GET", "POST"])
 def eliminarComentario(id, id_usuario):
     cursor = db.cursor()
-    print(id+"cc"+id_usuario)
     cursor.execute("DELETE FROM calificativo_comentarios WHERE id_calificativo_comentario = "+id+" AND id_usuario = "+id_usuario)
-    print("aa")
     db.commit()    
     flash("Se ha eliminado un comentario", 'error')
-    return redirect(url_for("responcecalificativo", id_usuario=id_usuario))
+    return redirect(url_for("calificativo", id_usuario=id_usuario))
 
 @app.route("/comentario/<string:id>", methods=["GET", "POST"])
 def comentario(id):
@@ -503,5 +502,5 @@ def privacidad():
 def ayuda():
     return render_template("/informacion/ayuda.html")
 
-if __name__=="__main__":
-   app.run(debug=False)
+
+app.run(debug=True)

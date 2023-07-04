@@ -5,10 +5,10 @@
   <title>Tabla con Bootstrap</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
-  
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/calificativo.css')}}">
   <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
- 
+
 </head>
 
 <body>
@@ -32,10 +32,10 @@
 
   <!--Botones de redireccion hacia atras -->
   <div class="">
-    <h2><a href="{{url_for('calificativo', id_usuario=id)}}"><i class="fas fa-arrow-left"
-      style="color: rgb(253, 253, 253); margin: 20px; margin-top: 20px; "></i></a>
+    <h2><a href="{{url_for('calificativo', id_usuario=id_usuario)}}"><i class="fas fa-arrow-left"
+          style="color: rgb(253, 253, 253); margin: 20px; margin-top: 20px; "></i></a>
     </h2>
-    
+
   </div>
 
   <div class="container">
@@ -58,14 +58,14 @@
       <tbody>
 
         <tr>
-         
-          <td>
-            <h5>{{traduccion[0]}}</h5>
-          </td>
+
           <td>
             <h5>{{traduccion[1]}}</h5>
           </td>
-          
+          <td>
+            <h5>{{traduccion[2]}}</h5>
+          </td>
+
           <table class="table">
             <thead>
               <tr>
@@ -78,19 +78,26 @@
               </tr>
             </thead>
             <tbody>
-              {% for palabra in palabras%}
+
+              {% for palabra in palabras %}
+
               <tr>
                 <td>
                   <p>
-                  <h5>{{palabra[4]}}</h5>
-                  <h5>{{palabra[3]}}</h5>
-                  </p>
+                  <h5>Comentario: {{palabra[4]}}</h5>
+                  <h5>Usuario: {{palabra[3]}}</h5>
+                  
                   {% if id_usuario == palabra[5] %}
-                    <a href="{{ url_for('eliminarComentario', id=palabra[0], id_usuario=id_usuario) }}" class="btn btn-danger" >Eliminar</a>
+                  <a href="{{url_for('eliminarComentario', id=palabra[0], id_usuario=id_usuario)}}"
+                    class="btn btn-danger">Eliminar</a>
                   {% endif %}
+                  </p>
+
                 </td>
               </tr>
+
               {% endfor %}
+
 
 
             </tbody>
