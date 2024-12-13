@@ -1,0 +1,173 @@
+{% extends 'base_html/base.html' %}
+
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<style>
+    .content-section {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: #333;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-input {
+        display: flex;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .text-input textarea {
+        flex: 1;
+        height: 250px;
+        border: none;
+        outline: none;
+        resize: none;
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+
+    .text-input .to-text {
+        border-left: 1px solid #bbb;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 15px;
+        background: #f5f5f5;
+    }
+
+    .controls select {
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+
+    .translate-btn {
+        width: 100%;
+        padding: 14px;
+        margin-top: 20px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: #fff;
+        font-size: 17px;
+        border-radius: 5px;
+        background: #5372f0;
+    }
+</style>
+{% endblock %}
+
+{% block titulo %}
+Traductor Inga-Español
+{% endblock %}
+
+{%block contenido %}
+
+
+
+<!-- Hero Section -->
+<section class="d-flex align-items-center" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center content-section">
+                <i class="fas fa-language language-icon"></i>
+                <h1>Traductor Inga-Español</h1>
+                <h3>Traduce entre Inga y Español fácilmente</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Translator Section -->
+<section class="py-5">
+    <div class="container">
+        <form id="traduccionForm" method="POST">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="content-section">
+                        <div class="text-input">
+                            <textarea class="from-text" name="texto_entrada" placeholder="Escribir texto">{{ texto_entrada }}</textarea>
+                            <textarea id="textoSalida" class="to-text" placeholder="Traducción" readonly>{{ texto_salida }}</textarea>
+                        </div>
+                        <div class="controls">
+                            <select id="idiomaEntrada" name="idioma_entrada">
+                                <option value="es">Español</option>
+                                <option value="inga">Inga</option>
+                            </select>
+                            <i id="btnIntercambiar" class="fas fa-exchange-alt" style="cursor: pointer;"></i>
+                            <select id="idiomaSalida" name="idioma_salida">
+                                <option value="inga">Inga</option>
+                                <option value="es">Español</option>
+                            </select>
+                            <button id="btnAudio" class="btn btn-link" type="button">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                        </div>
+                        <button class="translate-btn" type="submit">Traducir texto</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Manejar el envío del formulario de traducción
+        $('#traduccionForm').on('submit', function(event) {
+            event.preventDefault(); // Evitar el envío normal del formulario
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for("traduccion") }}',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#textoSalida').val(response); // Actualizar el textarea de traducción
+                }
+            });
+        });
+
+        // Manejar el botón de audio
+        $('#btnAudio').on('click', function(event) {
+            event.preventDefault(); // Evitar el envío normal del formulario
+            var textoSalida = $('#textoSalida').val(); // Obtener la traducción
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for("audio") }}',
+                data: { texto_salida: textoSalida },
+                success: function() {
+                    // Aquí puedes manejar lo que sucede después de reproducir el audio
+                }
+            });
+        });
+
+        // Manejar el intercambio de idiomas
+        $('#btnIntercambiar').on('click', function() {
+            var idiomaEntrada = $('#idiomaEntrada').val();
+            var idiomaSalida = $('#idiomaSalida').val();
+
+            // Intercambiar los valores
+            $('#idiomaEntrada').val(idiomaSalida);
+            $('#idiomaSalida').val(idiomaEntrada);
+        });
+    });
+</script>
+{% endblock %}

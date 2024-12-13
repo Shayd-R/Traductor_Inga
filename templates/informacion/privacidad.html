@@ -1,99 +1,93 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base_html/base.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/acerca_traductor.css')}}">
-    <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <title>Privacidad y condiciones</title>
-  </head>
-  <body>
-    
-    <header class="Headerr">
-        <div class=" bg-darkk bg-dark1" id="mecSoc">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                    <div class="container-fluid">
-                      <ul class="navbar-nav nav-flex-icons">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/privacidad.css')}}">
+{% endblock %}
 
-                        <li class="nav-item">
-                          <a href="{{url_for('inicio')}}" class="nav-link">
-                            <i class="fa-sharp fa-solid fa-left-long"></i>    
-                          </a>
-                        </li>
-                      </ul>
-                        <label for="" class="brand">
-                            <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
-                          </label>
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-                      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav d-flex justify-content-center w-100">
-                          <a class="nav-link" href="#">Privacidad y condiciones</a>
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
-            </div>
-        </div>
-        <div class="">
-          <h2><a href="{{url_for('inicio')}}"><i class="fas fa-arrow-left" style="color: rgb(255, 255, 255); margin: 20px; margin-top: 20px; "></i></a></h2>
-          <br>
-        </div>
-        
-        <div class="roww">
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="/static/img/privacidad/icono.jpg" alt="">
+{% block titulo %}
+Privacidad y condiciones - Traductor Inga-Español
+{% endblock %}
+
+{%block contenido %}
+
+
+<!-- Hero Section -->
+<section class="d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center" style="margin-top: 100px;">
+      <div class="col-md-10 text-center content-section">
+        <i class="fas fa-shield-alt language-icon"></i>
+        <h1>Privacidad y condiciones</h1>
+        <h3>Traductor Inga-Español</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Content Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Condiciones del servicio</h2>
+            <p class="card-text">
+              Bienvenido al Traductor Inga-Español. Al utilizar nuestro servicio, usted acepta cumplir con las
+              siguientes condiciones:
+            </p>
+            <ul>
+              <li>El uso del traductor es exclusivamente para fines educativos y de comunicación.</li>
+              <li>No se permite el uso del traductor para fines ilegales o que violen los derechos de terceros.</li>
+              <li>La precisión de las traducciones no está garantizada y se recomienda verificar los resultados.</li>
+              <li>Nos reservamos el derecho de modificar o interrumpir el servicio en cualquier momento.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="svg-hero" style="height: 150px; overflow: hidden;" >
-          <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-            <path d="M-27.99,85.35 C171.78,206.74 293.11,-71.54 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path>
-          </svg>
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Política de privacidad</h2>
+            <p class="card-text">
+              Su privacidad es importante para nosotros. Esta política explica cómo manejamos su información:
+            </p>
+            <ul>
+              <li>Recopilamos información básica de uso para mejorar nuestro servicio.</li>
+              <li>No compartimos su información personal con terceros sin su consentimiento.</li>
+              <li>Utilizamos medidas de seguridad para proteger su información.</li>
+              <li>Puede solicitar la eliminación de su información en cualquier momento.</li>
+            </ul>
+          </div>
         </div>
 
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Derechos de autor</h2>
+            <p class="card-text">
+              El contenido y el software del Traductor Inga-Español están protegidos por derechos de autor. No se
+              permite la reproducción o distribución no autorizada del contenido o del software.
+            </p>
+          </div>
+        </div>
 
-    </header>
-
-    <section class="Perfil">
-      <div class="container text-center">
-        <h3> </h3>
-        <p></p>
-        <p></p>
-      </div>
-    </section>
-
-    <section class="Galeria">
-      <div class="container">
-        <div class="text-center">
-          <h3><br><br>Condiciones del servicio</h3>
-          <p></p>
-          <p></p>
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Contacto</h2>
+            <p class="card-text">
+              Si tiene preguntas sobre nuestras políticas de privacidad o condiciones de servicio, por favor contáctenos
+              a través de traductornativo@itp.edu.co.
+            </p>
+          </div>
         </div>
       </div>
-
-    </section>
-
-    
-
-    <footer class="Foot">
-      <h4 class="text-center"><br><br>ITP 2022 todos los derechos reservados.</h4>
-    </footer>
-      
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-   
-  </body>
-</html>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

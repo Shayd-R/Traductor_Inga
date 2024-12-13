@@ -1,4 +1,4 @@
-{% extends 'base_html/base.html' %}
+{% extends 'base_html/base_modules.html' %}
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css')}}">
@@ -91,45 +91,36 @@ Menu_categorias
   <br>
 
   <div class="row row-cols-1 row-cols-md-4 text-dark">
-    <table class="table table-striped">
-      <thead class="table-dark">
+    <table class="table table-bordered table-hover" style="background-color: #f8f9fa; color: #343a40;">
+      <thead class="table-primary">
         <tr style="font-size: 25px;">
           <th scope="col">Frase</th>
-          <th scope="col">Traducion</th>
+          <th scope="col">Traducción</th>
           <th scope="col">Audio</th>
           <th scope="col">Imagen</th>
           {% if session['rol'] == 'admin' %}
-
           <th scope="col">Opciones</th>
-
           {% endif %}
         </tr>
       </thead>
       <tbody>
         {% for frase in frases_categoria %}
-        <tr class="table-warning">
+        <tr class="table-light">
           <td style="align-items: center; padding-top: 20px; font-size: 25px;">{{frase[1]}}</td>
           <td style="align-items: center; padding-top: 20px; font-size: 25px;">{{frase[2]}}</td>
           <td style="align-items: center; padding-top: 20px; font-size: 25px;"><a href="{{ url_for('audio_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}" class="btn btn-success">Audio</a></td>
-          <td><img src="/static/img/frases_categoria/{{frase[3]}}" class="rounded" style="width: 100px; height:100px;">
-          </td>
+          <td><img src="/static/img/frases_categoria/{{frase[3]}}" class="rounded" style="width: 100px; height:100px;"></td>
           {% if session['rol'] == 'admin' %}
-
           <td>
             <div class="row" style="padding-top: 5px;">
               <div class="col-6" style="display: flex; flex-direction: column;">
-                <a type="button" class="btn btn-primary fraseid " data-idf="{{frase[0]}}" data-id="{{id}}"
-                  data-nombre="{{nombre_categoria}}">Editar</a>
+                <a type="button" class="btn btn-primary fraseid" data-idf="{{frase[0]}}" data-id="{{id}}" data-nombre="{{nombre_categoria}}">Editar</a>
               </div>
               <div class="col-6" style="display: flex; flex-direction: column;">
-
-                <a type="button" class="btn btn-danger"
-                  href="{{url_for('eliminar_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}">Eliminar</a>
+                <a type="button" class="btn btn-danger" href="{{url_for('eliminar_frase', id_frase=frase[0], id=id, nombre=nombre_categoria)}}">Eliminar</a>
               </div>
-
             </div>
           </td>
-
           {% endif %}
         </tr>
         {% endfor %}

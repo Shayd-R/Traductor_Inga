@@ -1,9 +1,9 @@
-
 from flask import Flask, jsonify, render_template, request, redirect, url_for, session, flash, json, make_response
 from hashlib import sha256
 from models import voz_traductor, traduccion_texto, userModel, crearCategoria, existeCategoria, crearFrase, crearComentario
 from controllers import loginController, registroController, confirmarToken, restablecerPassword, cambiarPassword, autenticacionController
 from config.database import db
+import os
 
 
 app = Flask(__name__)
@@ -11,7 +11,7 @@ app.secret_key = "##91!IasdyAjadfbdfan"
 
 @app.route("/")
 def inicio():
-    return render_template("/inicio/inicio.html")
+    return render_template("/inicio/index.html")
 
 @app.route("/inicio_session", methods=["GET", "POST"])
 def inicio_session():
@@ -28,7 +28,7 @@ def inicio_session():
 def exit():
     if autenticacionController.vericarAutenticacion():
         session.clear()
-    return redirect(url_for('inicio_session'))
+    return redirect(url_for('inicio'))
 
 @app.route("/muro", methods=["GET", "POST"])
 def muro():
@@ -199,73 +199,68 @@ def authToken(token):
 
 @app.route("/traductor", methods=["GET", "POST"])
 def traductor():
-    return render_template("/traductor/traductor.html")
+    return render_template("/traductor/traductor1.html")
 
 @app.route("/traductor_inga", methods=["GET", "POST"])
 def traductor_inga():
     return render_template("/traductor/traductor_inga.html")
-
+# //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @app.route("/traduccion", methods=["GET", "POST"])
 def traduccion():
     if request.method == 'POST':
         texto_entrada = request.form['texto_entrada']
+        idioma_entrada = request.form['idioma_entrada']
+        idioma_salida = request.form['idioma_salida']
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +texto_entrada+"' ")
-        a = cursor.fetchone()
-        if a == None:
-            a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
-        else:
-            a = a['palabra a palabra']
-        db.commit()
-        texto_salida = a
-        return render_template("/traductor/traductor.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
-    return render_template("/traductor/traductor.html")
 
-@app.route("/traduccion_inga", methods=["GET", "POST"])
-def traduccion_inga():
-    if request.method == 'POST':
-        texto_entrada = request.form['texto_entrada']
-        cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +texto_entrada+"' ")
-        a = cursor.fetchone()
-        if a == None:
-            a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+        if idioma_entrada == 'es' and idioma_salida == 'inga':
+            cursor.execute("""
+                SELECT *,
+                       CHAR_LENGTH(palabra_espanol) - CHAR_LENGTH(REPLACE(palabra_espanol, %s, '')) AS relevancia,
+                       palabra_espanol = %s AS es_coincidencia_exacta
+                FROM palabras_espanol
+                WHERE palabra_espanol LIKE %s
+                ORDER BY es_coincidencia_exacta DESC, relevancia DESC
+                LIMIT 1;
+            """, (texto_entrada, texto_entrada, '%' + texto_entrada + '%'))
+            
+            a = cursor.fetchone()
+            if a is None:
+                a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+            else:
+                a = a['palabra_a_palabra']  # Asegúrate de que esta columna exista en tu tabla
+        elif idioma_entrada == 'inga' and idioma_salida == 'es':
+            cursor.execute(""" 
+                SELECT *,
+                       CHAR_LENGTH(palabra_inga) - CHAR_LENGTH(REPLACE(palabra_inga, %s, '')) AS relevancia,
+                       palabra_inga = %s AS es_coincidencia_exacta
+                FROM palabras_inga
+                WHERE palabra_inga LIKE %s
+                ORDER BY es_coincidencia_exacta DESC, relevancia DESC
+                LIMIT 1;
+            """, (texto_entrada, texto_entrada, '%' + texto_entrada + '%'))
+            
+            a = cursor.fetchone()
+            if a is None:
+                a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
+            else:
+                a = a['traduccion']  # Asegúrate de que esta columna exista en tu tabla
         else:
-            a = a['traduccion']
-        db.commit()
-        texto_salida = a
-        return render_template("/traductor/traductor_inga.html", texto_salida=texto_salida, texto_entrada=texto_entrada)
-    return render_template("/traductor/traductor_inga.html")
+            a = "¡Idioma no soportado!"
 
-@app.route("/voz_inga", methods=["GET", "POST"])
-def audio_inga():
-    texto_entrada = request.form['texto_entrada']
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM palabras_inga WHERE palabra_inga='" +texto_entrada+"' ")
-    a = cursor.fetchone()
-    if a == None:
-        a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
-    else:
-        a = a['traduccion']
-    db.commit()
-    texto_salida = a
-    voz_traductor.voz_texto(texto_salida)
-    return render_template("/traductor/traductor_inga.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
+        db.commit()
+        return a  # Devuelve solo el texto traducido
+    return render_template("/traductor/traductor1.html")
+# //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 @app.route("/voz", methods=["GET", "POST"])
 def audio():
-    texto_entrada = request.form['texto_entrada']
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM palabras_espanol WHERE palabra_espanol='" +texto_entrada+"' ")
-    a = cursor.fetchone()
-    if a == None:
-        a = "¡Esta palabra está en proceso, todavía no tiene traducción! 😊"
-    else:
-        a = a['palabra a palabra']
-    db.commit()
-    texto_salida = a
-    voz_traductor.voz_texto(texto_salida)
-    return render_template("/traductor/traductor.html", texto_entrada=texto_entrada, texto_salida=texto_salida)
+    if request.method == 'POST':
+        texto_salida = request.form.get('texto_salida')  # Obtiene la traducción ya realizada
+        voz_traductor.voz_texto(texto_salida)  # Reproduce el audio
+        return '', 204  # Devuelve un código de estado 204 No Content
+    return render_template("/traductor/traductor1.html")
 
 @app.route("/crearFrase/<string:id>/<string:nombre>", methods=["GET", "POST"])
 def crear_frase(id, nombre):
@@ -325,9 +320,15 @@ def audio_frase(id_frase, id, nombre):
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT * FROM contribucciones WHERE id_contribuccion='" +id_frase+"' ")
     frase=cursor.fetchone()
-    b=frase['frases-audios']
-    voz_traductor.reproducir_audio('C:/Users/shayd\OneDrive/Estudio\SEMESTRE 6/PRACTICAS EMPRESARIALES/PRACTICAS/Traductor_Practicas/static/Audio/Inga/'+b)
-    return redirect(url_for('frases', id=id, nombre=nombre))
+    
+    if frase:  # Verificar si se encontró la frase
+        b = frase['frases-audios']
+        audio_path = 'static/Audio/Inga/' + b
+        
+        if os.path.exists(audio_path):  # Verificar si el archivo de audio existe
+            voz_traductor.reproducir_audio(audio_path)
+            return '', 204  # No content
+    return '', 204  # No content
 
 @app.route("/ajaxfile", methods=["GET", "POST"])
 def ajaxfile():
@@ -356,11 +357,11 @@ def verificacionContribuyente():
                 `categorias`.`nombre_categoria`,
                 `contribucciones`.`imagen`,
                 `contribucciones`.`confirmacion`
-            FROM `traductor`.`contribucciones`
-                INNER JOIN `traductor`.`categorias`
+            FROM `traductordb`.`contribucciones`
+                INNER JOIN `traductordb`.`categorias`
                     ON (   `contribucciones`.`id_categoria` = `categorias`.`id_categoria`
                     )
-                INNER JOIN `traductor`.`usuarios`
+                INNER JOIN `traductordb`.`usuarios`
                     ON (
                     `contribucciones`.`id_usuario` = `usuarios`.`id_usuario`
                     )

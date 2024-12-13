@@ -1,0 +1,41 @@
+
+/* .hero-section {
+  min-height: 100vh;
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+} */
+
+
+
+.content-section {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+
+.language-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  background-clip: text;
+  /* Propiedad estándar */
+  -webkit-background-clip: text;
+  /* Para compatibilidad con navegadores WebKit */
+}
+
+.gallery-img {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}

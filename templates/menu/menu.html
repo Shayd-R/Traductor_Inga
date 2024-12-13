@@ -1,4 +1,4 @@
-{% extends 'base_html/base.html' %}
+{% extends 'base_html/base_modules.html' %}
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css')}}">
@@ -114,7 +114,7 @@ Menu
         {% endif %}
         <img src="/static/img/categorias/{{categoria[2]}}" class="card-img-top" style=" height: 215px;">
         <div class="card-body">
-          <center><a type="button" class="btn btn-danger"
+          <center><a type="button" class="btn btn-warning"
               href="{{ url_for('frases', id=categoria[0], nombre=categoria[1])}}">{{categoria[1]}}</a></center>
         </div>
       </div>

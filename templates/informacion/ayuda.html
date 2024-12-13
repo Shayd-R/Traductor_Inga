@@ -1,252 +1,249 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base_html/base.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/acerca_traductor.css')}}">
-    <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
-    <title>Ayuda</title>
-  </head>
-  <body>
-    
-    
-    <header class="Header">
-        <div class=" bg-darkk bg-dark1" id="mecSoc">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                    <div class="container-fluid">
-                      <ul class="navbar-nav nav-flex-icons">
-                        <li class="nav-item">
-                          <a href="{{url_for('inicio')}}" class="nav-link">
-                            <i class="fa-sharp fa-solid fa-left-long"></i>    
-                          </a>
-                        </li>
-                      </ul>
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-                      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <label for="" class="brand">
-                            <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
-                        </label>
-                        <div class="navbar-nav d-flex justify-content-center w-100">
-                          <a class="nav-link" href="#">AYUDA&nbsp  &nbsp    &nbsp &nbsp  &nbsp  &nbsp &nbsp   &nbsp  &nbsp </a>
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
-            </div>
-        </div>
-        
-        <div class="Text-hero ">
-          <div class="container ">
-            <h3> &nbsp  &nbsp    &nbsp  &nbsp  &nbsp   &nbsp  &nbsp   &nbspaidachii</h3>
-          </div>
-        </div>
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-        <div class="svg-hero" style="height: 150px; overflow: hidden;" >
-          <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-            <path d="M-27.99,85.35 C171.78,206.74 293.11,-71.54 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path>
-          </svg>
-        </div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ayuda.css')}}">
+{% endblock %}
 
+{% block titulo %}
+Ayuda - Traductor Inga-Español
+{% endblock %}
 
-    </header>
+{%block contenido %}
 
-  
-
-    <section class="Perfil">
-      <div class="container text-center">
-        <h3> MANUAL DE USUARIO </h3>
+<!-- Manual de Usuario Section -->
+<section class="py-5">
+  <div class="container" style="margin-top: 50px;">
+    <div class="row justify-content-center">
+      <div class="col-md-10 text-center content-section">
+        <i class="fas fa-question-circle language-icon"></i>
+        <h1>AYUDA</h1>
+        <h3>aidachii</h3>
+        <hr><br>
+        <h2>MANUAL DE USUARIO</h2>
         <p>Para poder manejar a la perfección nuestro traductor sigue las siguientes indicaciones.</p>
       </div>
-    </section>  
-
-    <section class="Galeria">
-      <div class="container">
       
+    </div>
+    
 
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">1. Al entrar al aplicativo web encontraremos esta vista de bienvenida al traductor inga-español, en donde encontraremos las diferentes opciones, a donde podremos ir encontraremos ingresar al traductor, acerca del traductor Inga-español la privacidad y las condiciones la ayuda para las personas que necesiten el manual de usuario y el respectivo botón de registro.
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/1bienvenida.png" class="card-img-top" alt="Bienvenida">
+          <div class="card-body">
+            <h5 class="card-title">1. Página de Bienvenida</h5>
+            <p class="card-text">Al entrar al aplicativo web encontraremos esta vista de bienvenida al traductor
+              inga-español, en donde encontraremos las diferentes opciones, a donde podremos ir encontraremos ingresar
+              al traductor, acerca del traductor Inga-español la privacidad y las condiciones la ayuda para las
+              personas que necesiten el manual de usuario y el respectivo botón de registro.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/2traductor.png" class="card-img-top" alt="Traductor">
+          <div class="card-body">
+            <h5 class="card-title">2. Interfaz del Traductor</h5>
+            <p class="card-text">Al darle clic en el botón ingresar al traductor encontraremos la interfaz del
+              traductor donde se encuentran las indicaciones donde debemos poner el texto y nos muestra el botón donde
+              debemos oprimir para traducir.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/2_2_3traductor.png" class="card-img-top" alt="Traductor en acción">
+          <div class="card-body">
+            <h5 class="card-title">3. Uso del Traductor</h5>
+            <p class="card-text">En esta página podemos traducir de inga a español y viceversa.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/2_2_traductor.png" class="card-img-top" alt="Ejemplo de traducción">
+          <div class="card-body">
+            <h5 class="card-title">4. Ejemplo de Traducción</h5>
+            <p class="card-text">Este es un ejemplo donde hemos escrito una palabra y en frente se muestra su
+              traducción, también podemos ver unos iconos de sonido los cuales al oprimirlos se escuchará como se
+              pronuncia la palabra traducida.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/3registro.png" class="card-img-top" alt="Registro de usuario">
+          <div class="card-body">
+            <h5 class="card-title">5. Registro de Usuario</h5>
+            <p class="card-text">Si volvemos a la página principal encontraremos uno de los botones que dice ingresar
+              al darle clic en este botón encontraremos una ventana que nos dice registro de usuario, para poder
+              registrarnos debemos colocar un nombre para el usuario, un correo electrónico y una contraseña: la
+              contraseña debe tener mayúsculas minúsculas y caracteres incluidos números, este correo nos valida un
+              token, debemos ingresar al correo electrónico para activar el registro solo debemos darle clic en la
+              palabra activar y ya quedaremos registrados.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/4iniciarsesion.png" class="card-img-top" alt="Iniciar sesión">
+          <div class="card-body">
+            <h5 class="card-title">6. Iniciar Sesión</h5>
+            <p class="card-text">Una vez tengamos nuestro usuario validado debemos colocar nuestro correo y
+              electrónico y contraseña en los campos que se muestran y debemos darle al botón iniciar sesión.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/5restablecer.png" class="card-img-top" alt="Restablecer contraseña">
+          <div class="card-body">
+            <h5 class="card-title">7. Restablecer Contraseña</h5>
+            <p class="card-text">En caso de haber olvidado la contraseña debemos escribir nuestro correo para
+              verificar, en nuestro correo nos llegara una redirección directa para poder escribir una nueva
+              contraseña y para que sea validada.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/6menu.png" class="card-img-top" alt="Menú principal">
+          <div class="card-body">
+            <h5 class="card-title">8. Menú Principal</h5>
+            <p class="card-text">Una vez estemos registrados nos redijera a esta página que es el menú donde
+              encontraremos las diferentes categorías donde el usuario podrá escoger lo que más le llame la atención.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/7menulista.png" class="card-img-top" alt="Menú de administrador">
+          <div class="card-body">
+            <h5 class="card-title">9. Menú de Administrador</h5>
+            <p class="card-text">Al presionar el botón admin se nos despliega una lista de opciones en donde
+              encontraremos las diferentes opciones como agregar una categoría, verificación de contribuciones y salir
+              al darle esta última opción es software te re direccionara a la pantalla de bienvenida.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/8frases.png" class="card-img-top" alt="Frases comunes">
+          <div class="card-body">
+            <h5 class="card-title">10. Frases Comunes</h5>
+            <p class="card-text">Al darle clic en una categoría por ejemplo trabajo nos llevara a esta ventana donde
+              veremos las principales frases comunes en español y en inga.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/9fraseopciones.png" class="card-img-top" alt="Opciones de frases">
+          <div class="card-body">
+            <h5 class="card-title">11. Opciones de Frases</h5>
+            <p class="card-text">En la parte superior izquierda encontraremos otra lista desplegable con la opción de
+              agregar una nueva fase a la interfaz.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/10editar.png" class="card-img-top" alt="Editar frases">
+          <div class="card-body">
+            <h5 class="card-title">12. Editar Frases</h5>
+            <p class="card-text">Cada frase tiene la opción de ser editada y eliminada.</p>
+          </div>
+        </div>
+      </div>
 
-              </p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/1bienvenida.png" class="card-img-bottom" alt="...">
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/11crearcategoria.png" class="card-img-top" alt="Crear categoría">
+          <div class="card-body">
+            <h5 class="card-title">13. Crear Categoría</h5>
+            <p class="card-text">Interfaz para crear una nueva categoría en el traductor.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">2.	AL darle clic en el botón ingresar al traductor encontraremos la interfaz del traductor donde se encuentran las indicaciones donde debemos poner el texto y nos muestra el botón donde debemos oprimir para traducir.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/2traductor.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/12editarcategoria.png" class="card-img-top" alt="Editar categoría">
+          <div class="card-body">
+            <h5 class="card-title">14. Editar Categoría</h5>
+            <p class="card-text">Interfaz de editar la categoría existente.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">En esta pagina podemos traducir de inga a español y viceversa.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/2_2_3traductor.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/13editarfrase.png" class="card-img-top" alt="Editar frase">
+          <div class="card-body">
+            <h5 class="card-title">15. Editar Frase</h5>
+            <p class="card-text">Interfaz para editar frases existentes en el traductor.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">Este es un ejemplo donde hemos escrito una palabra y en frente se muestra su traducción, también podemos ver unos iconos de sonido los cuales al oprimirlos se escuchará como se pronuncia la palabra traducida.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/2_2_traductor.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/14crearfrase.png" class="card-img-top" alt="Crear frase">
+          <div class="card-body">
+            <h5 class="card-title">16. Crear Frase</h5>
+            <p class="card-text">Interfaz para la creación de una nueva frase en el traductor.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">3.	Si volvemos a la página principal encontraremos uno de los botones que dice ingresar al darle clic en este botón encontraremos una ventana que nos dice registro de usuario, para poder registrarnos debemos colocar un nombre para el usuario, un correo electrónico y una contraseña: la contraseña debe tener mayúsculas minúsculas y caracteres incluidos números, este correo nos valida un toquen, debemos ingresar al correo electrónico para activar el registro solo debemos darle clic en la palabra activar y ya quedaremos registrados.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/3registro.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/15verificacion.png" class="card-img-top" alt="Verificación de contribuciones">
+          <div class="card-body">
+            <h5 class="card-title">17. Verificación de Contribuciones</h5>
+            <p class="card-text">Por último, cuando el usuario hace una contribución este es la interfaz que se
+              muestra, pero solo el administrador puede confirmarlas.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">4.	Una vez tengamos nuestro usuario validado debemos colocar nuestro correo y electrónico y contraseña en los campos que se muestran y debemos darle al botón iniciar sesión.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/4iniciarsesion.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/16acerca.png" class="card-img-top" alt="Acerca del traductor">
+          <div class="card-body">
+            <h5 class="card-title">18. Acerca del Traductor</h5>
+            <p class="card-text">Al volver a la pantalla de inicio y al darle sobre el botón acerca del traductor
+              encontraremos de que se trata nuestro software, con qué fin lo hicimos y unas breves indicaciones para
+              navegar por nuestro traductor.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">5.	En caso de haber olvidado la contraseña debemos escribir nuestro correo para verificar, en nuestro correo nos llegara una redirección directa para poder escribir una nueva contraseña y para que sea validada.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/5restablecer.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/17privacidad.png" class="card-img-top" alt="Privacidad y condiciones">
+          <div class="card-body">
+            <h5 class="card-title">19. Privacidad y Condiciones</h5>
+            <p class="card-text">Al inicio junto a nuestro botón acerca del traductor encontraremos el botón de
+              privacidad y condiciones el cual nos muestra las políticas de privacidad y las condiciones de la
+              empresa.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">6.	una vez estemos registrados nos redijera a esta página que es el menú donde encontraremos las diferentes categorías donde el usuario podrá escoger lo que más le llame la atención.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/6menu.png" class="card-img-bottom" alt="...">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <img src="/static/img/ayuda/18ayuda.png" class="card-img-top" alt="Ayuda">
+          <div class="card-body">
+            <h5 class="card-title">20. Ayuda</h5>
+            <p class="card-text">En la interfaz principal también encontramos el botón de ayuda al darle clic sobre
+              este encontraremos el manual de usuario donde los usuarios podrán guiarse para poder tener una
+              experiencia más interactiva.</p>
           </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">7.	Al presionar el botón admin se nos despliega una lista de opciones en donde encontraremos las diferentes opciones como agregar una categoría, verificación de contribuciones y salir al darle esta última opción es software te re direccionara a la pantalla de bienvenida.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/7menulista.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">8.	Al darle clic en una categoría por ejemplo trabajo nos llevara a esta ventana donde veremos las principales frases comunes en español y en inga.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/8frases.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">9.	En la parte superior izquierda encontraremos otra lista desplegable con la opción de agregar una nueva fase a la interfaz.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/9fraseopciones.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">10. Cada frase tiene la opción de ser editada y eliminada.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/10editar.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">11. Interfaz para crear una categoría.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/11crearcategoria.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">12.Interfaz de editar la categoría.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/12editarcategoria.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">13.Interfaz para editar frases.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/13editarfrase.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">14.	Interfaz para la creación de una frase.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/14crearfrase.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">15.Por ultimo cuando el usuario hace una contribución este es la interfaz que se muestra, pero solo el administrador puede confirmarlas.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/15verificacion.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">16.	Al volver a la pantalla de inicio y al darle sobre el botón acerca del traductor encontraremos de que se trata nuestro software, con qué fin lo hicimos y unas breves indicaciones para navegar por nuestro traductor.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/16acerca.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">17.	Al inicio junto a nuestro botón acerca del traductor encontraremos el botón de privacidad y condiciones el cual nos muestra las políticas de privacidad y las condiciones de la empresa.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/17privacidad.png" class="card-img-bottom" alt="...">
-          </div>
-          <div class="cardi">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text">18.En la interfaz principal también encontramos el botón de ayuda al darle clic sobre este encontraremos el manual de usuario donde los usuarios podrán guiarse para poder tener una experiencia más interactiva.</p>
-              <p class="card-text"><small class="text-muted"></small></p>
-            </div>
-            <img src="/static/img/ayuda/18ayuda.png" class="card-img-bottom" alt="...">
-          </div>
-          
-          
-    </section>
+        </div>
+      </div>
 
-    <footer class="Foot">
-      <h4 class="text-center"><br>ITP 2022 todos los derechos reservados.</h4>
-    </footer>
-
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-   
-  </body>
-</html>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

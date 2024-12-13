@@ -1,133 +1,78 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base_html/base.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/acerca_traductor.css')}}">
-    <script src="https://kit.fontawesome.com/41312000e3.js" crossorigin="anonymous"></script>
+{% block css %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <title>acerca del traductor </title>
-  </head>
-  <body>
-    
-    <header class="Header">
-        <div class=" bg-darkk bg-dark1" id="mecSoc">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-                    <div class="container-fluid">
-                      <ul class="navbar-nav nav-flex-icons">
-                        <li class="nav-item">
-                          <a href="{{url_for('inicio')}}" class="nav-link">
-                            <i class="fa-sharp fa-solid fa-left-long"></i>    
-                          </a>
-                        </li>
-                      </ul>
-                      <label for="" class="brand">
-                        <a href="javascript: history.go(-1)"><img class="icono_itp" src="/static/img/menu/Logo_ITP.jpg"></a>
-                      </label>
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-                      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav d-flex justify-content-center w-100">
-                          <a class="nav-link" href="#">Acerca del traductor inga-español</a>
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
-            </div>
-        </div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contacto.css')}}">
+{% endblock %}
 
-        <div class="Text-hero ">
-          <div class="container ">
-            <h3> &nbsp  &nbsp       CONECTANDO IDIOMAS</h3>
-          </div>
-        </div>
+{% block titulo %}
+Acerca del traductor Inga-Español
+{% endblock %}
 
-        <div class="svg-hero" style="height: 150px; overflow: hidden;" >
-          <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
-            <path d="M-27.99,85.35 C171.78,206.74 293.11,-71.54 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: rgb(255, 255, 255);"></path>
-          </svg>
-        </div>
-
-
-    </header>
-
-    <section class="Perfil">
-      <div class="container text-center ">
-        <h1> ¿DE QUE SE TRATA EL TRADUCTOR INGA-ESPAÑOL?</h1>
-        <h3> </h3>
-        <p>Se realizó este traductor para la comunidad en general con el objetivo de poder conectar a las personas que dominan la lengua inga y las personas que dominan la lengua hispana para poder entendernos más fácilmente, es un traductor con
-          fines educativos para aprender la riqueza del léxico de nuestras culturas.</p>
-        <p>Con el traductor inga-español los usuarios podrán traducir palabras comunes y podrán escuchar la pronunciación de cada palabra también podrán registrarse a través de correo electrónico y una vez estén registrados podrán entrar al menú
-           donde van a encontrar algunas categorías con las frases más comunes de la lengua inga y su traducción en español.</p>
-        <p>
-          <br>
-        </p>
-        <p>
-          <br>
-          <br>
-        </p>
+{%block contenido %}
+<!-- Hero Section -->
+<section class="d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center" style="margin-top: 100px;">
+      <div class="col-md-10 text-center content-section">
+        <i class="fas fa-language language-icon"></i>
+        <h1>CONECTANDO IDIOMAS</h1>
+        <h2>¿DE QUE SE TRATA EL TRADUCTOR INGA-ESPAÑOL?</h2>
+        <p>Se realizó este traductor para la comunidad en general con el objetivo de poder conectar a las personas que
+          dominan la lengua inga y las personas que dominan la lengua hispana para poder entendernos más fácilmente,
+          es un traductor con fines educativos para aprender la riqueza del léxico de nuestras culturas.</p>
+        <p>Con el traductor inga-español los usuarios podrán traducir palabras comunes y podrán escuchar la
+          pronunciación de cada palabra también podrán registrarse a través de correo electrónico y una vez estén
+          registrados podrán entrar al menú donde van a encontrar algunas categorías con las frases más comunes de la
+          lengua inga y su traducción en español.</p>
       </div>
-    </section>
+    </div>
 
-    <section class="Galeria">
-      <div class="container">
-        <div class="text-center">
-          <h2><br>INDICACIONES
-          </h2>
-          <h4>
-            <br>1.Traduce palabras fácilmente. <br>
-            2.Registrate con tu correo y contraseña.<br>
-            3.Escoge alguna categoría de nuestro Menú.<br>
-            4.Aprede las frases más comunes de nuestros idiomas.<br>
-            5.Revisa nuestras políticas de privacidad y condiciones.<br>
-            6.Si necesitas ayuda lee nuestro manual de usuario.<br>
-             
-            
-            <br>
-          </h4>
-        </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-10 text-center content-section">
+        <h2>INDICACIONES</h2>
+        <ol class="text-start">
+          <li>Traduce palabras fácilmente.</li>
+          <li>Registrate con tu correo y contraseña.</li>
+          <li>Escoge alguna categoría de nuestro Menú.</li>
+          <li>Aprende las frases más comunes de nuestros idiomas.</li>
+          <li>Revisa nuestras políticas de privacidad y condiciones.</li>
+          <li>Si necesitas ayuda lee nuestro manual de usuario.</li>
+        </ol>
+      </div>
+    </div>
 
-
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-10 content-section">
         <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="static/img/acerca_traductor/1traductor.png" alt="">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <img src="/static/img/acerca_traductor/1traductor.png" alt="Traductor" class="img-fluid gallery-img">
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="static/img/acerca_traductor/2registro.png" alt="">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <img src="/static/img/acerca_traductor/2registro.png" alt="Registro" class="img-fluid gallery-img">
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="static/img/acerca_traductor/3menu.png" alt="">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <img src="/static/img/acerca_traductor/3menu.png" alt="Menú" class="img-fluid gallery-img">
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="static/img/acerca_traductor/4frases.png" alt="">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <img src="/static/img/acerca_traductor/4frases.png" alt="Frases" class="img-fluid gallery-img">
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="static/img/acerca_traductor/5privacidad.png" alt="">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <img src="/static/img/acerca_traductor/5privacidad.png" alt="Privacidad" class="img-fluid gallery-img">
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4">
-            <img src="static/img/acerca_traductor/6manual.png" alt="">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <img src="/static/img/acerca_traductor/6manual.png" alt="Manual" class="img-fluid gallery-img">
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
 
-    <footer class="Foot">
-      <h4 class="text-center"><br><br>ITP 2022 todos los derechos reservados.</h4>
-    </footer>
-
-   
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-   
-  </body>
-</html>

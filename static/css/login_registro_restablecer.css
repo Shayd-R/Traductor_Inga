@@ -53,12 +53,7 @@ body {
     border: 2px solid var(--color-dark-xx);
 }
 
-.form-control {
-    background-color: var(--color-dark-xx);
-    border: 2px solid var(--color-dark-xx);
-    border-radius: .2rem;
-    padding: 1.5rem 1rem;
-}
+
 
 .register-bg {
     background-image: url(/static/img/login/collar.jpg);
@@ -116,4 +111,27 @@ body {
 }
 .form_input{
     width: 50% !important; border: 0;
+}
+
+.text-white {
+    color: rgb(0, 0, 0); /* Cambia el color del texto a blanco */
+}
+
+.form-control {
+    background-color: #343a40; /* Color de fondo del input */
+    border: 2px solid #ced4da; /* Color del borde */
+    border-radius: .2rem;
+    padding: 1.5rem 1rem;
+    color: white; /* Color del texto */
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Color del texto del placeholder */
+}
+
+.form-control:focus {
+    background-color: #343a40; /* Mantener el mismo color de fondo al hacer clic */
+    color: white; /* Asegurarse de que el texto sea blanco al hacer clic */
+    border-color: #ffffff; /* Color del borde al hacer clic */
+    outline: none; /* Eliminar el contorno predeterminado */
 }
